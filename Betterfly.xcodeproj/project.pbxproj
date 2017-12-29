@@ -7,39 +7,105 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E6FAA2F51F302CFC007E89D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FAA2F41F302CFC007E89D9 /* AppDelegate.swift */; };
-		E6FAA2F71F302CFC007E89D9 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FAA2F61F302CFC007E89D9 /* FirstViewController.swift */; };
-		E6FAA2F91F302CFC007E89D9 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FAA2F81F302CFC007E89D9 /* SecondViewController.swift */; };
-		E6FAA2FC1F302CFC007E89D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6FAA2FA1F302CFC007E89D9 /* Main.storyboard */; };
-		E6FAA2FE1F302CFC007E89D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6FAA2FD1F302CFC007E89D9 /* Assets.xcassets */; };
-		E6FAA3011F302CFC007E89D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6FAA2FF1F302CFC007E89D9 /* LaunchScreen.storyboard */; };
+		2524EBA21FF5E7AA0016ECBE /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E6FAA3021F302CFC007E89D9 /* Info.plist */; };
+		2524EBA31FF5EAA60016ECBE /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D4FEF51F43950F00129E69 /* Post.swift */; };
+		2524EBA41FF5EAA60016ECBE /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C260B81F394D87008CA748 /* SignInViewController.swift */; };
+		2524EBA51FF5EAA60016ECBE /* emailSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C260C21F395AC9008CA748 /* emailSignInViewController.swift */; };
+		2524EBA61FF5EAA60016ECBE /* emailSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C260C91F395FD5008CA748 /* emailSignUpViewController.swift */; };
+		2524EBA71FF5EAA60016ECBE /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FAA3281F3044E7007E89D9 /* Onboarding.swift */; };
+		2524EBA81FF5EAA60016ECBE /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FAA32A1F304619007E89D9 /* OnboardingView.swift */; };
+		2524EBA91FF5EAA60016ECBE /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E696CD281F39BEC8008B0DDD /* TabBarViewController.swift */; };
+		2524EBAB1FF5EAA60016ECBE /* testSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253724951FF578E7001EEAA2 /* testSettingsViewController.swift */; };
+		2524EBAC1FF5EAA60016ECBE /* PhotosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A26DFA1FF44394002475E2 /* PhotosTableViewController.swift */; };
+		2524EBAD1FF5EAA60016ECBE /* newFoldingPostListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257176D61FF1D501009EF21A /* newFoldingPostListTableViewController.swift */; };
+		2524EBAE1FF5EAA60016ECBE /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A26DFC1FF44469002475E2 /* PhotosTableViewCell.swift */; };
+		2524EBAF1FF5EAA60016ECBE /* FoldingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2519B3831FF1B870002BE46D /* FoldingTableViewCell.swift */; };
+		2524EBB01FF5EAA60016ECBE /* ToCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259B0A731FEF169900799250 /* ToCViewController.swift */; };
+		2524EBB11FF5EAA60016ECBE /* privacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259B0A751FEF16A400799250 /* privacyPolicyViewController.swift */; };
+		2524EBB21FF5EAA60016ECBE /* AboutMeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69259DA1F5F5BBE00E3CAC7 /* AboutMeViewController.swift */; };
+		2524EBB31FF5EAA60016ECBE /* ThirdPartyCreditsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259B0A711FEF10DD00799250 /* ThirdPartyCreditsTableViewController.swift */; };
+		2524EBB41FF5EAA60016ECBE /* ThirdPartyCreditWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259B0A771FEF1FB700799250 /* ThirdPartyCreditWebViewController.swift */; };
+		2524EBB51FF5EAA60016ECBE /* Assets.xcassets in Sources */ = {isa = PBXBuildFile; fileRef = E6FAA2FD1F302CFC007E89D9 /* Assets.xcassets */; };
+		2524EBB61FF5EAA60016ECBE /* Info.plist in Sources */ = {isa = PBXBuildFile; fileRef = E6FAA3021F302CFC007E89D9 /* Info.plist */; };
+		2552A9AE1FF5DF6E00941C75 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2552A9AC1FF5DF6E00941C75 /* Main.storyboard */; };
+		2552A9B11FF5DF6E00941C75 /* Betterfly.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2552A9AF1FF5DF6E00941C75 /* Betterfly.xcdatamodeld */; };
+		2552A9B31FF5DF6E00941C75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2552A9B21FF5DF6E00941C75 /* Assets.xcassets */; };
+		2552A9B61FF5DF6E00941C75 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2552A9B41FF5DF6E00941C75 /* LaunchScreen.storyboard */; };
+		2568BB701FF5F44F000B9ECA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2568BB6F1FF5F44F000B9ECA /* GoogleService-Info.plist */; };
+		2575FF6E1FF5ECFC00EF3A7D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FAA2F41F302CFC007E89D9 /* AppDelegate.swift */; };
+		4D83351EB6A0101F338EBE9B /* Pods_BetterflyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02320E01A334F2DE3F495BD2 /* Pods_BetterflyTests.framework */; };
+		8DACD670B717D47604AF4F31 /* Pods_Betterfly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21C293A6FFD2E6A837626FEF /* Pods_Betterfly.framework */; };
+		96A210A50FE514258C5B5E55 /* Pods_BetterflyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73DFC662913DBA7254D6AA20 /* Pods_BetterflyUITests.framework */; };
 		E6FAA30C1F302CFD007E89D9 /* BetterflyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FAA30B1F302CFD007E89D9 /* BetterflyTests.swift */; };
 		E6FAA3171F302CFD007E89D9 /* BetterflyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FAA3161F302CFD007E89D9 /* BetterflyUITests.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		E6FAA3081F302CFD007E89D9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E6FAA2E91F302CFC007E89D9 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E6FAA2F01F302CFC007E89D9;
-			remoteInfo = Betterfly;
-		};
-		E6FAA3131F302CFD007E89D9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E6FAA2E91F302CFC007E89D9 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E6FAA2F01F302CFC007E89D9;
-			remoteInfo = Betterfly;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		E6FAA2F11F302CFC007E89D9 /* Betterfly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Betterfly.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		02320E01A334F2DE3F495BD2 /* Pods_BetterflyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BetterflyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		136F7C257F0C986FB214B9E5 /* Pods-BetterflyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BetterflyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BetterflyTests/Pods-BetterflyTests.debug.xcconfig"; sourceTree = "<group>"; };
+		21C293A6FFD2E6A837626FEF /* Pods_Betterfly.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Betterfly.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2519B3831FF1B870002BE46D /* FoldingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldingTableViewCell.swift; sourceTree = "<group>"; };
+		2519B3881FF1BAC8002BE46D /* FoldingPostListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldingPostListViewController.swift; sourceTree = "<group>"; };
+		253724951FF578E7001EEAA2 /* testSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testSettingsViewController.swift; sourceTree = "<group>"; };
+		2552A9A61FF5DF6E00941C75 /* Betterfly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Betterfly.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2552A9A81FF5DF6E00941C75 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2552A9AD1FF5DF6E00941C75 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2552A9B01FF5DF6E00941C75 /* Betterfly.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Betterfly.xcdatamodel; sourceTree = "<group>"; };
+		2552A9B21FF5DF6E00941C75 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2552A9B51FF5DF6E00941C75 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2552A9B71FF5DF6E00941C75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2568BB6F1FF5F44F000B9ECA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		257176D61FF1D501009EF21A /* newFoldingPostListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newFoldingPostListTableViewController.swift; sourceTree = "<group>"; };
+		259B0A711FEF10DD00799250 /* ThirdPartyCreditsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdPartyCreditsTableViewController.swift; sourceTree = "<group>"; };
+		259B0A731FEF169900799250 /* ToCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToCViewController.swift; sourceTree = "<group>"; };
+		259B0A751FEF16A400799250 /* privacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = privacyPolicyViewController.swift; sourceTree = "<group>"; };
+		259B0A771FEF1FB700799250 /* ThirdPartyCreditWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdPartyCreditWebViewController.swift; sourceTree = "<group>"; };
+		25A26DFA1FF44394002475E2 /* PhotosTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewController.swift; sourceTree = "<group>"; };
+		25A26DFC1FF44469002475E2 /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
+		25A26E001FF47089002475E2 /* DesignableX */ = {isa = PBXFileReference; lastKnownFileType = folder; path = DesignableX; sourceTree = "<group>"; };
+		33011C69E729F2761A6E2938 /* Pods-BetterflyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BetterflyTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BetterflyTests/Pods-BetterflyTests.release.xcconfig"; sourceTree = "<group>"; };
+		4309159CCF22252BD0511778 /* Pods-BetterflyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BetterflyUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BetterflyUITests/Pods-BetterflyUITests.release.xcconfig"; sourceTree = "<group>"; };
+		449554F22918113B22896E0F /* Pods-BetterflyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BetterflyUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BetterflyUITests/Pods-BetterflyUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		73DFC662913DBA7254D6AA20 /* Pods_BetterflyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BetterflyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D51738CAA8C9685ACE78754 /* Pods-Betterfly.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Betterfly.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Betterfly/Pods-Betterfly.debug.xcconfig"; sourceTree = "<group>"; };
+		C958264CD630C90C445D4773 /* Pods-Betterfly.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Betterfly.release.xcconfig"; path = "Pods/Target Support Files/Pods-Betterfly/Pods-Betterfly.release.xcconfig"; sourceTree = "<group>"; };
+		E61B7DD51F492ACB004204EB /* photoPost.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = photoPost.xib; sourceTree = "<group>"; };
+		E61B7DD71F492DDE004204EB /* photoPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = photoPost.swift; sourceTree = "<group>"; };
+		E61B7DD91F4931E5004204EB /* textPost.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = textPost.xib; sourceTree = "<group>"; };
+		E61B7DDB1F49322A004204EB /* textPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = textPost.swift; sourceTree = "<group>"; };
+		E61D623C1F3EDCAB00DE0C42 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		E61D623E1F3FDEB100DE0C42 /* JarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JarViewController.swift; sourceTree = "<group>"; };
+		E61D62401F3FEB2D00DE0C42 /* ListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewController.swift; sourceTree = "<group>"; };
+		E61D62421F3FF1A600DE0C42 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		E69259DA1F5F5BBE00E3CAC7 /* AboutMeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutMeViewController.swift; sourceTree = "<group>"; };
+		E696CD281F39BEC8008B0DDD /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		E6C260B81F394D87008CA748 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		E6C260C21F395AC9008CA748 /* emailSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emailSignInViewController.swift; sourceTree = "<group>"; };
+		E6C260C91F395FD5008CA748 /* emailSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emailSignUpViewController.swift; sourceTree = "<group>"; };
+		E6C4CA901F57F25F00590E58 /* IQNSArray+Sort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IQNSArray+Sort.swift"; sourceTree = "<group>"; };
+		E6C4CA911F57F25F00590E58 /* IQUIScrollView+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IQUIScrollView+Additions.swift"; sourceTree = "<group>"; };
+		E6C4CA921F57F25F00590E58 /* IQUITextFieldView+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IQUITextFieldView+Additions.swift"; sourceTree = "<group>"; };
+		E6C4CA931F57F25F00590E58 /* IQUIView+Hierarchy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IQUIView+Hierarchy.swift"; sourceTree = "<group>"; };
+		E6C4CA941F57F25F00590E58 /* IQUIViewController+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IQUIViewController+Additions.swift"; sourceTree = "<group>"; };
+		E6C4CA951F57F25F00590E58 /* IQUIWindow+Hierarchy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IQUIWindow+Hierarchy.swift"; sourceTree = "<group>"; };
+		E6C4CA971F57F25F00590E58 /* IQKeyboardManagerConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IQKeyboardManagerConstants.swift; sourceTree = "<group>"; };
+		E6C4CA981F57F25F00590E58 /* IQKeyboardManagerConstantsInternal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IQKeyboardManagerConstantsInternal.swift; sourceTree = "<group>"; };
+		E6C4CA991F57F25F00590E58 /* IQKeyboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IQKeyboardManager.swift; sourceTree = "<group>"; };
+		E6C4CA9A1F57F25F00590E58 /* IQKeyboardManagerSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IQKeyboardManagerSwift.h; sourceTree = "<group>"; };
+		E6C4CA9B1F57F25F00590E58 /* IQKeyboardReturnKeyHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IQKeyboardReturnKeyHandler.swift; sourceTree = "<group>"; };
+		E6C4CA9D1F57F25F00590E58 /* IQTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IQTextView.swift; sourceTree = "<group>"; };
+		E6C4CA9F1F57F25F00590E58 /* IQBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IQBarButtonItem.swift; sourceTree = "<group>"; };
+		E6C4CAA01F57F25F00590E58 /* IQPreviousNextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IQPreviousNextView.swift; sourceTree = "<group>"; };
+		E6C4CAA11F57F25F00590E58 /* IQTitleBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IQTitleBarButtonItem.swift; sourceTree = "<group>"; };
+		E6C4CAA21F57F25F00590E58 /* IQToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IQToolbar.swift; sourceTree = "<group>"; };
+		E6C4CAA31F57F25F00590E58 /* IQUIView+IQKeyboardToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IQUIView+IQKeyboardToolbar.swift"; sourceTree = "<group>"; };
+		E6C4CAA51F57F25F00590E58 /* IQKeyboardManager.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IQKeyboardManager.bundle; sourceTree = "<group>"; };
+		E6C517CC1F437EFF00CE625A /* PostListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListViewController.swift; sourceTree = "<group>"; };
+		E6D4FEF51F43950F00129E69 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		E6D4FEFB1F43E40C00129E69 /* PostInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostInfoViewController.swift; sourceTree = "<group>"; };
+		E6F339BA1F397E5100B4D423 /* Betterfly.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Betterfly.entitlements; sourceTree = "<group>"; };
 		E6FAA2F41F302CFC007E89D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E6FAA2F61F302CFC007E89D9 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		E6FAA2F81F302CFC007E89D9 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
-		E6FAA2FB1F302CFC007E89D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E6FAA2FD1F302CFC007E89D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E6FAA3001F302CFC007E89D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E6FAA3021F302CFC007E89D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,13 +115,16 @@
 		E6FAA3121F302CFD007E89D9 /* BetterflyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BetterflyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6FAA3161F302CFD007E89D9 /* BetterflyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetterflyUITests.swift; sourceTree = "<group>"; };
 		E6FAA3181F302CFD007E89D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E6FAA3281F3044E7007E89D9 /* Onboarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
+		E6FAA32A1F304619007E89D9 /* OnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		E6FAA2EE1F302CFC007E89D9 /* Frameworks */ = {
+		2552A9A31FF5DF6E00941C75 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DACD670B717D47604AF4F31 /* Pods_Betterfly.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +132,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D83351EB6A0101F338EBE9B /* Pods_BetterflyTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,28 +140,143 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96A210A50FE514258C5B5E55 /* Pods_BetterflyUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2519B3851FF1BA2D002BE46D /* Unused Files */ = {
+			isa = PBXGroup;
+			children = (
+				E61D623C1F3EDCAB00DE0C42 /* SettingsViewController.swift */,
+				E6C517CC1F437EFF00CE625A /* PostListViewController.swift */,
+				E6FAA2F81F302CFC007E89D9 /* SecondViewController.swift */,
+				E61B7DD51F492ACB004204EB /* photoPost.xib */,
+				2519B3881FF1BAC8002BE46D /* FoldingPostListViewController.swift */,
+				E6D4FEFB1F43E40C00129E69 /* PostInfoViewController.swift */,
+				E61B7DDB1F49322A004204EB /* textPost.swift */,
+				E61D62401F3FEB2D00DE0C42 /* ListTableViewController.swift */,
+				E61B7DD71F492DDE004204EB /* photoPost.swift */,
+				E61D623E1F3FDEB100DE0C42 /* JarViewController.swift */,
+				E61D62421F3FF1A600DE0C42 /* TableViewController.swift */,
+				E61B7DD91F4931E5004204EB /* textPost.xib */,
+			);
+			path = "Unused Files";
+			sourceTree = "<group>";
+		};
+		2552A9A71FF5DF6E00941C75 /* Betterfly */ = {
+			isa = PBXGroup;
+			children = (
+				2552A9A81FF5DF6E00941C75 /* AppDelegate.swift */,
+				2552A9B21FF5DF6E00941C75 /* Assets.xcassets */,
+				2552A9B41FF5DF6E00941C75 /* LaunchScreen.storyboard */,
+				2552A9B71FF5DF6E00941C75 /* Info.plist */,
+				2552A9AF1FF5DF6E00941C75 /* Betterfly.xcdatamodeld */,
+			);
+			path = Betterfly;
+			sourceTree = "<group>";
+		};
+		4ACA470326D6204305979133 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7D51738CAA8C9685ACE78754 /* Pods-Betterfly.debug.xcconfig */,
+				C958264CD630C90C445D4773 /* Pods-Betterfly.release.xcconfig */,
+				136F7C257F0C986FB214B9E5 /* Pods-BetterflyTests.debug.xcconfig */,
+				33011C69E729F2761A6E2938 /* Pods-BetterflyTests.release.xcconfig */,
+				449554F22918113B22896E0F /* Pods-BetterflyUITests.debug.xcconfig */,
+				4309159CCF22252BD0511778 /* Pods-BetterflyUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		E6C4CA8E1F57F25F00590E58 /* IQKeyboardManagerSwift */ = {
+			isa = PBXGroup;
+			children = (
+				25A26E001FF47089002475E2 /* DesignableX */,
+				E6C4CA8F1F57F25F00590E58 /* Categories */,
+				E6C4CA961F57F25F00590E58 /* Constants */,
+				E6C4CA991F57F25F00590E58 /* IQKeyboardManager.swift */,
+				E6C4CA9A1F57F25F00590E58 /* IQKeyboardManagerSwift.h */,
+				E6C4CA9B1F57F25F00590E58 /* IQKeyboardReturnKeyHandler.swift */,
+				E6C4CA9C1F57F25F00590E58 /* IQTextView */,
+				E6C4CA9E1F57F25F00590E58 /* IQToolbar */,
+				E6C4CAA41F57F25F00590E58 /* Resources */,
+			);
+			name = IQKeyboardManagerSwift;
+			path = "../../../Downloads/IQKeyboardManager-master-2/IQKeyboardManagerSwift";
+			sourceTree = "<group>";
+		};
+		E6C4CA8F1F57F25F00590E58 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				E6C4CA901F57F25F00590E58 /* IQNSArray+Sort.swift */,
+				E6C4CA911F57F25F00590E58 /* IQUIScrollView+Additions.swift */,
+				E6C4CA921F57F25F00590E58 /* IQUITextFieldView+Additions.swift */,
+				E6C4CA931F57F25F00590E58 /* IQUIView+Hierarchy.swift */,
+				E6C4CA941F57F25F00590E58 /* IQUIViewController+Additions.swift */,
+				E6C4CA951F57F25F00590E58 /* IQUIWindow+Hierarchy.swift */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		E6C4CA961F57F25F00590E58 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				E6C4CA971F57F25F00590E58 /* IQKeyboardManagerConstants.swift */,
+				E6C4CA981F57F25F00590E58 /* IQKeyboardManagerConstantsInternal.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		E6C4CA9C1F57F25F00590E58 /* IQTextView */ = {
+			isa = PBXGroup;
+			children = (
+				E6C4CA9D1F57F25F00590E58 /* IQTextView.swift */,
+			);
+			path = IQTextView;
+			sourceTree = "<group>";
+		};
+		E6C4CA9E1F57F25F00590E58 /* IQToolbar */ = {
+			isa = PBXGroup;
+			children = (
+				E6C4CA9F1F57F25F00590E58 /* IQBarButtonItem.swift */,
+				E6C4CAA01F57F25F00590E58 /* IQPreviousNextView.swift */,
+				E6C4CAA11F57F25F00590E58 /* IQTitleBarButtonItem.swift */,
+				E6C4CAA21F57F25F00590E58 /* IQToolbar.swift */,
+				E6C4CAA31F57F25F00590E58 /* IQUIView+IQKeyboardToolbar.swift */,
+			);
+			path = IQToolbar;
+			sourceTree = "<group>";
+		};
+		E6C4CAA41F57F25F00590E58 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E6C4CAA51F57F25F00590E58 /* IQKeyboardManager.bundle */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		E6FAA2E81F302CFC007E89D9 = {
 			isa = PBXGroup;
 			children = (
 				E6FAA2F31F302CFC007E89D9 /* Betterfly */,
 				E6FAA30A1F302CFD007E89D9 /* BetterflyTests */,
 				E6FAA3151F302CFD007E89D9 /* BetterflyUITests */,
+				2552A9A71FF5DF6E00941C75 /* Betterfly */,
 				E6FAA2F21F302CFC007E89D9 /* Products */,
+				4ACA470326D6204305979133 /* Pods */,
+				F0F6AA8EE2BAB976D48A0F1E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		E6FAA2F21F302CFC007E89D9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E6FAA2F11F302CFC007E89D9 /* Betterfly.app */,
 				E6FAA3071F302CFD007E89D9 /* BetterflyTests.xctest */,
 				E6FAA3121F302CFD007E89D9 /* BetterflyUITests.xctest */,
+				2552A9A61FF5DF6E00941C75 /* Betterfly.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -99,10 +284,29 @@
 		E6FAA2F31F302CFC007E89D9 /* Betterfly */ = {
 			isa = PBXGroup;
 			children = (
+				E6F339BA1F397E5100B4D423 /* Betterfly.entitlements */,
+				E6C4CA8E1F57F25F00590E58 /* IQKeyboardManagerSwift */,
+				E6D4FEF51F43950F00129E69 /* Post.swift */,
+				E6C260B81F394D87008CA748 /* SignInViewController.swift */,
+				E6C260C21F395AC9008CA748 /* emailSignInViewController.swift */,
+				E6C260C91F395FD5008CA748 /* emailSignUpViewController.swift */,
+				E6FAA3281F3044E7007E89D9 /* Onboarding.swift */,
+				E6FAA32A1F304619007E89D9 /* OnboardingView.swift */,
 				E6FAA2F41F302CFC007E89D9 /* AppDelegate.swift */,
-				E6FAA2F61F302CFC007E89D9 /* FirstViewController.swift */,
-				E6FAA2F81F302CFC007E89D9 /* SecondViewController.swift */,
-				E6FAA2FA1F302CFC007E89D9 /* Main.storyboard */,
+				2568BB6F1FF5F44F000B9ECA /* GoogleService-Info.plist */,
+				E696CD281F39BEC8008B0DDD /* TabBarViewController.swift */,
+				253724951FF578E7001EEAA2 /* testSettingsViewController.swift */,
+				25A26DFA1FF44394002475E2 /* PhotosTableViewController.swift */,
+				257176D61FF1D501009EF21A /* newFoldingPostListTableViewController.swift */,
+				25A26DFC1FF44469002475E2 /* PhotosTableViewCell.swift */,
+				2519B3831FF1B870002BE46D /* FoldingTableViewCell.swift */,
+				2519B3851FF1BA2D002BE46D /* Unused Files */,
+				259B0A731FEF169900799250 /* ToCViewController.swift */,
+				259B0A751FEF16A400799250 /* privacyPolicyViewController.swift */,
+				E69259DA1F5F5BBE00E3CAC7 /* AboutMeViewController.swift */,
+				2552A9AC1FF5DF6E00941C75 /* Main.storyboard */,
+				259B0A711FEF10DD00799250 /* ThirdPartyCreditsTableViewController.swift */,
+				259B0A771FEF1FB700799250 /* ThirdPartyCreditWebViewController.swift */,
 				E6FAA2FD1F302CFC007E89D9 /* Assets.xcassets */,
 				E6FAA2FF1F302CFC007E89D9 /* LaunchScreen.storyboard */,
 				E6FAA3021F302CFC007E89D9 /* Info.plist */,
@@ -128,16 +332,29 @@
 			path = BetterflyUITests;
 			sourceTree = "<group>";
 		};
+		F0F6AA8EE2BAB976D48A0F1E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				21C293A6FFD2E6A837626FEF /* Pods_Betterfly.framework */,
+				02320E01A334F2DE3F495BD2 /* Pods_BetterflyTests.framework */,
+				73DFC662913DBA7254D6AA20 /* Pods_BetterflyUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E6FAA2F01F302CFC007E89D9 /* Betterfly */ = {
+		2552A9A51FF5DF6E00941C75 /* Betterfly */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E6FAA31B1F302CFD007E89D9 /* Build configuration list for PBXNativeTarget "Betterfly" */;
+			buildConfigurationList = 2552A9B81FF5DF6E00941C75 /* Build configuration list for PBXNativeTarget "Betterfly" */;
 			buildPhases = (
-				E6FAA2ED1F302CFC007E89D9 /* Sources */,
-				E6FAA2EE1F302CFC007E89D9 /* Frameworks */,
-				E6FAA2EF1F302CFC007E89D9 /* Resources */,
+				20DE539CA2238786E2DCAE61 /* [CP] Check Pods Manifest.lock */,
+				2552A9A21FF5DF6E00941C75 /* Sources */,
+				2552A9A31FF5DF6E00941C75 /* Frameworks */,
+				2552A9A41FF5DF6E00941C75 /* Resources */,
+				BAFA7B20EC599142BDC35CC8 /* [CP] Embed Pods Frameworks */,
+				00D087C331C70BFE391ECF13 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -145,21 +362,23 @@
 			);
 			name = Betterfly;
 			productName = Betterfly;
-			productReference = E6FAA2F11F302CFC007E89D9 /* Betterfly.app */;
+			productReference = 2552A9A61FF5DF6E00941C75 /* Betterfly.app */;
 			productType = "com.apple.product-type.application";
 		};
 		E6FAA3061F302CFD007E89D9 /* BetterflyTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E6FAA31E1F302CFD007E89D9 /* Build configuration list for PBXNativeTarget "BetterflyTests" */;
 			buildPhases = (
+				818546C48F7707AB9292BD76 /* [CP] Check Pods Manifest.lock */,
 				E6FAA3031F302CFD007E89D9 /* Sources */,
 				E6FAA3041F302CFD007E89D9 /* Frameworks */,
 				E6FAA3051F302CFD007E89D9 /* Resources */,
+				295585A5022B38FA60F6D6A0 /* [CP] Embed Pods Frameworks */,
+				F9EEFC404CD43C54562DD104 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				E6FAA3091F302CFD007E89D9 /* PBXTargetDependency */,
 			);
 			name = BetterflyTests;
 			productName = BetterflyTests;
@@ -170,14 +389,16 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E6FAA3211F302CFD007E89D9 /* Build configuration list for PBXNativeTarget "BetterflyUITests" */;
 			buildPhases = (
+				E842A6A6A148ABA347BD28B2 /* [CP] Check Pods Manifest.lock */,
 				E6FAA30E1F302CFD007E89D9 /* Sources */,
 				E6FAA30F1F302CFD007E89D9 /* Frameworks */,
 				E6FAA3101F302CFD007E89D9 /* Resources */,
+				9BEEB0921E51E9A1FC5716ED /* [CP] Embed Pods Frameworks */,
+				CE98072D410605107702BA0B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				E6FAA3141F302CFD007E89D9 /* PBXTargetDependency */,
 			);
 			name = BetterflyUITests;
 			productName = BetterflyUITests;
@@ -190,24 +411,32 @@
 		E6FAA2E91F302CFC007E89D9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0830;
+				LastSwiftUpdateCheck = 0920;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Dominick Hera";
 				TargetAttributes = {
-					E6FAA2F01F302CFC007E89D9 = {
-						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 47QKBB67M4;
+					2552A9A51FF5DF6E00941C75 = {
+						CreatedOnToolsVersion = 9.2;
+						DevelopmentTeam = BFN7NDKVPX;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.Siri = {
+								enabled = 1;
+							};
+						};
 					};
 					E6FAA3061F302CFD007E89D9 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 47QKBB67M4;
+						DevelopmentTeam = BFN7NDKVPX;
 						ProvisioningStyle = Automatic;
 						TestTargetID = E6FAA2F01F302CFC007E89D9;
 					};
 					E6FAA3111F302CFD007E89D9 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 47QKBB67M4;
+						DevelopmentTeam = BFN7NDKVPX;
 						ProvisioningStyle = Automatic;
 						TestTargetID = E6FAA2F01F302CFC007E89D9;
 					};
@@ -226,7 +455,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E6FAA2F01F302CFC007E89D9 /* Betterfly */,
+				2552A9A51FF5DF6E00941C75 /* Betterfly */,
 				E6FAA3061F302CFD007E89D9 /* BetterflyTests */,
 				E6FAA3111F302CFD007E89D9 /* BetterflyUITests */,
 			);
@@ -234,13 +463,15 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		E6FAA2EF1F302CFC007E89D9 /* Resources */ = {
+		2552A9A41FF5DF6E00941C75 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6FAA3011F302CFC007E89D9 /* LaunchScreen.storyboard in Resources */,
-				E6FAA2FE1F302CFC007E89D9 /* Assets.xcassets in Resources */,
-				E6FAA2FC1F302CFC007E89D9 /* Main.storyboard in Resources */,
+				2524EBA21FF5E7AA0016ECBE /* Info.plist in Resources */,
+				2552A9B61FF5DF6E00941C75 /* LaunchScreen.storyboard in Resources */,
+				2568BB701FF5F44F000B9ECA /* GoogleService-Info.plist in Resources */,
+				2552A9B31FF5DF6E00941C75 /* Assets.xcassets in Resources */,
+				2552A9AE1FF5DF6E00941C75 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,14 +491,240 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		00D087C331C70BFE391ECF13 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Betterfly/Pods-Betterfly-resources.sh",
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseAuthUI.bundle,
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseFacebookAuthUI.bundle,
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseGoogleAuthUI.bundle,
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterKitResources.bundle",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterShareExtensionUIResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Betterfly/Pods-Betterfly-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		20DE539CA2238786E2DCAE61 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Betterfly-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		295585A5022B38FA60F6D6A0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BetterflyTests/Pods-BetterflyTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		818546C48F7707AB9292BD76 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BetterflyTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9BEEB0921E51E9A1FC5716ED /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BetterflyUITests/Pods-BetterflyUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BAFA7B20EC599142BDC35CC8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Betterfly/Pods-Betterfly-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/CircleMenu/CircleMenu.framework",
+				"${BUILT_PRODUCTS_DIR}/CollieGallery/CollieGallery.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
+				"${BUILT_PRODUCTS_DIR}/FacebookLogin/FacebookLogin.framework",
+				"${BUILT_PRODUCTS_DIR}/FoldingCell/FoldingCell.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/QuickTableViewController/QuickTableViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/SCLAlertView/SCLAlertView.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SimpleImageViewer/SimpleImageViewer.framework",
+				"${BUILT_PRODUCTS_DIR}/SlackTextViewController/SlackTextViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/Solar/Solar.framework",
+				"${BUILT_PRODUCTS_DIR}/SwipeNavigationController/SwipeNavigationController.framework",
+				"${BUILT_PRODUCTS_DIR}/TransitionableTab/TransitionableTab.framework",
+				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework",
+				"${BUILT_PRODUCTS_DIR}/Weakify/Weakify.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${BUILT_PRODUCTS_DIR}/paper-onboarding/paper_onboarding.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CircleMenu.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CollieGallery.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookLogin.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FoldingCell.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QuickTableViewController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SCLAlertView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleImageViewer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SlackTextViewController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Solar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeNavigationController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TransitionableTab.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Weakify.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/paper_onboarding.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Betterfly/Pods-Betterfly-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CE98072D410605107702BA0B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BetterflyUITests/Pods-BetterflyUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E842A6A6A148ABA347BD28B2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BetterflyUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F9EEFC404CD43C54562DD104 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BetterflyTests/Pods-BetterflyTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
-		E6FAA2ED1F302CFC007E89D9 /* Sources */ = {
+		2552A9A21FF5DF6E00941C75 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6FAA2F91F302CFC007E89D9 /* SecondViewController.swift in Sources */,
-				E6FAA2F51F302CFC007E89D9 /* AppDelegate.swift in Sources */,
-				E6FAA2F71F302CFC007E89D9 /* FirstViewController.swift in Sources */,
+				2575FF6E1FF5ECFC00EF3A7D /* AppDelegate.swift in Sources */,
+				2524EBA31FF5EAA60016ECBE /* Post.swift in Sources */,
+				2524EBA41FF5EAA60016ECBE /* SignInViewController.swift in Sources */,
+				2524EBA51FF5EAA60016ECBE /* emailSignInViewController.swift in Sources */,
+				2524EBA61FF5EAA60016ECBE /* emailSignUpViewController.swift in Sources */,
+				2524EBA71FF5EAA60016ECBE /* Onboarding.swift in Sources */,
+				2524EBA81FF5EAA60016ECBE /* OnboardingView.swift in Sources */,
+				2524EBA91FF5EAA60016ECBE /* TabBarViewController.swift in Sources */,
+				2524EBAB1FF5EAA60016ECBE /* testSettingsViewController.swift in Sources */,
+				2524EBAC1FF5EAA60016ECBE /* PhotosTableViewController.swift in Sources */,
+				2524EBAD1FF5EAA60016ECBE /* newFoldingPostListTableViewController.swift in Sources */,
+				2524EBAE1FF5EAA60016ECBE /* PhotosTableViewCell.swift in Sources */,
+				2524EBAF1FF5EAA60016ECBE /* FoldingTableViewCell.swift in Sources */,
+				2524EBB01FF5EAA60016ECBE /* ToCViewController.swift in Sources */,
+				2524EBB11FF5EAA60016ECBE /* privacyPolicyViewController.swift in Sources */,
+				2524EBB21FF5EAA60016ECBE /* AboutMeViewController.swift in Sources */,
+				2524EBB31FF5EAA60016ECBE /* ThirdPartyCreditsTableViewController.swift in Sources */,
+				2524EBB41FF5EAA60016ECBE /* ThirdPartyCreditWebViewController.swift in Sources */,
+				2524EBB51FF5EAA60016ECBE /* Assets.xcassets in Sources */,
+				2524EBB61FF5EAA60016ECBE /* Info.plist in Sources */,
+				2552A9B11FF5DF6E00941C75 /* Betterfly.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,26 +746,21 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		E6FAA3091F302CFD007E89D9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E6FAA2F01F302CFC007E89D9 /* Betterfly */;
-			targetProxy = E6FAA3081F302CFD007E89D9 /* PBXContainerItemProxy */;
-		};
-		E6FAA3141F302CFD007E89D9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E6FAA2F01F302CFC007E89D9 /* Betterfly */;
-			targetProxy = E6FAA3131F302CFD007E89D9 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
-		E6FAA2FA1F302CFC007E89D9 /* Main.storyboard */ = {
+		2552A9AC1FF5DF6E00941C75 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				E6FAA2FB1F302CFC007E89D9 /* Base */,
+				2552A9AD1FF5DF6E00941C75 /* Base */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		2552A9B41FF5DF6E00941C75 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2552A9B51FF5DF6E00941C75 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 		E6FAA2FF1F302CFC007E89D9 /* LaunchScreen.storyboard */ = {
@@ -322,9 +774,55 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		2552A9B91FF5DF6E00941C75 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7D51738CAA8C9685ACE78754 /* Pods-Betterfly.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = Betterfly/Betterfly.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = BFN7NDKVPX;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Betterfly/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Dominick.Betterfly;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		2552A9BA1FF5DF6E00941C75 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C958264CD630C90C445D4773 /* Pods-Betterfly.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = Betterfly/Betterfly.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = BFN7NDKVPX;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Betterfly/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Dominick.Betterfly;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
 		E6FAA3191F302CFD007E89D9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -332,7 +830,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -340,13 +840,17 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -369,12 +873,17 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = NO;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
 		E6FAA31A1F302CFD007E89D9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -382,7 +891,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -390,7 +901,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -399,6 +914,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -409,44 +925,23 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		E6FAA31C1F302CFD007E89D9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 47QKBB67M4;
-				INFOPLIST_FILE = Betterfly/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Dominick.Betterfly;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Debug;
-		};
-		E6FAA31D1F302CFD007E89D9 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 47QKBB67M4;
-				INFOPLIST_FILE = Betterfly/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Dominick.Betterfly;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
 		E6FAA31F1F302CFD007E89D9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 136F7C257F0C986FB214B9E5 /* Pods-BetterflyTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = 47QKBB67M4;
+				DEVELOPMENT_TEAM = BFN7NDKVPX;
 				INFOPLIST_FILE = BetterflyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Dominick.BetterflyTests;
@@ -458,10 +953,11 @@
 		};
 		E6FAA3201F302CFD007E89D9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 33011C69E729F2761A6E2938 /* Pods-BetterflyTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = 47QKBB67M4;
+				DEVELOPMENT_TEAM = BFN7NDKVPX;
 				INFOPLIST_FILE = BetterflyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Dominick.BetterflyTests;
@@ -473,9 +969,10 @@
 		};
 		E6FAA3221F302CFD007E89D9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 449554F22918113B22896E0F /* Pods-BetterflyUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = 47QKBB67M4;
+				DEVELOPMENT_TEAM = BFN7NDKVPX;
 				INFOPLIST_FILE = BetterflyUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Dominick.BetterflyUITests;
@@ -487,9 +984,10 @@
 		};
 		E6FAA3231F302CFD007E89D9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4309159CCF22252BD0511778 /* Pods-BetterflyUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = 47QKBB67M4;
+				DEVELOPMENT_TEAM = BFN7NDKVPX;
 				INFOPLIST_FILE = BetterflyUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Dominick.BetterflyUITests;
@@ -502,6 +1000,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		2552A9B81FF5DF6E00941C75 /* Build configuration list for PBXNativeTarget "Betterfly" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2552A9B91FF5DF6E00941C75 /* Debug */,
+				2552A9BA1FF5DF6E00941C75 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		E6FAA2EC1F302CFC007E89D9 /* Build configuration list for PBXProject "Betterfly" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -511,14 +1018,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E6FAA31B1F302CFD007E89D9 /* Build configuration list for PBXNativeTarget "Betterfly" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E6FAA31C1F302CFD007E89D9 /* Debug */,
-				E6FAA31D1F302CFD007E89D9 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-		};
 		E6FAA31E1F302CFD007E89D9 /* Build configuration list for PBXNativeTarget "BetterflyTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -526,6 +1025,7 @@
 				E6FAA3201F302CFD007E89D9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E6FAA3211F302CFD007E89D9 /* Build configuration list for PBXNativeTarget "BetterflyUITests" */ = {
 			isa = XCConfigurationList;
@@ -534,8 +1034,22 @@
 				E6FAA3231F302CFD007E89D9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		2552A9AF1FF5DF6E00941C75 /* Betterfly.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2552A9B01FF5DF6E00941C75 /* Betterfly.xcdatamodel */,
+			);
+			currentVersion = 2552A9B01FF5DF6E00941C75 /* Betterfly.xcdatamodel */;
+			path = Betterfly.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = E6FAA2E91F302CFC007E89D9 /* Project object */;
 }
