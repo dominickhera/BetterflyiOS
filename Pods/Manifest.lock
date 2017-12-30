@@ -1,0 +1,197 @@
+PODS:
+  - Bolts (1.8.4):
+    - Bolts/AppLinks (= 1.8.4)
+    - Bolts/Tasks (= 1.8.4)
+  - Bolts/AppLinks (1.8.4):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.8.4)
+  - CircleMenu (3.0.0)
+  - CollieGallery (0.6.0)
+  - Crashlytics (3.9.3):
+    - Fabric (~> 1.7.2)
+  - Fabric (1.7.2)
+  - FacebookCore (0.3.0):
+    - Bolts (~> 1.8)
+    - FBSDKCoreKit (~> 4.27)
+  - FacebookLogin (0.3.0):
+    - Bolts (~> 1.8)
+    - FacebookCore (~> 0.3)
+    - FBSDKCoreKit (~> 4.27)
+    - FBSDKLoginKit (~> 4.27)
+  - FBSDKCoreKit (4.29.0):
+    - Bolts (~> 1.7)
+  - FBSDKLoginKit (4.29.0):
+    - FBSDKCoreKit
+  - Firebase (4.8.0):
+    - Firebase/Core (= 4.8.0)
+  - Firebase/Auth (4.8.0):
+    - Firebase/Core
+    - FirebaseAuth (= 4.4.1)
+  - Firebase/Core (4.8.0):
+    - FirebaseAnalytics (= 4.0.5)
+    - FirebaseCore (= 4.0.13)
+  - Firebase/Database (4.8.0):
+    - Firebase/Core
+    - FirebaseDatabase (= 4.1.3)
+  - Firebase/Storage (4.8.0):
+    - Firebase/Core
+    - FirebaseStorage (= 2.1.1)
+  - FirebaseAnalytics (4.0.5):
+    - FirebaseCore (~> 4.0)
+    - FirebaseInstanceID (~> 2.0)
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+    - nanopb (~> 0.3)
+  - FirebaseAuth (4.4.1):
+    - FirebaseAnalytics (~> 4.0)
+    - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - FirebaseCore (4.0.13):
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseDatabase (4.1.3):
+    - FirebaseAnalytics (~> 4.0)
+    - FirebaseCore (~> 4.0)
+    - leveldb-library (~> 1.18)
+  - FirebaseInstanceID (2.0.8):
+    - FirebaseCore (~> 4.0)
+  - FirebaseStorage (2.1.1):
+    - FirebaseAnalytics (~> 4.0)
+    - FirebaseCore (~> 4.0)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - FirebaseUI/Auth (4.5.0):
+    - Firebase/Auth (~> 4.2)
+  - FirebaseUI/Database (4.5.0):
+    - Firebase/Database (~> 4.0)
+  - FirebaseUI/Facebook (4.5.0):
+    - FBSDKLoginKit (~> 4.0)
+    - FirebaseUI/Auth
+  - FirebaseUI/Google (4.5.0):
+    - FirebaseUI/Auth
+    - GoogleSignIn (~> 4.0)
+  - FirebaseUI/Storage (4.5.0):
+    - Firebase/Storage (~> 4.0)
+    - SDWebImage (~> 4.0)
+  - FoldingCell (3.0.0)
+  - GoogleSignIn (4.1.1):
+    - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
+    - GoogleToolboxForMac/NSString+URLArguments (~> 2.1)
+    - GTMOAuth2 (~> 1.0)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - GoogleToolboxForMac/DebugUtils (2.1.3):
+    - GoogleToolboxForMac/Defines (= 2.1.3)
+  - GoogleToolboxForMac/Defines (2.1.3)
+  - GoogleToolboxForMac/NSData+zlib (2.1.3):
+    - GoogleToolboxForMac/Defines (= 2.1.3)
+  - GoogleToolboxForMac/NSDictionary+URLArguments (2.1.3):
+    - GoogleToolboxForMac/DebugUtils (= 2.1.3)
+    - GoogleToolboxForMac/Defines (= 2.1.3)
+    - GoogleToolboxForMac/NSString+URLArguments (= 2.1.3)
+  - GoogleToolboxForMac/NSString+URLArguments (2.1.3)
+  - GTMOAuth2 (1.1.6):
+    - GTMSessionFetcher (~> 1.1)
+  - GTMSessionFetcher (1.1.12):
+    - GTMSessionFetcher/Full (= 1.1.12)
+  - GTMSessionFetcher/Core (1.1.12)
+  - GTMSessionFetcher/Full (1.1.12):
+    - GTMSessionFetcher/Core (= 1.1.12)
+  - IQKeyboardManagerSwift (5.0.7)
+  - leveldb-library (1.20)
+  - nanopb (0.3.8):
+    - nanopb/decode (= 0.3.8)
+    - nanopb/encode (= 0.3.8)
+  - nanopb/decode (0.3.8)
+  - nanopb/encode (0.3.8)
+  - paper-onboarding (2.0.1)
+  - QuickTableViewController (0.7.1)
+  - SCLAlertView (0.7.0)
+  - SDWebImage (4.2.2):
+    - SDWebImage/Core (= 4.2.2)
+  - SDWebImage/Core (4.2.2)
+  - SimpleImageViewer (1.1)
+  - SlackTextViewController (1.9.6)
+  - Solar (2.1.0)
+  - SwipeNavigationController (2.0.2)
+  - TransitionableTab (0.1.2)
+  - TwitterCore (3.1.0)
+  - TwitterKit (3.3.0):
+    - TwitterCore (>= 3.1.0)
+  - UIDeviceComplete (2.0.1)
+  - Weakify (0.4.0)
+
+DEPENDENCIES:
+  - Bolts
+  - CircleMenu
+  - CollieGallery
+  - Crashlytics (~> 3.9.3)
+  - Fabric
+  - FacebookCore
+  - FacebookLogin
+  - FBSDKCoreKit
+  - FBSDKLoginKit
+  - Firebase
+  - Firebase/Auth
+  - Firebase/Core
+  - Firebase/Storage
+  - FirebaseUI/Auth (~> 4.0)
+  - FirebaseUI/Database (~> 4.0)
+  - FirebaseUI/Facebook (~> 4.0)
+  - FirebaseUI/Google (~> 4.0)
+  - FirebaseUI/Storage (~> 4.0)
+  - FoldingCell
+  - GoogleSignIn
+  - IQKeyboardManagerSwift
+  - paper-onboarding (~> 2.0.1)
+  - QuickTableViewController (~> 0.7.0)
+  - SCLAlertView
+  - SDWebImage (~> 4.0)
+  - SimpleImageViewer (~> 1.1)
+  - SlackTextViewController
+  - Solar
+  - SwipeNavigationController (~> 2.0.0)
+  - TransitionableTab (~> 0.1.2)
+  - TwitterKit
+  - UIDeviceComplete
+  - Weakify (~> 0.4.0)
+
+SPEC CHECKSUMS:
+  Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  CircleMenu: 63d02351f5cb550777b47aa19cc336e09fec2a98
+  CollieGallery: b8fcf63af6b31add2f435f5aee4742ae3b84cb3b
+  Crashlytics: dbb07d01876c171c5ccbdf7826410380189e452c
+  Fabric: 9cd6a848efcf1b8b07497e0b6a2e7d336353ba15
+  FacebookCore: 3ffa190a3f1f96cec0e44d3fc221bc322c595ffa
+  FacebookLogin: 0af839ea858faef99550d16596b87b4a8e8906e6
+  FBSDKCoreKit: 6f139173dc63a1deaff4430a55f2fe5bb222d2af
+  FBSDKLoginKit: 56a057ca6822535ea0faa25f57a7c41edb697fd4
+  Firebase: 710decbbc6d9d48530e9a5dba3209740c3532e05
+  FirebaseAnalytics: 5b02a63ead2c3f0259cfc7f15e053e440587ecf8
+  FirebaseAuth: dc0dd403beca5b2b016aac89c2d0b8dad1c81926
+  FirebaseCore: 3c02ec652db3d03fdc8bc6d9154af3e20d64b6f5
+  FirebaseDatabase: 7088bfc4af2cc00231bb36e1404fc2d7509eb4dc
+  FirebaseInstanceID: 81df5805a08001e69138664bdd02c6719a9ac80f
+  FirebaseStorage: ab08d1c93a2feffa038fdd6693088b310ab1e6c6
+  FirebaseUI: 883482fea73b73bbb488c55176f4c6ad128957eb
+  FoldingCell: 55e9fcac546acc2c8f110f210af892aa90032160
+  GoogleSignIn: 3fdaa34a2ba04dbd7a25d7db39aecb0da98d5bdc
+  GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
+  GTMOAuth2: c77fe325e4acd453837e72d91e3b5f13116857b2
+  GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
+  IQKeyboardManagerSwift: 30fb3a61de1af53a95e02b80fb54ed0a19d5ede5
+  leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
+  nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  paper-onboarding: a8e001214d9ce9decf78e160b3823f396dbd51ac
+  QuickTableViewController: 5b6223e33723977082e80796e9c5cf6713525124
+  SCLAlertView: 8a14ffc40590c619e183eed2298b854385f30be1
+  SDWebImage: 89a9d32cd520bbb46eb14e541d5109b3564af198
+  SimpleImageViewer: 293698047ffaf41e79c0c6b052ed38b218583453
+  SlackTextViewController: b854e62c1c156336bc4fd409c6ca79b5773e8f9d
+  Solar: 2dc6e7cc39186cb0c8228fa08df76fb50c7d8f24
+  SwipeNavigationController: 592681599a3105a44484e5b7af9055cee7a0d7b9
+  TransitionableTab: 2c4af884ff0048b560269245ab6880bd5db67c5e
+  TwitterCore: 644d59e75abccb26cf0a9050d2c4dea0e5412241
+  TwitterKit: a2e60ddcedbf54091eac6f27685ca7a87681e1d7
+  UIDeviceComplete: 9c4d7f979454ce948b95bf1052978a34af24663c
+  Weakify: 66756fc9a0b7384e6dd58706d82d4afa081c775c
+
+PODFILE CHECKSUM: a5ba12e98ec45ad9cb6d74465531602c4db21436
+
+COCOAPODS: 1.3.1
