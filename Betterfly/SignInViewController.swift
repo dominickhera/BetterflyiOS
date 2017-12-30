@@ -13,28 +13,28 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import TwitterKit
 
-
 class SignInViewController: UIViewController, GIDSignInUIDelegate {
 
 var segueInProcess = false
 var handle: AuthStateDidChangeListenerHandle?
     var ref: DatabaseReference!
+    let userDefaults = UserDefaults.standard
 //    @IBOutlet weak var SignInButton: GIDSignInButton!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         if(!segueInProcess){
-        let googleButton = GIDSignInButton()
-        googleButton.frame = CGRect(x: 16, y: 116 + 66, width: view.frame.width - 32, height: 60)
-        googleButton.addTarget(self, action: #selector(GoogleSignIn), for: .touchUpInside)
-        view.addSubview(googleButton)
-        segueInProcess = true
+            let googleButton = GIDSignInButton()
+            googleButton.frame = CGRect(x: 16, y: view.frame.height - 240, width: view.frame.width - 32, height: 60)
+            googleButton.addTarget(self, action: #selector(GoogleSignIn), for: .touchUpInside)
+            view.addSubview(googleButton)
+            segueInProcess = true
         }
         let twitterButton = TWTRLogInButton(logInCompletion: { session, error in
             if let session = session {
                 print("signed in as \(String(describing: session.userName))");
                 let credential = TwitterAuthProvider.credential(withToken: session.authToken, secret: session.authTokenSecret)
-                
+                self.userDefaults.set("twitter", forKey: "signInMode")
                 self.generalLogin(credential)
                 let client = TWTRAPIClient.withCurrentUser()
                 
@@ -52,30 +52,27 @@ var handle: AuthStateDidChangeListenerHandle?
                 print("error: \(String(describing: error?.localizedDescription))");
             }
         })
-        twitterButton.frame = CGRect(x: 16, y: 116 + 122, width: view.frame.width - 32, height: 60)
+        twitterButton.frame = CGRect(x: 16, y: view.frame.height - 180, width: view.frame.width - 32, height: 60)
         self.view.addSubview(twitterButton)
         
         
         
         let emailButton = UIButton(type: .system)
-        emailButton.frame = CGRect(x: 16, y: 116 + 190, width: view.frame.width - 32, height: 60)
+        emailButton.frame = CGRect(x: 16, y: 116 + 330, width: view.frame.width - 32, height: 60)
         emailButton.setTitle("Email", for: UIControlState.normal)
 //        emailButton.contentHorizontalAlignment = .left
         emailButton.backgroundColor = UIColor.red
-        emailButton.addTarget(self, action: #selector(emailSignUp), for: .touchUpInside)
-        self.view.addSubview(emailButton)
         
-//        let facebookButton = FBSDKButton()
-//        let facebookButton = facebookButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError?) {
-//            if let error = error {
-//                print(error.localizedDescription)
-//                return
-//            }
-            // ...
-//        }
-//        facebookButton.frame = CGRect(x: 16, y: 116 + 230, width: view.frame.width - 32, height: 60)
-//        facebookButton.addTarget(self, action: #selector(FacebookSignIn), for: .touchUpInside)
-//        view.addSubview(facebookButton)
+        emailButton.addTarget(self, action: #selector(emailSignUp), for: .touchUpInside)
+//        self.view.addSubview(emailButton)
+        
+//        let facebookButton = UIButton(type: .custom)
+        
+//        facebookButton.setImage(UIImage(named: "facebookLogInButton.png"), for: .normal)
+        let facebookButton = FBSDKLoginButton()
+        facebookButton.frame = CGRect(x: 16, y: view.frame.height - 110, width: view.frame.width - 32, height: 60)
+        facebookButton.addTarget(self, action: #selector(facebookSignInButton), for: .touchUpInside)
+        self.view.addSubview(facebookButton)
 
         
         // Do any additional setup after loading the view.
@@ -161,6 +158,24 @@ var handle: AuthStateDidChangeListenerHandle?
         
     }
 
+    
+    func facebookSignInButton() {
+        let fbLoginManager = FBSDKLoginManager()
+        fbLoginManager.logIn(withReadPermissions: ["public_profile", "email"], from: self) { (result, error) in
+            if let error = error {
+                print("Failed to login: \(error.localizedDescription)")
+                return
+            }
+            guard let accessToken = FBSDKAccessToken.current() else {
+                print("Failed to get access token")
+                return
+            }
+            self.userDefaults.set("facebook", forKey: "signInMode")
+            let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
+            self.generalLogin(credential)
+            
+        }
+    }
     
     func generalLogin(_ credential: AuthCredential)
     {

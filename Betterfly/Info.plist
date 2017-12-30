@@ -30,13 +30,32 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>twitterauth</string>
+			<string></string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>twitterkit-b0bI0LmBRXFEXs0s7li1RwkXwQhq6wtyONmafPAHDhr7koZ4ss</string>
+				<string>twitterkit-opXb4omBw469uSEWDHEKxeUSf</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb262107020943856</string>
 			</array>
 		</dict>
 	</array>
+    <key>FacebookAppID</key>
+    <string>262107020943856</string>
+    <key>FacebookDisplayName</key>
+    <string>Bettrfly</string>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>fbapi</string>
+        <string>fb-messenger-api</string>
+        <string>fbauth2</string>
+        <string>fbshareextension</string>
+    </array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>

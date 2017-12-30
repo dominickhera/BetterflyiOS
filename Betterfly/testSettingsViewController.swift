@@ -14,6 +14,8 @@ import GoogleSignIn
 import MessageUI
 import CoreLocation
 import Crashlytics
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 internal final class testSettingsViewController: QuickTableViewController, MFMailComposeViewControllerDelegate, CLLocationManagerDelegate {
     let userDefaults = UserDefaults.standard
@@ -62,7 +64,7 @@ internal final class testSettingsViewController: QuickTableViewController, MFMai
                 TapActionRow<CustomTapActionCell>(title: "Contact Us", action: weakify(self, type(of: self).createEmail)),
                 TapActionRow<CustomTapActionCell>(title: "Website", action: weakify(self, type(of: self).openWebsite)),
                 TapActionRow<CustomTapActionCell>(title: "Share App", action: weakify(self, type(of: self).shareApp)),
-                TapActionRow<CustomTapActionCell>(title: "Rate App", action: weakify(self, type(of: self).shareApp))
+                TapActionRow<CustomTapActionCell>(title: "Rate App", action: weakify(self, type(of: self).rateApp))
                 
                 ]),
             
@@ -70,22 +72,6 @@ internal final class testSettingsViewController: QuickTableViewController, MFMai
                 TapActionRow<CustomTapActionCell>(title: "Sign Out", action: weakify(self, type(of: self).signOut))
                 
                 ]),
-            
-            
-            
-            
-//            Section(title: nil, rows: [
-//                NavigationRow<CustomCell>(title: "Empty section title", subtitle: .none, customization: { cell, row in
-////                    cell.accessoryView = UIImageView(image: #imageLiteral(resourceName: "iconmonstr-x-mark"))
-//                    print(row.cellReuseIdentifier)
-//                })
-//                ]),
-            
-//            RadioSection(title: "Radio Buttons", options: [
-//                OptionRow(title: "Option 1", isSelected: true, action: weakify(self, type(of: self).didToggleSelection)),
-//                OptionRow(title: "Option 2", isSelected: false, action: weakify(self, type(of: self).didToggleSelection)),
-//                OptionRow<CustomOptionCell>(title: "Option 3", isSelected: false, action: weakify(self, type(of: self).didToggleSelection))
-//                ], footer: "See RadioSection for more details."),
             
             debugging
         ]
@@ -227,11 +213,11 @@ internal final class testSettingsViewController: QuickTableViewController, MFMai
 //        let userDefaults = UserDefaults.standard
         if userDefaults.bool(forKey: "is24HourTimeEnabled") {
             userDefaults.set(false, forKey: "is24HourTimeEnabled")
-            print("um11111")
+//            print("um11111")
         }
         else
         {
-            print("what1111")
+//            print("what1111")
             userDefaults.set(true, forKey: "is24HourTimeEnabled")
         }
         
@@ -269,7 +255,7 @@ internal final class testSettingsViewController: QuickTableViewController, MFMai
             mail.mailComposeDelegate = self
             mail.setToRecipients(["support@dominickhera.com"])
             mail.setSubject("Betterfly Question")
-            mail.setMessageBody("<p>Device: \(UIDevice.current)</br>App: Betterfly</br>App Version: \(version)</br></br></p>", isHTML: true)
+            mail.setMessageBody("<p>Device: \(UIDevice.current.model)</br>App: Betterfly</br>App Version: \(version)</br></br></p>", isHTML: true)
             
             present(mail, animated: true)
         } else {
@@ -282,20 +268,45 @@ internal final class testSettingsViewController: QuickTableViewController, MFMai
     }
     
     private func shareApp() {
-        let activityViewController = UIActivityViewController(activityItems: ["Hey, you should check out this cool new app for keeping track of positive thoughts made by Dominick Hera!"], applicationActivities: nil)
+        let activityViewController = UIActivityViewController(activityItems: ["Check out this cool app called Bettrfly! itunes.apple.com/app/id1282712660"], applicationActivities: nil)
         present(activityViewController, animated: true, completion: {})
+    }
+    
+    private func rateApp() {
+//        guard let url = URL(string : "itms-apps://itunes.apple.com/app/id1282712660") else {
+//            completion(false)
+//            return
+//        }
+//        guard #available(iOS 10, *) else {
+//            completion(UIApplication.shared.openURL(url))
+//            return
+//        }
+//        UIApplication.shared.open(url, options: [:], completionHandler: completion)
+        
+        
+        let url = URL(string: "itms-apps://itunes.apple.com/app/id1282712660")!
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url, options: [:])
+        } else {
+            UIApplication.shared.openURL(url)
+            // Fallback on earlier versions
+        }
     }
     
     private func signOut() {
         let firebaseAuth = Auth.auth()
         
         do {
+            FBSDKAccessToken.setCurrent(nil)
             GIDSignIn.sharedInstance().signOut()
             try firebaseAuth.signOut()
         } catch let signOutError as NSError {
             print ("\n\nError signing out: %@", signOutError)
         }
-        
+        userDefaults.set(false, forKey: "isSignedIn")
+        userDefaults.set("", forKey: "signInMode")
+        userDefaults.set(false, forKey: "is24HourTimeEnabled")
+        userDefaults.set(false, forKey: "isDarkModeEnabled")
         if let VC = self.storyboard?.instantiateViewController(withIdentifier: "signUpPage")
         {
             //            print("peehole")

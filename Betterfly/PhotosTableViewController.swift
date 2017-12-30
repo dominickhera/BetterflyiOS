@@ -117,7 +117,7 @@ class PhotosTableViewController: UITableViewController, UIImagePickerControllerD
         else
         {
             navigationController?.navigationBar.barTintColor = UIColor.white
-            tableView.backgroundColor = UIColor(red:0.40, green:0.78, blue:0.73, alpha:1.0)
+            tableView.backgroundColor = UIColor(red:0.18, green:0.81, blue:0.92, alpha:1.0)
         }
 //        self.tableView.reloadData()
     }

@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import FirebaseAuthUI
 import FirebaseGoogleAuthUI
-import FirebaseFacebookAuthUI
+//import FirebaseFacebookAuthUI
 import GoogleSignIn
 import FBSDKCoreKit
 import FBSDKLoginKit
@@ -34,14 +34,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         //        Fabric.with([Twitter.self])
         
         FirebaseApp.configure()
-        
+//        let authUI = FUIAuth.defaultAuthUI()
+        // You need to adopt a FUIAuthDelegate protocol to receive callback
+//        authUI?.delegate = self as? FUIAuthDelegate
         
         Database.database().isPersistenceEnabled = true
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
         TWTRTwitter.sharedInstance().start(withConsumerKey:"opXb4omBw469uSEWDHEKxeUSf", consumerSecret:"b0bI0LmBRXFEXs0s7li1RwkXwQhq6wtyONmafPAHDhr7koZ4ss")
-        FBSDKApplicationDelegate.sharedInstance().application(application,
-                                                              didFinishLaunchingWithOptions:launchOptions)
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
         window = UIWindow(frame: UIScreen.main.bounds)
         
@@ -51,9 +52,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         let userDefaults = UserDefaults.standard
         
         if userDefaults.bool(forKey: "onboardingComplete") {
-            if userDefaults.bool(forKey: "isSignedIn") {
-                initialViewController = sb.instantiateViewController(withIdentifier: "navTabBar")
-            }
+//            if userDefaults.bool(forKey: "isSignedIn") {
+//                initialViewController = sb.instantiateViewController(withIdentifier: "navTabBar")
+//            }
             initialViewController = sb.instantiateViewController(withIdentifier: "signUpPage")
             
         }
@@ -85,10 +86,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     @available(iOS 9.0, *)
     func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any])
         -> Bool {
+            let userDefaults = UserDefaults.standard
             if GIDSignIn.sharedInstance().handle(url,
                                                  sourceApplication:options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
                                                  annotation: [:]) {
                 return true
+            }
+            
+            if (userDefaults.string(forKey: "signInMode") == "facebook") {
+                return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, options: options)
+            }
+            
+            if (userDefaults.string(forKey: "signInMode") == "twitter") {
+                return TWTRTwitter.sharedInstance().application(application, open: url, options: options)
             }
             return TWTRTwitter.sharedInstance().application(application, open: url, options: options)
     }
