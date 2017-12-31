@@ -9,6 +9,11 @@
 import UIKit
 import FoldingCell
 
+protocol FoldingCellDelegate: class {
+    func shareFoldingCell(cell: FoldingTableViewCell)
+//    func editFoldingCell(cell: FoldingTableViewCell)
+}
+
 class FoldingTableViewCell: FoldingCell {
     
 //    var postKey: String?
@@ -24,21 +29,23 @@ class FoldingTableViewCell: FoldingCell {
     @IBOutlet weak var openTimeLabel: UILabel!
     @IBOutlet weak var closedBodyTextView: UITextView!
     @IBOutlet weak var firstImageContainerView: UIView!
-    
-    
-  
-    
     @IBOutlet weak var barContainerView: UIView!
-    
-    
-    
-    
-    
     @IBOutlet weak var secondContainerView: RotatedView!
-    
-    
     @IBOutlet weak var openDateBackgroundView: UIView!
     
+    var delegate: FoldingCellDelegate?
+    
+    override func awakeFromNib() {
+        foregroundView.layer.cornerRadius = 10
+        foregroundView.layer.masksToBounds = true
+        super.awakeFromNib()
+        // Initialization code
+    }
+    
+    
+    
+//    @IBAction func sharePost(_ sender: Any) {
+//    }
     
     
     var number: Int = 0 {
@@ -46,13 +53,6 @@ class FoldingTableViewCell: FoldingCell {
 //            closeNumberLabel.text = String(number)
 //            openNumberLabel.text = String(number)
         }
-    }
-
-    override func awakeFromNib() {
-        foregroundView.layer.cornerRadius = 10
-        foregroundView.layer.masksToBounds = true
-        super.awakeFromNib()
-        // Initialization code
     }
     
     override func animationDuration(_ itemIndex: NSInteger, type: FoldingCell.AnimationType) -> TimeInterval {
@@ -63,6 +63,10 @@ class FoldingTableViewCell: FoldingCell {
 }
 
 extension FoldingTableViewCell {
+    @IBAction func sharePost(_ sender: Any) {
+//        print("ok")
+        delegate?.shareFoldingCell(cell: self)
+    }
     
     //for action functions
     

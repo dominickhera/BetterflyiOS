@@ -28,6 +28,17 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
     @IBOutlet weak var bodyTextView: UITextView!
     @IBOutlet weak var entryDate: UILabel!
     @IBOutlet weak var postImageView: UIImageView!
+    @IBOutlet var editPostView: UIView!
+    @IBOutlet weak var editBodyTextView: UITextView!
+    @IBOutlet weak var editEntryDate: UILabel!
+    
+    
+    @IBOutlet weak var editPostImageView: UIImageView!
+    
+    @IBOutlet weak var editRemoveImagePost: UIButton!
+    
+    
+    
     
     let kCloseCellHeight: CGFloat = 108
     let kOpenCellHeight: CGFloat = 488
@@ -70,8 +81,8 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
                 cell.openBodyTextView?.textColor = UIColor.black
                 cell.closedBodyTextView?.textColor = UIColor.black
                 cell.closedFullDateLabel?.textColor = UIColor.black
-                cell.openDateBackgroundView?.backgroundColor = UIColor(red:0.58, green:0.49, blue:0.69, alpha:1.0)
-                cell.barContainerView.backgroundColor = UIColor(red:0.58, green:0.49, blue:0.69, alpha:1.0)
+                cell.openDateBackgroundView?.backgroundColor = UIColor(red:0.93, green:0.39, blue:0.29, alpha:1.0)
+                cell.barContainerView.backgroundColor = UIColor(red:0.93, green:0.39, blue:0.29, alpha:1.0)
                 cell.foregroundView.backgroundColor = UIColor.white
                 cell.containerView.backgroundColor = UIColor.white
                 cell.firstImageContainerView.backgroundColor = UIColor.white
@@ -146,13 +157,13 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
                 let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.self.imageTapped(tapGestureRecognizer:)))
                 cell.openImageView!.addGestureRecognizer(tapGestureRecognizer)
             }
-            else
-            {
+//            else
+//            {
 
-                cell.openImageView.image = nil
-                cell.openImageView.isHidden = true
+//                cell.openImageView.image = nil
+//                cell.openImageView.isHidden = true
 //                cell.firstImageContainerView!.isHidden = true
-            }
+//            }
 
             return cell
         }
@@ -185,8 +196,8 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
                 cell.openBodyTextView?.textColor = UIColor.black
                 cell.closedBodyTextView?.textColor = UIColor.black
                 cell.closedFullDateLabel?.textColor = UIColor.black
-                cell.openDateBackgroundView?.backgroundColor = UIColor(red:0.58, green:0.49, blue:0.69, alpha:1.0)
-                cell.barContainerView.backgroundColor = UIColor(red:0.58, green:0.49, blue:0.69, alpha:1.0)
+                cell.openDateBackgroundView?.backgroundColor = UIColor(red:0.93, green:0.39, blue:0.29, alpha:1.0)
+                cell.barContainerView.backgroundColor = UIColor(red:0.93, green:0.39, blue:0.29, alpha:1.0)
                 cell.foregroundView.backgroundColor = UIColor.white
                 cell.containerView.backgroundColor = UIColor.white
                 cell.firstImageContainerView.backgroundColor = UIColor.white
@@ -687,10 +698,10 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         }
     }
     
-}
-
-// MARK: - TableView
-extension newFoldingPostListTableViewController {
+//}
+//
+//// MARK: - TableView
+//extension newFoldingPostListTableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10000
@@ -775,3 +786,29 @@ extension newFoldingPostListTableViewController {
     }
 
 }
+
+extension newFoldingPostListTableViewController: FoldingCellDelegate {
+    func shareFoldingCell(cell: FoldingTableViewCell) {
+        print("wtf")
+        let imageToShare =  cell.openImageView.image!
+        let textToShare = "\(String(describing: cell.closedFullDateLabel.text!)): \(cell.closedBodyTextView.text!)"
+        let shareItems = [imageToShare, textToShare] as [Any]
+        
+        let activityViewController = UIActivityViewController(activityItems: shareItems , applicationActivities: nil)
+        self.present(activityViewController, animated: true, completion: nil)
+    }
+    
+//    func editFoldingCell(cell: FoldingTableViewCell) {
+//        print("still working on it")
+//        let activityViewController = UIActivityViewController(activityItems: ["Check out this cool app called Bettrfly! itunes.apple.com/app/id1282712660"], applicationActivities: nil)
+//        present(activityViewController, animated: true, completion: {})
+//    }
+    
+    
+    
+}
+
+
+
+
+
