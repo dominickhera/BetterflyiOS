@@ -6,7 +6,6 @@ target 'Betterfly' do
   use_frameworks!
 
   # Pods for Betterfly
-  pod 'SwipeNavigationController', '~> 2.0.0'
   pod 'SwipeableTabBarController'
   pod 'Weakify', '~> 0.4.0' 
   pod 'Solar' 
@@ -16,8 +15,6 @@ target 'Betterfly' do
   pod 'IQKeyboardManagerSwift' 
   pod 'paper-onboarding', '~> 2.0.1' 
   pod 'FoldingCell'
-  pod 'TransitionableTab', '~> 0.1.2'
-  pod 'CircleMenu' 
   pod 'SDWebImage', '~> 4.0' 
   pod 'Firebase'
   pod 'Firebase/Core'
@@ -39,7 +36,6 @@ target 'Betterfly' do
   pod 'TwitterKit'
   pod 'Fabric'
   pod 'SCLAlertView' 
-  pod 'CollieGallery'
   pod 'SimpleImageViewer', '~> 1.1'
  
   target 'BetterflyTests' do

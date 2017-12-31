@@ -12,8 +12,8 @@ import FirebaseDatabaseUI
 import FirebaseStorageUI
 import Photos
 import SCLAlertView
-import CircleMenu
 import Crashlytics
+import SimpleImageViewer
 
 class PhotosTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -129,28 +129,36 @@ class PhotosTableViewController: UITableViewController, UIImagePickerControllerD
     func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
     {
         //        let tappedImage = tapGestureRecognizer.view as! UIImageView
-        
         let imageView = tapGestureRecognizer.view as! UIImageView
-        let newImageView = UIImageView(image: imageView.image)
-        //                newImageView.frame = UIScreen.main.bounds
-        newImageView.backgroundColor = .black
-        newImageView.contentMode = .scaleAspectFit
-        newImageView.frame = UIScreen.main.bounds
-        newImageView.isUserInteractionEnabled = true
-        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
-        let window = UIApplication.shared.keyWindow!
-        newImageView.addGestureRecognizer(tap)
-        window.addSubview(newImageView)
-        newImageView.center = window.center
-        newImageView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
-        newImageView.alpha = 0
+//        let newImageView = UIImageView(image: imageView.image)
         
-        UIView.animate(withDuration: 0.4) {
-            newImageView.alpha = 1
-            newImageView.transform = CGAffineTransform.identity
+        let configuration = ImageViewerConfiguration { config in
+            config.imageView = imageView
         }
-        self.navigationController?.isNavigationBarHidden = true
-        self.tabBarController?.tabBar.isHidden = true
+        
+        present(ImageViewerController(configuration: configuration), animated: true)
+        
+//        let imageView = tapGestureRecognizer.view as! UIImageView
+//        let newImageView = UIImageView(image: imageView.image)
+        //                newImageView.frame = UIScreen.main.bounds
+//        newImageView.backgroundColor = .black
+//        newImageView.contentMode = .scaleAspectFit
+//        newImageView.frame = UIScreen.main.bounds
+//        newImageView.isUserInteractionEnabled = true
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
+//        let window = UIApplication.shared.keyWindow!
+//        newImageView.addGestureRecognizer(tap)
+//        window.addSubview(newImageView)
+//        newImageView.center = window.center
+//        newImageView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+//        newImageView.alpha = 0
+//
+//        UIView.animate(withDuration: 0.4) {
+//            newImageView.alpha = 1
+//            newImageView.transform = CGAffineTransform.identity
+//        }
+//        self.navigationController?.isNavigationBarHidden = true
+//        self.tabBarController?.tabBar.isHidden = true
         
         // Your action
     }

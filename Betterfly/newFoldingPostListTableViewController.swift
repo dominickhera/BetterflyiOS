@@ -12,8 +12,8 @@ import Firebase
 import FirebaseDatabaseUI
 import Photos
 import SCLAlertView
-import CircleMenu
 import Crashlytics
+import SimpleImageViewer
 
 class newFoldingPostListTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -39,7 +39,6 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
     
     
     
-    
     let kCloseCellHeight: CGFloat = 108
     let kOpenCellHeight: CGFloat = 488
     let kRowsCount = 10000
@@ -61,6 +60,7 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         postImageView.isHidden = true
         postImageView.layer.cornerRadius = 5
         removeImagePost.isHidden = true
+//        if
         dataSource = FUITableViewDataSource.init(query: (getQuery())) { (tableView, indexPath, snap) -> UITableViewCell in
             let cell = tableView.dequeueReusableCell(withIdentifier: "FoldingCell", for: indexPath) as! FoldingTableViewCell
             guard let post = Post.init(snapshot: snap) else { return cell }
@@ -312,28 +312,35 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
     func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
     {
         //        let tappedImage = tapGestureRecognizer.view as! UIImageView
-        
         let imageView = tapGestureRecognizer.view as! UIImageView
-        let newImageView = UIImageView(image: imageView.image)
-        //                newImageView.frame = UIScreen.main.bounds
-        newImageView.backgroundColor = .black
-        newImageView.contentMode = .scaleAspectFit
-        newImageView.frame = UIScreen.main.bounds
-        newImageView.isUserInteractionEnabled = true
-        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
-        let window = UIApplication.shared.keyWindow!
-        newImageView.addGestureRecognizer(tap)
-        window.addSubview(newImageView)
-        newImageView.center = window.center
-        newImageView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
-        newImageView.alpha = 0
+        //        let newImageView = UIImageView(image: imageView.image)
         
-        UIView.animate(withDuration: 0.4) {
-            newImageView.alpha = 1
-            newImageView.transform = CGAffineTransform.identity
+        let configuration = ImageViewerConfiguration { config in
+            config.imageView = imageView
         }
-        self.navigationController?.isNavigationBarHidden = true
-        self.tabBarController?.tabBar.isHidden = true
+        
+        present(ImageViewerController(configuration: configuration), animated: true)
+//        let imageView = tapGestureRecognizer.view as! UIImageView
+//        let newImageView = UIImageView(image: imageView.image)
+//        //                newImageView.frame = UIScreen.main.bounds
+//        newImageView.backgroundColor = .black
+//        newImageView.contentMode = .scaleAspectFit
+//        newImageView.frame = UIScreen.main.bounds
+//        newImageView.isUserInteractionEnabled = true
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
+//        let window = UIApplication.shared.keyWindow!
+//        newImageView.addGestureRecognizer(tap)
+//        window.addSubview(newImageView)
+//        newImageView.center = window.center
+//        newImageView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+//        newImageView.alpha = 0
+//
+//        UIView.animate(withDuration: 0.4) {
+//            newImageView.alpha = 1
+//            newImageView.transform = CGAffineTransform.identity
+//        }
+//        self.navigationController?.isNavigationBarHidden = true
+//        self.tabBarController?.tabBar.isHidden = true
         
         // Your action
     }
@@ -529,6 +536,7 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         
         let date = Date()
         let formatter = DateFormatter()
+        
         formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZ"
         formatter.timeZone = TimeZone(abbreviation: "UTC")
@@ -545,10 +553,14 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         let postYear = ("\(year)")
         let time = ("\(hour):\(postMinutes)")
         var downloadURL = ""
+        var searchTags = ""
         
         if postImageView.image != nil {
+             if #available(iOS 11.0, *) {
+                searchTags = "\(sceneLabel(forImage: (postImageView.image)!)!), \(sceneLabelTwo(forImage: (postImageView.image)!)!), \(sceneLabelThree(forImage: (postImageView.image)!)!)"
+            }
             var data = Data()
-            data = UIImageJPEGRepresentation(postImageView.image!, 0.8)!
+            data = UIImageJPEGRepresentation(postImageView.image!, 0.2)!
             // set upload path
             let filePath = "users/" + Auth.auth().currentUser!.uid + "/\(key).jpg"
             let metaData = StorageMetadata()
@@ -575,7 +587,8 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
                                 "timeStamp": timeStamp,
                                 "reverseTimeStamp": realReverseTimeStamp,
                                 "downloadURL": photoURL,
-                                "body": body]
+                                "body": body,
+                                "searchTags": searchTags]
                     
                     print("\(userID!)")
                     let childUpdates = ["/users/\(userID!)/\(key)/": post]
@@ -598,7 +611,8 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
                         "timeStamp": timeStamp,
                         "reverseTimeStamp": realReverseTimeStamp,
                         "downloadURL": downloadURL,
-                        "body": body]
+                        "body": body,
+                        "searchTags": searchTags]
             
             print("\(userID!)")
             let childUpdates = ["/users/\(userID!)/\(key)/": post]
@@ -627,6 +641,62 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         blurOut()
 //        reloadFirebaseData()
         //            self.ref.child("users/\(userID!)/\(date)").setValue(post)
+    }
+    
+    func sceneLabel (forImage image:UIImage) -> String? {
+        if #available(iOS 11.0, *) {
+            let mLModelOne = GoogLeNetPlaces()
+        
+//        let imageData = image.jpeg(.medium)
+        let resizedImage = image.resized(toWidth: 224)
+        if let pixelBuffer = ImageProcessor.pixelBuffer(forImage: (resizedImage?.cgImage)!) {
+            guard let scene = try? mLModelOne.prediction(sceneImage: pixelBuffer) else {fatalError("Unexpected runtime error")}
+            return scene.sceneLabel
+            
+        }
+        } else {
+            return nil
+            // Fallback on earlier versions
+        }
+        
+        return nil
+    }
+    
+    func sceneLabelTwo (forImage image:UIImage) -> String? {
+        if #available(iOS 11.0, *) {
+            let mLModelTwo = SqueezeNet()
+        let imageData = image.jpeg(.medium)
+        let resizedImage = UIImage(data:imageData!,scale:1.0)?.resized(toWidth: 227)
+        if let pixelBuffer = ImageProcessor.pixelBuffer(forImage: (resizedImage?.cgImage)!) {
+            guard let scene = try? mLModelTwo.prediction(image: pixelBuffer) else {fatalError("Unexpected runtime error")}
+            return scene.classLabel
+            
+        }
+    } else {
+        return nil
+    // Fallback on earlier versions
+    }
+        
+        return nil
+    }
+    
+    func sceneLabelThree (forImage image:UIImage) -> String? {
+        if #available(iOS 11.0, *) {
+            let mLModelThree = MobileNet()
+        
+        let imageData = image.jpeg(.medium)
+        let resizedImage = UIImage(data:imageData!,scale:1.0)?.resized(toWidth: 224)
+        if let pixelBuffer = ImageProcessor.pixelBuffer(forImage: (resizedImage?.cgImage)!) {
+            guard let scene = try? mLModelThree.prediction(image: pixelBuffer) else {fatalError("Unexpected runtime error")}
+            return scene.classLabel
+            
+        }
+        } else {
+            return nil
+            // Fallback on earlier versions
+        }
+        
+        return nil
     }
     @IBAction func removeImagePost(_ sender: Any) {
         self.view.endEditing(true)
@@ -806,6 +876,38 @@ extension newFoldingPostListTableViewController: FoldingCellDelegate {
     
     
     
+}
+
+extension UIImage {
+    enum JPEGQuality: CGFloat {
+        case lowest  = 0
+        case low     = 0.25
+        case medium  = 0.5
+        case high    = 0.75
+        case highest = 1
+    }
+    
+    /// Returns the data for the specified image in JPEG format.
+    /// If the image object’s underlying image data has been purged, calling this function forces that data to be reloaded into memory.
+    /// - returns: A data object containing the JPEG data, or nil if there was a problem generating the data. This function may return nil if the image has no data or if the underlying CGImageRef contains data in an unsupported bitmap format.
+    func jpeg(_ quality: JPEGQuality) -> Data? {
+        return UIImageJPEGRepresentation(self, quality.rawValue)
+    }
+    
+    func resized(withPercentage percentage: CGFloat) -> UIImage? {
+        let canvasSize = CGSize(width: size.width * percentage, height: size.height * percentage)
+        UIGraphicsBeginImageContextWithOptions(canvasSize, false, scale)
+        defer { UIGraphicsEndImageContext() }
+        draw(in: CGRect(origin: .zero, size: canvasSize))
+        return UIGraphicsGetImageFromCurrentImageContext()
+    }
+    func resized(toWidth width: CGFloat) -> UIImage? {
+        let canvasSize = CGSize(width: width, height: width)
+        UIGraphicsBeginImageContextWithOptions(canvasSize, false, scale)
+        defer { UIGraphicsEndImageContext() }
+        draw(in: CGRect(origin: .zero, size: canvasSize))
+        return UIGraphicsGetImageFromCurrentImageContext()
+    }
 }
 
 

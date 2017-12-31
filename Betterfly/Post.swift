@@ -22,9 +22,10 @@ class Post: NSObject {
     var reverseTimeStamp: String
     var downloadURL: String
     var body: String
+    var searchTags: String
     
     
-    init(uid: String, month: String, day: String, year: String, time: String,date: String, hour: String, minutes: String, timeStamp: String, reverseTimeStamp: String, downloadURL: String, body: String) {
+    init(uid: String, month: String, day: String, year: String, time: String,date: String, hour: String, minutes: String, timeStamp: String, reverseTimeStamp: String, downloadURL: String, body: String, searchTags: String) {
         self.uid = uid
         self.month = month
         self.day = day
@@ -37,6 +38,7 @@ class Post: NSObject {
         self.reverseTimeStamp = reverseTimeStamp
         self.downloadURL = downloadURL
         self.body = body
+        self.searchTags = searchTags
     }
     
     init?(snapshot: DataSnapshot) {
@@ -53,6 +55,7 @@ class Post: NSObject {
         guard let reverseTimeStamp = dict["reverseTimeStamp"] else { return nil }
         guard let downloadURL = dict["downloadURL"] else { return nil}
         guard let body = dict["body"] else { return nil }
+        guard let searchTags = dict["searchTags"] else { return nil }
         
         self.uid = uid
         self.month = month
@@ -66,10 +69,11 @@ class Post: NSObject {
         self.reverseTimeStamp = reverseTimeStamp
         self.downloadURL = downloadURL
         self.body = body
+        self.searchTags = searchTags
     }
     
     convenience override init() {
-        self.init(uid: "",month:"", day: "", year: "", time: "",date: "", hour: "", minutes: "", timeStamp: "", reverseTimeStamp: "", downloadURL: "", body:  "")
+        self.init(uid: "",month:"", day: "", year: "", time: "",date: "", hour: "", minutes: "", timeStamp: "", reverseTimeStamp: "", downloadURL: "", body:  "", searchTags: "")
     }
 }
 

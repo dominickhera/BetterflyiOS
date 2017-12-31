@@ -84,8 +84,15 @@ class ViewController: UIViewController, PaperOnboardingDataSource, PaperOnboardi
         let userDefaults = UserDefaults.standard
         
         userDefaults.set(true, forKey: "onboardingComplete")
-        
         userDefaults.synchronize()
+        if !userDefaults.bool(forKey: "isSignedIn"){
+            if let VC = self.storyboard?.instantiateViewController(withIdentifier: "signUpPage")
+            {
+                self.present(VC, animated: true, completion: nil)
+            }
+        }
+        
+        
         
     }
     
