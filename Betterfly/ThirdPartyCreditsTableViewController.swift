@@ -60,12 +60,17 @@ class ThirdPartyCreditsTableViewController:  UIViewController, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let selectedItem = data[indexPath.row]
-        self.performSegue(withIdentifier: "detail", sender: indexPath)
-//        if(selectedItem == "Icons"){
+        let selectedItem = data[indexPath.row]
+       
+        if(selectedItem == "Icons by Smashicons"){
+//            print("dickhole")
+//             performSegue(withIdentifier: "detail", sender: "https://www.flaticon.com/packs/essential-set-2")
+            let destinationVC = ThirdPartyCreditWebViewController()
+            destinationVC.url = "https://www.flaticon.com/packs/essential-set-2"
+//            destinationVC.performSegue(withIdentifier: "detail", sender: self)
 //            let urlTest = "http://www.dominickhera.com/apps/betterfly/privacyPolicy.html"
 //            performSegue(withIdentifier: "webCreditSegue", sender: urlTest)
-//        }
+        }
 //        else if(selectedItem == "SCLAlertView"){
 ////            let urlTest = URL(string: "http://www.dominickhera.com/apps/betterfly/privacyPolicy.html")
 ////                performSegue(withIdentifier: "webCreditSegue", sender: urlTest)
@@ -113,89 +118,101 @@ class ThirdPartyCreditsTableViewController:  UIViewController, UITableViewDelega
     
     func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         var data = ["Icons by Smashicons", "SCLAlertView", "IQKeyboardManagerSwift", "Firebase", "Fabric", "ParallaxHeader", "TwitterKit", "Facebook SDK", "Folding Cells", "Paper-Onboarding", "Transitionable Tab"]
-        guard let indexPath: IndexPath = sender as? IndexPath else { return }
-        guard let detail: ThirdPartyCreditWebViewController = segue.destination as? ThirdPartyCreditWebViewController else {
-            return
+        if segue.identifier == "detail" {
+            print("aaaaa")
+            if let destination = segue.destination as? ThirdPartyCreditWebViewController {
+                print("bbbbbb")
+                let indexPath: IndexPath = (sender as? IndexPath)!
+                let selectedItem = data[indexPath.row]
+//                if(selectedItem == "Icons by Smashicons"){
+                if let url = sender as? String {
+                    destination.url = url
+                    print("mum")
+                }
+                
+            }
         }
-        
-        let selectedItem = data[indexPath.row]
-            if(selectedItem == "Icons by Smashicons"){
-                detail.url = "https://www.flaticon.com/packs/essential-set-2"
-            }
-            else if(selectedItem == "SCLAlertView"){
-                detail.url = "https://github.com/vikmeup/SCLAlertView-Swift"
-            }
-            else if(selectedItem == "IQKeyboardManagerSwift"){
-                detail.url = "https://github.com/hackiftekhar/IQKeyboardManager"
-            }
-            else if(selectedItem == "Firebase"){
-    
-                detail.url = "https://firebase.google.com/terms/"
-            }
-            else if(selectedItem == "Fabric"){
-                detail.url = "https://fabric.io/privacy"
-            }
-            else if(selectedItem == "ParallaxHeader"){
-                detail.url = "https://github.com/romansorochak/ParallaxHeader"
-            }
-            else if(selectedItem == "TwitterKit") {
-                detail.url = "https://twitter.com/en/tos"
-    
-            }
-            else if(selectedItem == "Facebook SDK") {
-                detail.url = "https://www.facebook.com/legal/terms"
-    
-            }
-            else if(selectedItem == "Folding Cells") {
-                detail.url = "https://github.com/Ramotion/folding-cell"
-            }
-            else if(selectedItem == "Paper-Onboarding") {
-                detail.url = "https://github.com/Ramotion/paper-onboarding"
-            }
-            else if(selectedItem == "Transitionable Tab") {
-                detail.url = "https://github.com/Interactive-Studio/TransitionableTab"
-                print("url sending is \(detail.url)")
-            }
-            print("url sending is \(detail.url)")
-            
-        
-}
-//        else
-//        {
-//            return
+//        guard let indexPath: IndexPath = sender as? IndexPath else { return }
+////         let detail: ThirdPartyCreditWebViewController = segue.destination as? ThirdPartyCreditWebViewController {
+////
+////        }
+//        let detail = segue.destination as! ThirdPartyCreditWebViewController
+//        let selectedItem = data[indexPath.row]
+//        if(selectedItem == "Icons by Smashicons"){
+//            detail.url = "https://www.flaticon.com/packs/essential-set-2"
 //        }
-        
-        
-        
-//        if let dataSource = dataSource {
-//            detail.creditURL = dataSource.snapshot(at: indexPath.row).text
+//        else if(selectedItem == "SCLAlertView"){
+//            detail.url = "https://github.com/vikmeup/SCLAlertView-Swift"
 //        }
-
-    
-//            if let dataSource = dataSource {
-//                detail.postKey = dataSource.snapshot(at: indexPath.row).key
-//            }
+//        else if(selectedItem == "IQKeyboardManagerSwift"){
+//            detail.url = "https://github.com/hackiftekhar/IQKeyboardManager"
 //        }
-
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let destination = segue.destination as? Game{
-//            if let easyURLStart = sender as? URL{
-//                destination.startingURL = easyURLStart
-//            }
-//        }
-//    }
+//        else if(selectedItem == "Firebase"){
 //
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
+//            detail.url = "https://firebase.google.com/terms/"
+//        }
+//        else if(selectedItem == "Fabric"){
+//            detail.url = "https://fabric.io/privacy"
+//        }
+//        else if(selectedItem == "ParallaxHeader"){
+//            detail.url = "https://github.com/romansorochak/ParallaxHeader"
+//        }
+//        else if(selectedItem == "TwitterKit") {
+//            detail.url = "https://twitter.com/en/tos"
+//
+//        }
+//        else if(selectedItem == "Facebook SDK") {
+//            detail.url = "https://www.facebook.com/legal/terms"
+//
+//        }
+//        else if(selectedItem == "Folding Cells") {
+//            detail.url = "https://github.com/Ramotion/folding-cell"
+//        }
+//        else if(selectedItem == "Paper-Onboarding") {
+//            detail.url = "https://github.com/Ramotion/paper-onboarding"
+//        }
+//        else if(selectedItem == "Transitionable Tab") {
+//            detail.url = "https://github.com/Interactive-Studio/TransitionableTab"
+//            print("url sending is \(detail.url)")
+//        }
+//        print("url sending is \(detail.url)")
+//}
+////        else
+////        {
+////            return
+////        }
+//
+//
+//
+////        if let dataSource = dataSource {
+////            detail.creditURL = dataSource.snapshot(at: indexPath.row).text
+////        }
+//
+//
+////            if let dataSource = dataSource {
+////                detail.postKey = dataSource.snapshot(at: indexPath.row).key
+////            }
+////        }
+//
+//
+////    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+////        if let destination = segue.destination as? Game{
+////            if let easyURLStart = sender as? URL{
+////                destination.startingURL = easyURLStart
+////            }
+////        }
+    }
+////
+//    /*
+//     // MARK: - Navigation
+//
+//     // In a storyboard-based application, you will often want to do a little preparation before navigation
+//     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//     // Get the new view controller using segue.destinationViewController.
+//     // Pass the selected object to the new view controller.
+//     }
+//     */
+//
 //}
 
     /*

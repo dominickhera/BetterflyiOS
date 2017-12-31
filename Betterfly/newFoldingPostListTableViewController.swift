@@ -761,7 +761,7 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let cell = tableView.cellForRow(at: indexPath) as! FoldingTableViewCell
-        
+//        print("test: <\(cell.closedFullDateLabel.text!)>")
         if cell.isAnimating() {
             return
         }
