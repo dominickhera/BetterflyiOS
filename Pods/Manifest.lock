@@ -33,6 +33,9 @@ PODS:
   - Firebase/Database (4.8.0):
     - Firebase/Core
     - FirebaseDatabase (= 4.1.3)
+  - Firebase/Performance (4.8.0):
+    - Firebase/Core
+    - FirebasePerformance (= 1.1.0)
   - Firebase/Storage (4.8.0):
     - Firebase/Core
     - FirebaseStorage (= 2.1.1)
@@ -53,10 +56,19 @@ PODS:
     - leveldb-library (~> 1.18)
   - FirebaseInstanceID (2.0.8):
     - FirebaseCore (~> 4.0)
+  - FirebasePerformance (1.1.0):
+    - FirebaseAnalytics (~> 4.0)
+    - FirebaseInstanceID (~> 2.0)
+    - FirebaseSwizzlingUtilities (~> 1.0)
+    - GoogleToolboxForMac/Logger (~> 2.1)
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+    - GTMSessionFetcher/Core (~> 1.1)
+    - Protobuf (~> 3.1)
   - FirebaseStorage (2.1.1):
     - FirebaseAnalytics (~> 4.0)
     - FirebaseCore (~> 4.0)
     - GTMSessionFetcher/Core (~> 1.1)
+  - FirebaseSwizzlingUtilities (1.0.0)
   - FirebaseUI/Auth (4.5.0):
     - Firebase/Auth (~> 4.2)
   - FirebaseUI/Database (4.5.0):
@@ -79,6 +91,8 @@ PODS:
   - GoogleToolboxForMac/DebugUtils (2.1.3):
     - GoogleToolboxForMac/Defines (= 2.1.3)
   - GoogleToolboxForMac/Defines (2.1.3)
+  - GoogleToolboxForMac/Logger (2.1.3):
+    - GoogleToolboxForMac/Defines (= 2.1.3)
   - GoogleToolboxForMac/NSData+zlib (2.1.3):
     - GoogleToolboxForMac/Defines (= 2.1.3)
   - GoogleToolboxForMac/NSDictionary+URLArguments (2.1.3):
@@ -101,6 +115,7 @@ PODS:
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
   - paper-onboarding (2.0.1)
+  - Protobuf (3.5.0)
   - QuickTableViewController (0.7.1)
   - SCLAlertView (0.7.0)
   - SDWebImage (4.2.2):
@@ -114,7 +129,6 @@ PODS:
   - TwitterCore (3.1.0)
   - TwitterKit (3.3.0):
     - TwitterCore (>= 3.1.0)
-  - UIDeviceComplete (2.0.1)
   - Weakify (0.4.0)
 
 DEPENDENCIES:
@@ -130,6 +144,7 @@ DEPENDENCIES:
   - Firebase
   - Firebase/Auth
   - Firebase/Core
+  - Firebase/Performance
   - Firebase/Storage
   - FirebaseUI/Auth (~> 4.0)
   - FirebaseUI/Database (~> 4.0)
@@ -149,7 +164,6 @@ DEPENDENCIES:
   - SwipeNavigationController (~> 2.0.0)
   - TransitionableTab (~> 0.1.2)
   - TwitterKit
-  - UIDeviceComplete
   - Weakify (~> 0.4.0)
 
 SPEC CHECKSUMS:
@@ -168,7 +182,9 @@ SPEC CHECKSUMS:
   FirebaseCore: 3c02ec652db3d03fdc8bc6d9154af3e20d64b6f5
   FirebaseDatabase: 7088bfc4af2cc00231bb36e1404fc2d7509eb4dc
   FirebaseInstanceID: 81df5805a08001e69138664bdd02c6719a9ac80f
+  FirebasePerformance: 3877d097c59956aa2d7a317dbae503c2b4e78459
   FirebaseStorage: ab08d1c93a2feffa038fdd6693088b310ab1e6c6
+  FirebaseSwizzlingUtilities: f1c49a5a372ac852c853722a5891a0a5e2344a6c
   FirebaseUI: 883482fea73b73bbb488c55176f4c6ad128957eb
   FoldingCell: 55e9fcac546acc2c8f110f210af892aa90032160
   GoogleSignIn: 3fdaa34a2ba04dbd7a25d7db39aecb0da98d5bdc
@@ -179,6 +195,7 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   paper-onboarding: a8e001214d9ce9decf78e160b3823f396dbd51ac
+  Protobuf: 8a9838fba8dae3389230e1b7f8c104aa32389c03
   QuickTableViewController: 5b6223e33723977082e80796e9c5cf6713525124
   SCLAlertView: 8a14ffc40590c619e183eed2298b854385f30be1
   SDWebImage: 89a9d32cd520bbb46eb14e541d5109b3564af198
@@ -189,9 +206,8 @@ SPEC CHECKSUMS:
   TransitionableTab: 2c4af884ff0048b560269245ab6880bd5db67c5e
   TwitterCore: 644d59e75abccb26cf0a9050d2c4dea0e5412241
   TwitterKit: a2e60ddcedbf54091eac6f27685ca7a87681e1d7
-  UIDeviceComplete: 9c4d7f979454ce948b95bf1052978a34af24663c
   Weakify: 66756fc9a0b7384e6dd58706d82d4afa081c775c
 
-PODFILE CHECKSUM: a5ba12e98ec45ad9cb6d74465531602c4db21436
+PODFILE CHECKSUM: a4c87f9da1b12bb123094d55f31fb1c30963a06a
 
 COCOAPODS: 1.3.1

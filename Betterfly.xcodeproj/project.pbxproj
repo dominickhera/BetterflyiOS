@@ -260,6 +260,8 @@
 		2519B3851FF1BA2D002BE46D /* Unused Files */ = {
 			isa = PBXGroup;
 			children = (
+				E6C260C91F395FD5008CA748 /* emailSignUpViewController.swift */,
+				E6C260C21F395AC9008CA748 /* emailSignInViewController.swift */,
 				E61D623C1F3EDCAB00DE0C42 /* SettingsViewController.swift */,
 				E6C517CC1F437EFF00CE625A /* PostListViewController.swift */,
 				E6FAA2F81F302CFC007E89D9 /* SecondViewController.swift */,
@@ -321,6 +323,13 @@
 			path = "Watch Extension";
 			sourceTree = "<group>";
 		};
+		2584B7FA1FF87BDD0096BC52 /* Unused Files */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Unused Files";
+			sourceTree = "<group>";
+		};
 		4ACA470326D6204305979133 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -337,6 +346,7 @@
 		E6C4CA8E1F57F25F00590E58 /* IQKeyboardManagerSwift */ = {
 			isa = PBXGroup;
 			children = (
+				2584B7FA1FF87BDD0096BC52 /* Unused Files */,
 				25A26E001FF47089002475E2 /* DesignableX */,
 				E6C4CA8F1F57F25F00590E58 /* Categories */,
 				E6C4CA961F57F25F00590E58 /* Constants */,
@@ -435,10 +445,9 @@
 			children = (
 				E6F339BA1F397E5100B4D423 /* Betterfly.entitlements */,
 				E6C4CA8E1F57F25F00590E58 /* IQKeyboardManagerSwift */,
+				2519B3851FF1BA2D002BE46D /* Unused Files */,
 				E6D4FEF51F43950F00129E69 /* Post.swift */,
 				E6C260B81F394D87008CA748 /* SignInViewController.swift */,
-				E6C260C21F395AC9008CA748 /* emailSignInViewController.swift */,
-				E6C260C91F395FD5008CA748 /* emailSignUpViewController.swift */,
 				E6FAA3281F3044E7007E89D9 /* Onboarding.swift */,
 				E6FAA32A1F304619007E89D9 /* OnboardingView.swift */,
 				E6FAA2F41F302CFC007E89D9 /* AppDelegate.swift */,
@@ -449,7 +458,6 @@
 				257176D61FF1D501009EF21A /* newFoldingPostListTableViewController.swift */,
 				25A26DFC1FF44469002475E2 /* PhotosTableViewCell.swift */,
 				2519B3831FF1B870002BE46D /* FoldingTableViewCell.swift */,
-				2519B3851FF1BA2D002BE46D /* Unused Files */,
 				259B0A731FEF169900799250 /* ToCViewController.swift */,
 				259B0A751FEF16A400799250 /* privacyPolicyViewController.swift */,
 				E69259DA1F5F5BBE00E3CAC7 /* AboutMeViewController.swift */,
@@ -849,6 +857,7 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/QuickTableViewController/QuickTableViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/SCLAlertView/SCLAlertView.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
@@ -859,7 +868,6 @@
 				"${BUILT_PRODUCTS_DIR}/TransitionableTab/TransitionableTab.framework",
 				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework",
-				"${BUILT_PRODUCTS_DIR}/UIDeviceComplete/UIDeviceComplete.framework",
 				"${BUILT_PRODUCTS_DIR}/Weakify/Weakify.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -879,6 +887,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QuickTableViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SCLAlertView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
@@ -889,7 +898,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TransitionableTab.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIDeviceComplete.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Weakify.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",

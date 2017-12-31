@@ -130,63 +130,63 @@
 			<key>orderHint</key>
 			<integer>21</integer>
 		</dict>
-		<key>QuickTableViewController.xcscheme</key>
+		<key>Protobuf.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>22</integer>
 		</dict>
-		<key>SCLAlertView.xcscheme</key>
+		<key>QuickTableViewController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>23</integer>
 		</dict>
-		<key>SDWebImage.xcscheme</key>
+		<key>SCLAlertView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>24</integer>
 		</dict>
-		<key>SimpleImageViewer.xcscheme</key>
+		<key>SDWebImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>25</integer>
 		</dict>
-		<key>SlackTextViewController.xcscheme</key>
+		<key>SimpleImageViewer.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>26</integer>
 		</dict>
-		<key>Solar.xcscheme</key>
+		<key>SlackTextViewController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>27</integer>
 		</dict>
-		<key>SwipeNavigationController.xcscheme</key>
+		<key>Solar.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>28</integer>
 		</dict>
-		<key>TransitionableTab.xcscheme</key>
+		<key>SwipeNavigationController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>29</integer>
 		</dict>
-		<key>UIDeviceComplete.xcscheme</key>
+		<key>TransitionableTab.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

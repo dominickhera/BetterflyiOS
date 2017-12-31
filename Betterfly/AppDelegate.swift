@@ -19,6 +19,8 @@ import Fabric
 import TwitterKit
 import IQKeyboardManagerSwift
 import paper_onboarding
+import Crashlytics
+import FirebasePerformance
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
