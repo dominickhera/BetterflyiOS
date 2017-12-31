@@ -7,6 +7,7 @@ target 'Betterfly' do
 
   # Pods for Betterfly
   pod 'SwipeNavigationController', '~> 2.0.0'
+  pod 'SwipeableTabBarController'
   pod 'Weakify', '~> 0.4.0' 
   pod 'Solar' 
   pod 'Crashlytics', '~> 3.9.3'
