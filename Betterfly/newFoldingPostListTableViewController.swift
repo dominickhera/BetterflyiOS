@@ -89,12 +89,12 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         postArray.removeAll()
          self.tableView.reloadData()
 //        if(makingPost == false) {
-            getQuery().queryOrdered(byChild: "reverseTimeStamp").observe(.childAdded, with: {  (snapshot) -> Void in
-                self.postArray.append(snapshot)
+            getQuery().observe(.childAdded, with: {  (snapshot) -> Void in
+                self.postArray.insert(snapshot, at: 0)
     //            guard let post = Post.init(snapshot: snapshot) else { return }
     //            print("test: \(post.body)")
     //            self.tableView.beginUpdates()
-                self.tableView.insertRows(at: [IndexPath(row: self.postArray.count-1, section: 0)], with: .automatic)
+                self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
     //            self.tableView.endUpdates()
             })
 //        }

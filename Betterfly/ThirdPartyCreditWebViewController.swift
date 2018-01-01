@@ -9,13 +9,13 @@
 import UIKit
 
 class ThirdPartyCreditWebViewController: UIViewController {
-
+    var urlTest = ""
     @IBOutlet weak var myWebView: UIWebView!
-    var url = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("credit URL is \(url)")
+        
+        print("credit URL is \(urlTest)")
 //        let url = URLRequest(url: creditURL)
 //        myWebView.loadRequest(URLRequest(url: url!))
         // Do any additional setup after loading the view.

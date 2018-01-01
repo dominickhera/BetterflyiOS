@@ -72,8 +72,6 @@
 	<string>$(PRODUCT_NAME) uses the camera to take a picture to add to your post.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>$(PRODUCT_NAME) uses your photo library so you can pick an image to add to your post.</string>
-	<key>NSSiriUsageDescription</key>
-	<string>$(PRODUCT_NAME) uses Siri so you can use Siri to create new text posts with your voice.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

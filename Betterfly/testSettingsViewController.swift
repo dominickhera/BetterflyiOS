@@ -12,12 +12,11 @@ import Weakify
 import Firebase
 import GoogleSignIn
 import MessageUI
-import CoreLocation
 import Crashlytics
 import FBSDKCoreKit
 import FBSDKLoginKit
 
-internal final class testSettingsViewController: QuickTableViewController, MFMailComposeViewControllerDelegate, CLLocationManagerDelegate {
+internal final class testSettingsViewController: QuickTableViewController, MFMailComposeViewControllerDelegate {
     let userDefaults = UserDefaults.standard
     private final class CustomCell: UITableViewCell {}
     private final class CustomSwitchCell: SwitchCell {}
