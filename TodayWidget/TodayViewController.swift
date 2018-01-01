@@ -10,7 +10,10 @@ import UIKit
 import NotificationCenter
 
 class TodayViewController: UIViewController, NCWidgetProviding {
-        
+    @IBOutlet weak var widgetBodyTextView: UITextView!
+    
+    @IBOutlet weak var widgetDateLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view from its nib.
@@ -21,6 +24,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func openApp(_ sender: Any) {
+        extensionContext?.open(URL(string: "foo://")! , completionHandler: nil)
+    }
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
         // Perform any setup necessary in order to update the view.
         

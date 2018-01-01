@@ -62,234 +62,8 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         postImageView.isHidden = true
         postImageView.layer.cornerRadius = 5
         removeImagePost.isHidden = true
-//        var countVar = 0
-        
-//        getQuery().on("value", function(snapshot) {
-//            console.log("There are "+snapshot.numChildren()+" messages");
-//        })
-        
-//        getQuery().observe(.value) { snapshot in
-//            for child in snapshot.children {
-//                countVar = countVar + 1
-//            }
-//        }
-//         print("countVar is now \(countVar)")
-//        dataSource = FUITableViewDataSource.init(query: (getQuery())) { (tableView, indexPath, snap) -> UITableViewCell in
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "FoldingCell", for: indexPath) as! FoldingTableViewCell
-////            countVar = countVar + 1
-////            print("countVar is now \(countVar), indexPath is now \(indexPath.row)")
-//            guard let post = Post.init(snapshot: snap) else { return cell }
-//            if self.userDefaults.bool(forKey: "isDarkModeEnabled"){
-//                cell.openBodyTextView?.textColor = UIColor.white
-//                cell.closedBodyTextView?.textColor = UIColor.white
-//                cell.closedFullDateLabel?.textColor = UIColor.white
-//                cell.openDateBackgroundView?.backgroundColor = UIColor(red:0.17, green:0.24, blue:0.31, alpha:1.0)
-//                cell.foregroundView.backgroundColor = UIColor(red:0.42, green:0.48, blue:0.54, alpha:1.0)
-//                cell.barContainerView.backgroundColor = UIColor(red:0.42, green:0.48, blue:0.54, alpha:1.0)
-//                cell.containerView.backgroundColor = UIColor(red:0.42, green:0.48, blue:0.54, alpha:1.0)
-//                cell.firstImageContainerView.backgroundColor = UIColor(red:0.42, green:0.48, blue:0.54, alpha:1.0)
-//                cell.secondContainerView.backgroundColor = UIColor(red:0.42, green:0.48, blue:0.54, alpha:1.0)
-//
-//            }
-//            else
-//            {
-//                cell.openBodyTextView?.textColor = UIColor.black
-//                cell.closedBodyTextView?.textColor = UIColor.black
-//                cell.closedFullDateLabel?.textColor = UIColor.black
-//                cell.openDateBackgroundView?.backgroundColor = UIColor(red:0.93, green:0.39, blue:0.29, alpha:1.0)
-//                cell.barContainerView.backgroundColor = UIColor(red:0.93, green:0.39, blue:0.29, alpha:1.0)
-//                cell.foregroundView.backgroundColor = UIColor.white
-//                cell.containerView.backgroundColor = UIColor.white
-//                cell.firstImageContainerView.backgroundColor = UIColor.white
-//                cell.secondContainerView.backgroundColor = UIColor.white
-//            }
-//            cell.openBodyTextView?.text = post.body
-//            cell.openDateLabel?.text = post.day
-//
-//            let month = Int(post.month)
-//            var realMonth = "Month"
-//
-//            switch(month){
-//            case 1?:
-//                realMonth = "January"
-//            case 2?:
-//                realMonth = "February"
-//            case 3?:
-//                realMonth = "March"
-//            case 4?:
-//                realMonth = "April"
-//            case 5?:
-//                realMonth = "May"
-//            case 6?:
-//                realMonth = "June"
-//            case 7?:
-//                realMonth = "July"
-//            case 8?:
-//                realMonth = "August"
-//            case 9?:
-//                realMonth = "September"
-//            case 10?:
-//                realMonth = "October"
-//            case 11?:
-//                realMonth = "November"
-//            case 12?:
-//                realMonth = "December"
-//            default:
-//                realMonth = "Error"
-//
-//            }
-//
-//            var tempHour = Int(post.hour)
-//            if self.userDefaults.bool(forKey: "is24HourTimeEnabled") {
-//                cell.openTimeLabel?.text = "\(post.hour):\(post.minutes)"
-////                cell.openBodyTextView?.textColor = UIColor.gray
-//            }
-//            else
-//            {
-////                cell.openBodyTextView?.textColor = UIColor.black
-//                if(tempHour! > 12 && tempHour! != 24)
-//                {
-//                    tempHour! = tempHour! - 12
-//                    let tempLabelHour = "\(tempHour!)"
-//                    cell.openTimeLabel?.text = "\(tempLabelHour):\(post.minutes) PM"
-//                }
-//                else
-//                {
-//                    cell.openTimeLabel?.text = "\(post.hour):\(post.minutes) AM"
-//                }
-//            }
-//
-//            cell.openMonthLabel?.text = realMonth
-//            cell.closedFullDateLabel?.text = "\(realMonth) \(post.day), \(post.year)"
-//            cell.closedBodyTextView?.text = post.body
-////            let urlCheck: String! = post.downloadURL
-//            if(String(post.downloadURL) != "")
-//            {
-//                let photoRef = self.storageRef.child("users/" + Auth.auth().currentUser!.uid + "/\(snap.key).jpg")
-//                print("photo ref is \(photoRef)\n\n")
-//    //                    let imageView: UIImageView = imageTableViewCell!.postImageView
-//                cell.openImageView!.sd_setImage(with: photoRef)
-//                let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.self.imageTapped(tapGestureRecognizer:)))
-//                cell.openImageView!.addGestureRecognizer(tapGestureRecognizer)
-//            }
-////            else
-////            {
-//
-////                cell.openImageView.image = nil
-////                cell.openImageView.isHidden = true
-////                cell.firstImageContainerView!.isHidden = true
-////            }
-//
-//            return cell
-//        }
-//
-//        dataSource?.bind(to: tableView)
-////        reloadFirebaseData()
-//        tableView.delegate = self
         setup()
     
-    }
-    
-    func reloadFirebaseData() {
-        dataSource = FUITableViewDataSource.init(query: (getQuery())) { (tableView, indexPath, snap) -> UITableViewCell in
-            let cell = tableView.dequeueReusableCell(withIdentifier: "FoldingCell", for: indexPath) as! FoldingTableViewCell
-            guard let post = Post.init(snapshot: snap) else { return cell }
-            if self.userDefaults.bool(forKey: "isDarkModeEnabled"){
-                cell.openBodyTextView?.textColor = UIColor.white
-                cell.closedBodyTextView?.textColor = UIColor.white
-                cell.closedFullDateLabel?.textColor = UIColor.white
-                cell.openDateBackgroundView?.backgroundColor = UIColor(red:0.17, green:0.24, blue:0.31, alpha:1.0)
-                cell.foregroundView.backgroundColor = UIColor(red:0.42, green:0.48, blue:0.54, alpha:1.0)
-                cell.barContainerView.backgroundColor = UIColor(red:0.42, green:0.48, blue:0.54, alpha:1.0)
-                cell.containerView.backgroundColor = UIColor(red:0.42, green:0.48, blue:0.54, alpha:1.0)
-                cell.firstImageContainerView.backgroundColor = UIColor(red:0.42, green:0.48, blue:0.54, alpha:1.0)
-                cell.secondContainerView.backgroundColor = UIColor(red:0.42, green:0.48, blue:0.54, alpha:1.0)
-                
-            }
-            else
-            {
-                cell.openBodyTextView?.textColor = UIColor.black
-                cell.closedBodyTextView?.textColor = UIColor.black
-                cell.closedFullDateLabel?.textColor = UIColor.black
-                cell.openDateBackgroundView?.backgroundColor = UIColor(red:0.93, green:0.39, blue:0.29, alpha:1.0)
-                cell.barContainerView.backgroundColor = UIColor(red:0.93, green:0.39, blue:0.29, alpha:1.0)
-                cell.foregroundView.backgroundColor = UIColor.white
-                cell.containerView.backgroundColor = UIColor.white
-                cell.firstImageContainerView.backgroundColor = UIColor.white
-                cell.secondContainerView.backgroundColor = UIColor.white
-            }
-            cell.openBodyTextView?.text = post.body
-            cell.openDateLabel?.text = post.day
-            
-            let month = Int(post.month)
-            var realMonth = "Month"
-            
-            switch(month){
-            case 1?:
-                realMonth = "January"
-            case 2?:
-                realMonth = "February"
-            case 3?:
-                realMonth = "March"
-            case 4?:
-                realMonth = "April"
-            case 5?:
-                realMonth = "May"
-            case 6?:
-                realMonth = "June"
-            case 7?:
-                realMonth = "July"
-            case 8?:
-                realMonth = "August"
-            case 9?:
-                realMonth = "September"
-            case 10?:
-                realMonth = "October"
-            case 11?:
-                realMonth = "November"
-            case 12?:
-                realMonth = "December"
-            default:
-                realMonth = "Error"
-                
-            }
-            
-            var tempHour = Int(post.hour)
-            if self.userDefaults.bool(forKey: "is24HourTimeEnabled") {
-                cell.openTimeLabel?.text = "\(post.hour):\(post.minutes)"
-            }
-            else
-            {
-                if(tempHour! > 12 && tempHour! != 24)
-                {
-                    tempHour! = tempHour! - 12
-                    let tempLabelHour = "\(tempHour!)"
-                    cell.openTimeLabel?.text = "\(tempLabelHour):\(post.minutes) PM"
-                }
-                else
-                {
-                    cell.openTimeLabel?.text = "\(post.hour):\(post.minutes) AM"
-                }
-            }
-            
-            cell.openMonthLabel?.text = realMonth
-            cell.closedFullDateLabel?.text = "\(realMonth) \(post.day), \(post.year)"
-            cell.closedBodyTextView?.text = post.body
-            //            let urlCheck: String! = post.downloadURL
-            if(String(post.downloadURL) != "")
-            {
-                let photoRef = self.storageRef.child("users/" + Auth.auth().currentUser!.uid + "/\(snap.key).jpg")
-                print("photo ref is \(photoRef)\n\n")
-                //                    let imageView: UIImageView = imageTableViewCell!.postImageView
-                cell.openImageView!.sd_setImage(with: photoRef)
-                let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.self.imageTapped(tapGestureRecognizer:)))
-                cell.openImageView!.addGestureRecognizer(tapGestureRecognizer)
-            }
-            
-            return cell
-        }
-        dataSource?.bind(to: tableView)
-        tableView.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -299,6 +73,7 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
                 let uid = user.uid
                 //                let email = user.email
                 print("\n\nuid: \(uid)\n\n")
+                self.userDefaults.set(uid, forKey: "uid")
             }
             else
             {
@@ -904,6 +679,7 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FoldingCell", for: indexPath) as! FoldingTableViewCell
         cell.delegate = self
+        cell.tag = indexPath.row
         if self.userDefaults.bool(forKey: "isDarkModeEnabled"){
             cell.openBodyTextView?.textColor = UIColor.white
             cell.closedBodyTextView?.textColor = UIColor.white
@@ -1046,6 +822,46 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
 }
 
 extension newFoldingPostListTableViewController: FoldingCellDelegate {
+    func deleteFoldingCell(_ tag: Int) {
+        let window = UIApplication.shared.keyWindow!
+        //        window.addSubview(addPostView)
+        //        addPostView.center = window.center
+        window.endEditing(true)
+        let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
+        let alert = SCLAlertView(appearance: appearance)
+        _ = alert.addButton("Delete Post")
+        {
+//            let photoRef = self.storageRef.child("users/" + Auth.auth().currentUser!.uid + "/\(self.postArray[tag].key).jpg")
+            print("row is \(tag), key for post is")
+            
+            let postDict = self.postArray[tag].value as? [String : AnyObject]
+            //            cell.openDateLabel.text = "b00ty"
+            //        cell.openBodyTextView?.text = post.body
+            //        cell.openDateLabel?.text = post.day
+            
+            
+              print("body is\((postDict?["body"])! as! String)")
+            //                print("row is \(IndexPath.row)")
+            //                self.postImageView.image = nil
+            //                self.postImageView.isUserInteractionEnabled = false
+            //                self.postImageView.isHidden = true
+            //                self.blurOut()
+        }
+        _ = alert.addButton("Cancel")
+        {
+            //                self.bodyTextView.becomeFirstResponder()
+            print("user canceled action.")
+        }
+        _ = alert.showWarning("Delete current post?", subTitle:"If you cancel now, you'll lose all the information you just wrote out!")
+        
+        //        blurOut()
+        print("user canceled status entry")
+    }
+    
+    func editFoldingCell(cell: FoldingTableViewCell) {
+        print("buuts")
+    }
+    
     func shareFoldingCell(cell: FoldingTableViewCell) {
         print("wtf")
         let imageToShare =  cell.openImageView.image!

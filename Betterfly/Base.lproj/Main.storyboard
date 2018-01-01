@@ -452,11 +452,17 @@
                                                             <rect key="frame" x="22" y="231" width="30" height="30"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <state key="normal" title="Delete" image="trash-1"/>
+                                                            <connections>
+                                                                <action selector="deletePost:" destination="Xba-hQ-hMR" eventType="touchUpInside" id="rPl-i3-Zpu"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5im-uk-u3K">
                                                             <rect key="frame" x="283" y="231" width="30" height="30"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <state key="normal" title="Edit" image="edit-3"/>
+                                                            <connections>
+                                                                <action selector="editPost:" destination="Xba-hQ-hMR" eventType="touchUpInside" id="a5S-la-wct"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -764,17 +770,17 @@
                                 </connections>
                             </button>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vuc-7S-Vy7">
-                                <rect key="frame" x="64" y="110" width="374" height="667"/>
+                                <rect key="frame" x="64" y="110" width="373" height="667"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="4K2-ko-vgt">
-                                    <rect key="frame" x="0.0" y="0.0" width="374" height="667"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="373" height="667"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hzx-9s-56z">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="667"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="373" height="667"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="d9Z-Ny-R52">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="667"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="373" height="667"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             </view>
                                             <vibrancyEffect>

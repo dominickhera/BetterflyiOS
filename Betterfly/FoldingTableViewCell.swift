@@ -11,7 +11,8 @@ import FoldingCell
 
 protocol FoldingCellDelegate: class {
     func shareFoldingCell(cell: FoldingTableViewCell)
-//    func editFoldingCell(cell: FoldingTableViewCell)
+    func editFoldingCell(cell: FoldingTableViewCell)
+    func deleteFoldingCell(_: Int)
 }
 
 class FoldingTableViewCell: FoldingCell {
@@ -41,11 +42,7 @@ class FoldingTableViewCell: FoldingCell {
         super.awakeFromNib()
         // Initialization code
     }
-    
-    
-    
-//    @IBAction func sharePost(_ sender: Any) {
-//    }
+
     
     
     var number: Int = 0 {
@@ -66,6 +63,14 @@ extension FoldingTableViewCell {
     @IBAction func sharePost(_ sender: Any) {
 //        print("ok")
         delegate?.shareFoldingCell(cell: self)
+    }
+    
+    @IBAction func deletePost(_ sender: Any) {
+        delegate?.deleteFoldingCell((sender as AnyObject).tag)
+    }
+    
+    @IBAction func editPost(_ sender: Any) {
+        delegate?.editFoldingCell(cell: self)
     }
     
     //for action functions
