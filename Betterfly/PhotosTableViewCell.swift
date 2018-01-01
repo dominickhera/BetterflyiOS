@@ -29,6 +29,7 @@ class PhotosTableViewCell: UITableViewCell {
     }
 
     @IBAction func shareImageCell(_ sender: Any) {
+        print("booty")
         delegate?.sharePressed(cell: self)
     }
     override func setSelected(_ selected: Bool, animated: Bool) {

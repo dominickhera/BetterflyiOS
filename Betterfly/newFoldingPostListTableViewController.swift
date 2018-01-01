@@ -19,6 +19,7 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
     
     var storageRef: StorageReference!
     var camCheck = false
+    var makingPost = false
     var ref: DatabaseReference!
     var dataSource: FUITableViewDataSource?
     
@@ -43,6 +44,7 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
     let kOpenCellHeight: CGFloat = 488
     let kRowsCount = 10000
     var cellHeights: [CGFloat] = []
+    var postArray: Array<DataSnapshot> = []
     let userDefaults = UserDefaults.standard
     
     override func viewDidLoad() {
@@ -60,117 +62,130 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         postImageView.isHidden = true
         postImageView.layer.cornerRadius = 5
         removeImagePost.isHidden = true
-//        if
-        dataSource = FUITableViewDataSource.init(query: (getQuery())) { (tableView, indexPath, snap) -> UITableViewCell in
-            let cell = tableView.dequeueReusableCell(withIdentifier: "FoldingCell", for: indexPath) as! FoldingTableViewCell
-            guard let post = Post.init(snapshot: snap) else { return cell }
-            if self.userDefaults.bool(forKey: "isDarkModeEnabled"){
-                cell.openBodyTextView?.textColor = UIColor.white
-                cell.closedBodyTextView?.textColor = UIColor.white
-                cell.closedFullDateLabel?.textColor = UIColor.white
-                cell.openDateBackgroundView?.backgroundColor = UIColor(red:0.17, green:0.24, blue:0.31, alpha:1.0)
-                cell.foregroundView.backgroundColor = UIColor(red:0.42, green:0.48, blue:0.54, alpha:1.0)
-                cell.barContainerView.backgroundColor = UIColor(red:0.42, green:0.48, blue:0.54, alpha:1.0)
-                cell.containerView.backgroundColor = UIColor(red:0.42, green:0.48, blue:0.54, alpha:1.0)
-                cell.firstImageContainerView.backgroundColor = UIColor(red:0.42, green:0.48, blue:0.54, alpha:1.0)
-                cell.secondContainerView.backgroundColor = UIColor(red:0.42, green:0.48, blue:0.54, alpha:1.0)
-
-            }
-            else
-            {
-                cell.openBodyTextView?.textColor = UIColor.black
-                cell.closedBodyTextView?.textColor = UIColor.black
-                cell.closedFullDateLabel?.textColor = UIColor.black
-                cell.openDateBackgroundView?.backgroundColor = UIColor(red:0.93, green:0.39, blue:0.29, alpha:1.0)
-                cell.barContainerView.backgroundColor = UIColor(red:0.93, green:0.39, blue:0.29, alpha:1.0)
-                cell.foregroundView.backgroundColor = UIColor.white
-                cell.containerView.backgroundColor = UIColor.white
-                cell.firstImageContainerView.backgroundColor = UIColor.white
-                cell.secondContainerView.backgroundColor = UIColor.white
-            }
-            cell.openBodyTextView?.text = post.body
-            cell.openDateLabel?.text = post.day
-
-            let month = Int(post.month)
-            var realMonth = "Month"
-
-            switch(month){
-            case 1?:
-                realMonth = "January"
-            case 2?:
-                realMonth = "February"
-            case 3?:
-                realMonth = "March"
-            case 4?:
-                realMonth = "April"
-            case 5?:
-                realMonth = "May"
-            case 6?:
-                realMonth = "June"
-            case 7?:
-                realMonth = "July"
-            case 8?:
-                realMonth = "August"
-            case 9?:
-                realMonth = "September"
-            case 10?:
-                realMonth = "October"
-            case 11?:
-                realMonth = "November"
-            case 12?:
-                realMonth = "December"
-            default:
-                realMonth = "Error"
-
-            }
-
-            var tempHour = Int(post.hour)
-            if self.userDefaults.bool(forKey: "is24HourTimeEnabled") {
-                cell.openTimeLabel?.text = "\(post.hour):\(post.minutes)"
-//                cell.openBodyTextView?.textColor = UIColor.gray
-            }
-            else
-            {
-//                cell.openBodyTextView?.textColor = UIColor.black
-                if(tempHour! > 12 && tempHour! != 24)
-                {
-                    tempHour! = tempHour! - 12
-                    let tempLabelHour = "\(tempHour!)"
-                    cell.openTimeLabel?.text = "\(tempLabelHour):\(post.minutes) PM"
-                }
-                else
-                {
-                    cell.openTimeLabel?.text = "\(post.hour):\(post.minutes) AM"
-                }
-            }
-
-            cell.openMonthLabel?.text = realMonth
-            cell.closedFullDateLabel?.text = "\(realMonth) \(post.day), \(post.year)"
-            cell.closedBodyTextView?.text = post.body
-//            let urlCheck: String! = post.downloadURL
-            if(String(post.downloadURL) != "")
-            {
-                let photoRef = self.storageRef.child("users/" + Auth.auth().currentUser!.uid + "/\(snap.key).jpg")
-                print("photo ref is \(photoRef)\n\n")
-    //                    let imageView: UIImageView = imageTableViewCell!.postImageView
-                cell.openImageView!.sd_setImage(with: photoRef)
-                let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.self.imageTapped(tapGestureRecognizer:)))
-                cell.openImageView!.addGestureRecognizer(tapGestureRecognizer)
-            }
+//        var countVar = 0
+        
+//        getQuery().on("value", function(snapshot) {
+//            console.log("There are "+snapshot.numChildren()+" messages");
+//        })
+        
+//        getQuery().observe(.value) { snapshot in
+//            for child in snapshot.children {
+//                countVar = countVar + 1
+//            }
+//        }
+//         print("countVar is now \(countVar)")
+//        dataSource = FUITableViewDataSource.init(query: (getQuery())) { (tableView, indexPath, snap) -> UITableViewCell in
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "FoldingCell", for: indexPath) as! FoldingTableViewCell
+////            countVar = countVar + 1
+////            print("countVar is now \(countVar), indexPath is now \(indexPath.row)")
+//            guard let post = Post.init(snapshot: snap) else { return cell }
+//            if self.userDefaults.bool(forKey: "isDarkModeEnabled"){
+//                cell.openBodyTextView?.textColor = UIColor.white
+//                cell.closedBodyTextView?.textColor = UIColor.white
+//                cell.closedFullDateLabel?.textColor = UIColor.white
+//                cell.openDateBackgroundView?.backgroundColor = UIColor(red:0.17, green:0.24, blue:0.31, alpha:1.0)
+//                cell.foregroundView.backgroundColor = UIColor(red:0.42, green:0.48, blue:0.54, alpha:1.0)
+//                cell.barContainerView.backgroundColor = UIColor(red:0.42, green:0.48, blue:0.54, alpha:1.0)
+//                cell.containerView.backgroundColor = UIColor(red:0.42, green:0.48, blue:0.54, alpha:1.0)
+//                cell.firstImageContainerView.backgroundColor = UIColor(red:0.42, green:0.48, blue:0.54, alpha:1.0)
+//                cell.secondContainerView.backgroundColor = UIColor(red:0.42, green:0.48, blue:0.54, alpha:1.0)
+//
+//            }
 //            else
 //            {
-
-//                cell.openImageView.image = nil
-//                cell.openImageView.isHidden = true
-//                cell.firstImageContainerView!.isHidden = true
+//                cell.openBodyTextView?.textColor = UIColor.black
+//                cell.closedBodyTextView?.textColor = UIColor.black
+//                cell.closedFullDateLabel?.textColor = UIColor.black
+//                cell.openDateBackgroundView?.backgroundColor = UIColor(red:0.93, green:0.39, blue:0.29, alpha:1.0)
+//                cell.barContainerView.backgroundColor = UIColor(red:0.93, green:0.39, blue:0.29, alpha:1.0)
+//                cell.foregroundView.backgroundColor = UIColor.white
+//                cell.containerView.backgroundColor = UIColor.white
+//                cell.firstImageContainerView.backgroundColor = UIColor.white
+//                cell.secondContainerView.backgroundColor = UIColor.white
 //            }
-
-            return cell
-        }
-
-        dataSource?.bind(to: tableView)
-//        reloadFirebaseData()
-        tableView.delegate = self
+//            cell.openBodyTextView?.text = post.body
+//            cell.openDateLabel?.text = post.day
+//
+//            let month = Int(post.month)
+//            var realMonth = "Month"
+//
+//            switch(month){
+//            case 1?:
+//                realMonth = "January"
+//            case 2?:
+//                realMonth = "February"
+//            case 3?:
+//                realMonth = "March"
+//            case 4?:
+//                realMonth = "April"
+//            case 5?:
+//                realMonth = "May"
+//            case 6?:
+//                realMonth = "June"
+//            case 7?:
+//                realMonth = "July"
+//            case 8?:
+//                realMonth = "August"
+//            case 9?:
+//                realMonth = "September"
+//            case 10?:
+//                realMonth = "October"
+//            case 11?:
+//                realMonth = "November"
+//            case 12?:
+//                realMonth = "December"
+//            default:
+//                realMonth = "Error"
+//
+//            }
+//
+//            var tempHour = Int(post.hour)
+//            if self.userDefaults.bool(forKey: "is24HourTimeEnabled") {
+//                cell.openTimeLabel?.text = "\(post.hour):\(post.minutes)"
+////                cell.openBodyTextView?.textColor = UIColor.gray
+//            }
+//            else
+//            {
+////                cell.openBodyTextView?.textColor = UIColor.black
+//                if(tempHour! > 12 && tempHour! != 24)
+//                {
+//                    tempHour! = tempHour! - 12
+//                    let tempLabelHour = "\(tempHour!)"
+//                    cell.openTimeLabel?.text = "\(tempLabelHour):\(post.minutes) PM"
+//                }
+//                else
+//                {
+//                    cell.openTimeLabel?.text = "\(post.hour):\(post.minutes) AM"
+//                }
+//            }
+//
+//            cell.openMonthLabel?.text = realMonth
+//            cell.closedFullDateLabel?.text = "\(realMonth) \(post.day), \(post.year)"
+//            cell.closedBodyTextView?.text = post.body
+////            let urlCheck: String! = post.downloadURL
+//            if(String(post.downloadURL) != "")
+//            {
+//                let photoRef = self.storageRef.child("users/" + Auth.auth().currentUser!.uid + "/\(snap.key).jpg")
+//                print("photo ref is \(photoRef)\n\n")
+//    //                    let imageView: UIImageView = imageTableViewCell!.postImageView
+//                cell.openImageView!.sd_setImage(with: photoRef)
+//                let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.self.imageTapped(tapGestureRecognizer:)))
+//                cell.openImageView!.addGestureRecognizer(tapGestureRecognizer)
+//            }
+////            else
+////            {
+//
+////                cell.openImageView.image = nil
+////                cell.openImageView.isHidden = true
+////                cell.firstImageContainerView!.isHidden = true
+////            }
+//
+//            return cell
+//        }
+//
+//        dataSource?.bind(to: tableView)
+////        reloadFirebaseData()
+//        tableView.delegate = self
         setup()
     
     }
@@ -296,17 +311,53 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
     override func viewWillAppear(_ animated: Bool) {
         
         setup()
+        postArray.removeAll()
+         self.tableView.reloadData()
+//        if(makingPost == false) {
+            getQuery().queryOrdered(byChild: "reverseTimeStamp").observe(.childAdded, with: {  (snapshot) -> Void in
+                self.postArray.append(snapshot)
+    //            guard let post = Post.init(snapshot: snapshot) else { return }
+    //            print("test: \(post.body)")
+    //            self.tableView.beginUpdates()
+                self.tableView.insertRows(at: [IndexPath(row: self.postArray.count-1, section: 0)], with: .automatic)
+    //            self.tableView.endUpdates()
+            })
+//        }
+        getQuery().observe(.childRemoved, with: { (snapshot) -> Void in
+            let index = self.rowCountFunction(snapshot)
+//            let index = 100
+            self.postArray.remove(at: index)
+            self.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: UITableViewRowAnimation.automatic)
+        })
+        
+//        refHandle = getQuery().observe(DataEventType.value, with: { (snapshot) in
+//
+//        })
 //        self.tableView.reloadData()
         //        let presenceRef = Database.database().reference(withPath: "disconnectmessage");
         // Write a string when this client loses connection
         //        presenceRef.onDisconnectSetValue("I disconnected!")
         self.tabBarController?.tabBar.isHidden = false
-        reloadFirebaseData()
+//        print("there are \(self.postArray.count) amount of posts")
+//        reloadFirebaseData()
         
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         getQuery().removeAllObservers()
+//        self.postArray.removeAll()
+    }
+    
+    
+    func rowCountFunction(_ snapshot: DataSnapshot) -> Int {
+        var index = 0
+        for postArray in self.postArray {
+            if snapshot.key == postArray.key {
+                return index
+            }
+            index += 1
+        }
+        return -1
     }
     
     func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
@@ -320,27 +371,6 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         }
         
         present(ImageViewerController(configuration: configuration), animated: true)
-//        let imageView = tapGestureRecognizer.view as! UIImageView
-//        let newImageView = UIImageView(image: imageView.image)
-//        //                newImageView.frame = UIScreen.main.bounds
-//        newImageView.backgroundColor = .black
-//        newImageView.contentMode = .scaleAspectFit
-//        newImageView.frame = UIScreen.main.bounds
-//        newImageView.isUserInteractionEnabled = true
-//        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
-//        let window = UIApplication.shared.keyWindow!
-//        newImageView.addGestureRecognizer(tap)
-//        window.addSubview(newImageView)
-//        newImageView.center = window.center
-//        newImageView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
-//        newImageView.alpha = 0
-//
-//        UIView.animate(withDuration: 0.4) {
-//            newImageView.alpha = 1
-//            newImageView.transform = CGAffineTransform.identity
-//        }
-//        self.navigationController?.isNavigationBarHidden = true
-//        self.tabBarController?.tabBar.isHidden = true
         
         // Your action
     }
@@ -357,22 +387,53 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         let picker = UIImagePickerController()
         picker.delegate = self
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
+//            let authStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
+//            switch authStatus {
+//            case .authorized:
+//                picker.sourceType = .camera
+//            case .notDetermined:
+//                permissionPrimeCameraAccess()
+//            case .restricted:
+//                print("2")
+//                blurOut()
+//            case .denied:
+//                print("3")
+//                blurOut()
+//            }
             picker.sourceType = .camera
-        } else {
-            picker.sourceType = .photoLibrary
+            present(picker, animated: true, completion:nil)
         }
-        present(picker, animated: true, completion:nil)
+//        else {
+//            picker.sourceType = .photoLibrary
+//        }
+//        present(picker, animated: true, completion:nil)
     }
     @IBAction func addPictureFromLibrary(_ sender: Any) {
         
         let picker = UIImagePickerController()
         picker.delegate = self
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            picker.sourceType = .photoLibrary
-        } else {
-            picker.sourceType = .camera
+            let photos = PHPhotoLibrary.authorizationStatus()
+            if photos == .notDetermined {
+                PHPhotoLibrary.requestAuthorization({status in
+                    if status == .authorized{
+                        picker.sourceType = .photoLibrary
+                         self.present(picker, animated: true, completion:nil)
+                    }
+//                    else {
+//                        picker.sourceType = .camera
+//                    }
+                })
+            }
+            else if photos == .authorized {
+                picker.sourceType = .photoLibrary
+                self.present(picker, animated: true, completion:nil)
+//            picker.sourceType = .photoLibrary
+            }
+//                else {
+//            picker.sourceType = .camera
         }
-        present(picker, animated: true, completion:nil)
+//        present(picker, animated: true, completion:nil)
     }
     
     func imagePickerController(_ picker: UIImagePickerController,
@@ -389,11 +450,33 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         
     }
     
+//    func permissionPrimeCameraAccess() {
+//        let alert = UIAlertController( title: "\"<Your App>\" Would Like To Access the Camera", message: "<Your App> would like to access your Camera so that you can <customer benefit>.", preferredStyle: .alert )
+//        let allowAction = UIAlertAction(title: "Allow", style: .default, handler: { (alert) -> Void in
+////            Analytics.track(event: .permissionsPrimeCameraAccepted)
+//            if AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo).count > 0 {
+//                AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo, completionHandler: { [weak self] granted in
+//                    DispatchQueue.main.async {
+//                        self?.addPictureToPost((Any).self) // try again
+//                    }
+//                })
+//            }
+//        })
+//        alert.addAction(allowAction)
+//        let declineAction = UIAlertAction(title: "Not Now", style: .cancel) { (alert) in
+////            Analytics.track(event: .permissionsPrimeCameraCancelled)
+//        }
+//        alert.addAction(declineAction)
+//        present(alert, animated: true, completion: nil)
+//    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
+        let window = UIApplication.shared.keyWindow!
+        window.endEditing(true)
     }
     
     func blurIn() {
+//        self.makingPost = true
         if self.userDefaults.bool(forKey: "isDarkModeEnabled"){
             bodyTextView.textColor = UIColor.white
             entryDate.textColor = UIColor.white
@@ -420,7 +503,7 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
             self.addPostView.alpha = 1
             self.addPostView.transform = CGAffineTransform.identity
         }
-        
+        self.tableView.reloadData()
         self.tabBarController?.tabBar.isHidden = true
         self.view.isUserInteractionEnabled = false
         
@@ -436,6 +519,7 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         }) { (success:Bool) in
             self.addPostView.removeFromSuperview()
         }
+        self.makingPost = false
         self.tabBarController?.tabBar.isHidden = false
         self.view.isUserInteractionEnabled = true
     }
@@ -545,7 +629,7 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         let timeStamp = "\(Date().timeIntervalSince1970)"
         let doubleTimeStamp = Double(timeStamp)
         let reversedTimestamp = -1.0 * doubleTimeStamp!
-        let realReverseTimeStamp = "\(reversedTimestamp)"
+        let realReverseTimeStamp = reversedTimestamp as AnyObject?
         //        let seconds = calendar.component(.second, from: date as Date)
         let postDate = ("\(month)-\(day)-\(year)")
         let postMonth = ("\(month)")
@@ -557,7 +641,7 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         
         if postImageView.image != nil {
              if #available(iOS 11.0, *) {
-                searchTags = "\(sceneLabel(forImage: (postImageView.image)!)!), \(sceneLabelTwo(forImage: (postImageView.image)!)!), \(sceneLabelThree(forImage: (postImageView.image)!)!)"
+                searchTags = "\(sceneLabel(forImage: (postImageView.image)!)!),\(sceneLabelTwo(forImage: (postImageView.image)!)!),\(sceneLabelThree(forImage: (postImageView.image)!)!)"
             }
             var data = Data()
             data = UIImageJPEGRepresentation(postImageView.image!, 0.2)!
@@ -576,7 +660,7 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
                     //                print("download url: \(downloadURL), photourl: \(photoURL)")
                     //                print("download url is now: \(downloadURL)")
                     print("\(date)")
-                    let post = ["uid": userID,
+                    let post = ["uid": userID!,
                                 "month": postMonth,
                                 "day": postDay,
                                 "year": postYear,
@@ -585,9 +669,9 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
                                 "hour": postHour,
                                 "minutes": postMinutes,
                                 "timeStamp": timeStamp,
-                                "reverseTimeStamp": realReverseTimeStamp,
+                                "reverseTimeStamp": realReverseTimeStamp as Any,
                                 "downloadURL": photoURL,
-                                "body": body,
+                                "body": body!,
                                 "searchTags": searchTags]
                     
                     print("\(userID!)")
@@ -600,7 +684,7 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         else{
             print("download url is now: \(downloadURL)")
             print("\(date)")
-            let post = ["uid": userID,
+            let post = ["uid": userID!,
                         "month": postMonth,
                         "day": postDay,
                         "year": postYear,
@@ -609,9 +693,9 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
                         "hour": postHour,
                         "minutes": postMinutes,
                         "timeStamp": timeStamp,
-                        "reverseTimeStamp": realReverseTimeStamp,
+                        "reverseTimeStamp": realReverseTimeStamp as Any,
                         "downloadURL": downloadURL,
-                        "body": body,
+                        "body": body!,
                         "searchTags": searchTags]
             
             print("\(userID!)")
@@ -639,6 +723,7 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         postImageView.isUserInteractionEnabled = false
         postImageView.isHidden = true
         blurOut()
+//        self.tableView.reloadData()
 //        reloadFirebaseData()
         //            self.ref.child("users/\(userID!)/\(date)").setValue(post)
     }
@@ -745,6 +830,8 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         print("user canceled status entry")
     }
     
+    
+    
     func getUid() -> String {
         return (Auth.auth().currentUser?.uid)!
     }
@@ -774,7 +861,7 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
 //extension newFoldingPostListTableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10000
+        return self.postArray.count
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -791,7 +878,7 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
 //
 //            return cell
 //        }
-        
+//
         
         cell.backgroundColor = .clear
         
@@ -805,17 +892,118 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        let noDataLabel = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
-        noDataLabel.text = "No posts yet - why not add one?"
-        noDataLabel.textColor = UIColor.black
-        noDataLabel.textAlignment = .center
-        tableView.backgroundView = noDataLabel
-        tableView.separatorStyle = .none
+//        let noDataLabel = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
+//        noDataLabel.text = "No posts yet - why not add one?"
+//        noDataLabel.textColor = UIColor.black
+//        noDataLabel.textAlignment = .center
+//        tableView.backgroundView = noDataLabel
+//        tableView.separatorStyle = .none
         return 1
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FoldingCell", for: indexPath) as! FoldingTableViewCell
+        cell.delegate = self
+        if self.userDefaults.bool(forKey: "isDarkModeEnabled"){
+            cell.openBodyTextView?.textColor = UIColor.white
+            cell.closedBodyTextView?.textColor = UIColor.white
+            cell.closedFullDateLabel?.textColor = UIColor.white
+            cell.openDateBackgroundView?.backgroundColor = UIColor(red:0.17, green:0.24, blue:0.31, alpha:1.0)
+            cell.foregroundView.backgroundColor = UIColor(red:0.42, green:0.48, blue:0.54, alpha:1.0)
+            cell.barContainerView.backgroundColor = UIColor(red:0.42, green:0.48, blue:0.54, alpha:1.0)
+            cell.containerView.backgroundColor = UIColor(red:0.42, green:0.48, blue:0.54, alpha:1.0)
+            cell.firstImageContainerView.backgroundColor = UIColor(red:0.42, green:0.48, blue:0.54, alpha:1.0)
+            cell.secondContainerView.backgroundColor = UIColor(red:0.42, green:0.48, blue:0.54, alpha:1.0)
+            
+        }
+        else
+        {
+            cell.openBodyTextView?.textColor = UIColor.black
+            cell.closedBodyTextView?.textColor = UIColor.black
+            cell.closedFullDateLabel?.textColor = UIColor.black
+            cell.openDateBackgroundView?.backgroundColor = UIColor(red:0.93, green:0.39, blue:0.29, alpha:1.0)
+            cell.barContainerView.backgroundColor = UIColor(red:0.93, green:0.39, blue:0.29, alpha:1.0)
+            cell.foregroundView.backgroundColor = UIColor.white
+            cell.containerView.backgroundColor = UIColor.white
+            cell.firstImageContainerView.backgroundColor = UIColor.white
+            cell.secondContainerView.backgroundColor = UIColor.white
+        }
+        
+        let postDict = postArray[(indexPath as NSIndexPath).row].value as? [String : AnyObject]
+//            cell.openDateLabel.text = "b00ty"
+//        cell.openBodyTextView?.text = post.body
+//        cell.openDateLabel?.text = post.day
+
+        cell.openBodyTextView?.text = postDict?["body"] as! String
+        cell.openDateLabel?.text = postDict?["day"] as? String
+        cell.closedBodyTextView?.text = postDict?["body"] as! String
+        cell.openMonthLabel?.text = postDict?["month"] as? String
+        
+        
+        let month = Int((postDict?["month"] as? String)!)
+        var realMonth = "Month"
+        
+        switch(month){
+        case 1?:
+            realMonth = "January"
+        case 2?:
+            realMonth = "February"
+        case 3?:
+            realMonth = "March"
+        case 4?:
+            realMonth = "April"
+        case 5?:
+            realMonth = "May"
+        case 6?:
+            realMonth = "June"
+        case 7?:
+            realMonth = "July"
+        case 8?:
+            realMonth = "August"
+        case 9?:
+            realMonth = "September"
+        case 10?:
+            realMonth = "October"
+        case 11?:
+            realMonth = "November"
+        case 12?:
+            realMonth = "December"
+        default:
+            realMonth = "Error"
+            
+        }
+        
+        var tempHour = Int((postDict?["hour"])! as! String)
+        if self.userDefaults.bool(forKey: "is24HourTimeEnabled") {
+            cell.openTimeLabel?.text = "\((postDict?["hour"])! as! String):\((postDict?["minutes"])! as! String)"
+        }
+        else
+        {
+            if(tempHour! > 12 && tempHour! != 24)
+            {
+                tempHour! = tempHour! - 12
+                let tempLabelHour = "\(tempHour!)"
+                cell.openTimeLabel?.text = "\(tempLabelHour):\((postDict?["minutes"])! as! String) PM"
+            }
+            else
+            {
+                cell.openTimeLabel?.text = "\((postDict?["hour"])! as! String):\((postDict?["minutes"])! as! String) AM"
+            }
+        }
+        
+        if((postDict?["downloadURL"])! as! String  != "")
+                    {
+                        let photoRef = self.storageRef.child("users/" + Auth.auth().currentUser!.uid + "/\(postArray[(indexPath as NSIndexPath).row].key).jpg")
+                        print("photo ref is \(photoRef)\n\n")
+        //    //                    let imageView: UIImageView = imageTableViewCell!.postImageView
+                        cell.openImageView!.sd_setImage(with: photoRef)
+                        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.self.imageTapped(tapGestureRecognizer:)))
+                        cell.openImageView!.addGestureRecognizer(tapGestureRecognizer)
+                    }
+        
+        cell.openMonthLabel?.text = realMonth
+        cell.closedFullDateLabel?.text = "\(realMonth) \((postDict?["day"])! as! String), \( (postDict?["year"])! as! String)"
+        
         let durations: [TimeInterval] = [0.26, 0.2, 0.2]
         cell.durationsForExpandedState = durations
         cell.durationsForCollapsedState = durations

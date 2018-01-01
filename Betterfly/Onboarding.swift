@@ -8,6 +8,13 @@
 
 import UIKit
 import paper_onboarding
+import Firebase
+import GoogleSignIn
+import MessageUI
+import Crashlytics
+import FBSDKCoreKit
+import FBSDKLoginKit
+
 
 class ViewController: UIViewController, PaperOnboardingDataSource, PaperOnboardingDelegate {
     
@@ -20,8 +27,6 @@ class ViewController: UIViewController, PaperOnboardingDataSource, PaperOnboardi
         super.viewDidLoad()
         onboardingView.dataSource = self
         onboardingView.delegate = self
-        
-        
     }
     
     
@@ -86,6 +91,19 @@ class ViewController: UIViewController, PaperOnboardingDataSource, PaperOnboardi
         userDefaults.set(true, forKey: "onboardingComplete")
         userDefaults.synchronize()
         if !userDefaults.bool(forKey: "isSignedIn"){
+            let firebaseAuth = Auth.auth()
+            
+            do {
+                FBSDKAccessToken.setCurrent(nil)
+                GIDSignIn.sharedInstance().signOut()
+                try firebaseAuth.signOut()
+            } catch let signOutError as NSError {
+                print ("\n\nError signing out: %@", signOutError)
+            }
+            userDefaults.set(false, forKey: "isSignedIn")
+            userDefaults.set("", forKey: "signInMode")
+            userDefaults.set(false, forKey: "is24HourTimeEnabled")
+            userDefaults.set(false, forKey: "isDarkModeEnabled")
             if let VC = self.storyboard?.instantiateViewController(withIdentifier: "signUpPage")
             {
                 self.present(VC, animated: true, completion: nil)

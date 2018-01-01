@@ -8,7 +8,7 @@
 
 import UIKit
 import Firebase
-import FirebaseDatabaseUI
+//import FirebaseDatabaseUI
 import FirebaseStorageUI
 import Photos
 import SCLAlertView
@@ -20,8 +20,9 @@ class PhotosTableViewController: UITableViewController, UIImagePickerControllerD
     var storageRef: StorageReference!
     var camCheck = false
     var ref: DatabaseReference!
-    var dataSource: FUITableViewDataSource?
+//    var dataSource: FUITableViewDataSource?
     let userDefaults = UserDefaults.standard
+    var postArray: Array<DataSnapshot> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,86 +31,88 @@ class PhotosTableViewController: UITableViewController, UIImagePickerControllerD
         self.tabBarController?.tabBar.isHidden = false
         storageRef = Storage.storage().reference()
         self.tableView.separatorColor = UIColor.clear
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
-        dataSource = FUITableViewDataSource.init(query: (getQuery().queryLimited(toLast: 10000))) { (tableView, indexPath, snap) -> UITableViewCell in
-            let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoCell", for: indexPath) as! PhotosTableViewCell
-            guard let post = Post.init(snapshot: snap) else { return cell }
-            if(String(post.downloadURL) != "")
-            {
-                let photoRef = self.storageRef.child("users/" + Auth.auth().currentUser!.uid + "/\(snap.key).jpg")
-                print("photo ref is \(photoRef)\n\n")
-                //                    let imageView: UIImageView = imageTableViewCell!.postImageView
-                cell.photoCellImageView!.sd_setImage(with: photoRef)
-                let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.self.imageTapped(tapGestureRecognizer:)))
-                cell.photoCellImageView!.addGestureRecognizer(tapGestureRecognizer)
-                
-//                cell.photoCellImageView!.addBlackGradientLayer(frame: cell.bounds, colors:[.clear, .black])
-                self.camCheck = true
-                let month = Int(post.month)
-                var realMonth = "Month"
-                
-                switch(month){
-                case 1?:
-                    realMonth = "January"
-                case 2?:
-                    realMonth = "February"
-                case 3?:
-                    realMonth = "March"
-                case 4?:
-                    realMonth = "April"
-                case 5?:
-                    realMonth = "May"
-                case 6?:
-                    realMonth = "June"
-                case 7?:
-                    realMonth = "July"
-                case 8?:
-                    realMonth = "August"
-                case 9?:
-                    realMonth = "September"
-                case 10?:
-                    realMonth = "October"
-                case 11?:
-                    realMonth = "November"
-                case 12?:
-                    realMonth = "December"
-                default:
-                    realMonth = "Error"
-                    
-                }
-                
-                cell.photoCellDateLabel?.text = "\(realMonth) \(post.day), \(post.year)"
-                cell.photoCellTextBodyView?.text = post.body
-                cell.photoCellTextBodyView?.layer.shadowRadius = 5.0
-                cell.photoCellTextBodyView?.layer.shadowColor = UIColor.black.cgColor
-                cell.photoCellTextBodyView?.layer.shadowOffset = CGSize(width: 4.0, height: 4.0)
-                cell.photoCellTextBodyView?.layer.shadowOpacity = 1.0
-                
-                    
-                
-                cell.delegate = self
-                
-                
-//                print("fuck")
-            }
-            else
-            {
-//                print("butthole")
-                self.camCheck = false
-////                cell.
-//                cell.photoCellImageView.image = nil
-//                cell.photoCellImageView.isHidden = true
-//                cell.isHidden = true
-            }
+//        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+//        dataSource = FUITableViewDataSource.init(query: (getQuery().queryOrdered(byChild: "reverseTimeStamp"))) { (tableView, indexPath, snap) -> UITableViewCell in
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoCell", for: indexPath) as! PhotosTableViewCell
+//            guard let post = Post.init(snapshot: snap) else { return cell }
+//            if(String(post.downloadURL) != "")
+//            {
+//                let photoRef = self.storageRef.child("users/" + Auth.auth().currentUser!.uid + "/\(snap.key).jpg")
+//                print("photo ref is \(photoRef)\n\n")
+//                //                    let imageView: UIImageView = imageTableViewCell!.postImageView
+//                cell.photoCellImageView!.sd_setImage(with: photoRef)
+//                let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.self.imageTapped(tapGestureRecognizer:)))
+//                cell.photoCellImageView!.addGestureRecognizer(tapGestureRecognizer)
 //
-            return cell
-        }
-        
-        dataSource?.bind(to: tableView)
-        tableView.delegate = self
+////                cell.photoCellImageView!.addBlackGradientLayer(frame: cell.bounds, colors:[.clear, .black])
+//                self.camCheck = true
+//                let month = Int(post.month)
+//                var realMonth = "Month"
+//
+//                switch(month){
+//                case 1?:
+//                    realMonth = "January"
+//                case 2?:
+//                    realMonth = "February"
+//                case 3?:
+//                    realMonth = "March"
+//                case 4?:
+//                    realMonth = "April"
+//                case 5?:
+//                    realMonth = "May"
+//                case 6?:
+//                    realMonth = "June"
+//                case 7?:
+//                    realMonth = "July"
+//                case 8?:
+//                    realMonth = "August"
+//                case 9?:
+//                    realMonth = "September"
+//                case 10?:
+//                    realMonth = "October"
+//                case 11?:
+//                    realMonth = "November"
+//                case 12?:
+//                    realMonth = "December"
+//                default:
+//                    realMonth = "Error"
+//
+//                }
+//
+//                cell.photoCellDateLabel?.text = "\(realMonth) \(post.day), \(post.year)"
+//                cell.photoCellTextBodyView?.text = post.body
+//                cell.photoCellTextBodyView?.layer.shadowRadius = 5.0
+//                cell.photoCellTextBodyView?.layer.shadowColor = UIColor.black.cgColor
+//                cell.photoCellTextBodyView?.layer.shadowOffset = CGSize(width: 4.0, height: 4.0)
+//                cell.photoCellTextBodyView?.layer.shadowOpacity = 1.0
+//
+//
+//
+//                cell.delegate = self
+//
+//
+////                print("fuck")
+//            }
+//            else
+//            {
+////                print("butthole")
+//                self.camCheck = false
+//////                cell.
+////                cell.photoCellImageView.image = nil
+////                cell.photoCellImageView.isHidden = true
+////                cell.isHidden = true
+//            }
+////
+//            return cell
+//        }
+//
+//        dataSource?.bind(to: tableView)
+//        tableView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        postArray.removeAll()
+        self.tableView.reloadData()
         if self.userDefaults.bool(forKey: "isDarkModeEnabled") {
             tableView.backgroundColor = UIColor.black
             navigationController?.navigationBar.barTintColor = UIColor.black
@@ -119,6 +122,16 @@ class PhotosTableViewController: UITableViewController, UIImagePickerControllerD
             navigationController?.navigationBar.barTintColor = UIColor.white
             tableView.backgroundColor = UIColor(red:0.18, green:0.81, blue:0.92, alpha:1.0)
         }
+        
+        //        if(makingPost == false) {
+        getQuery().queryOrdered(byChild: "reverseTimeStamp").observe(.childAdded, with: {  (snapshot) -> Void in
+            self.postArray.append(snapshot)
+            //            guard let post = Post.init(snapshot: snapshot) else { return }
+            //            print("test: \(post.body)")
+            //            self.tableView.beginUpdates()
+            self.tableView.insertRows(at: [IndexPath(row: self.postArray.count-1, section: 0)], with: .automatic)
+            //            self.tableView.endUpdates()
+        })
 //        self.tableView.reloadData()
     }
     
@@ -225,7 +238,85 @@ class PhotosTableViewController: UITableViewController, UIImagePickerControllerD
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 10000
+        return self.postArray.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoCell", for: indexPath) as! PhotosTableViewCell
+        cell.delegate = self
+        let postDict = postArray[(indexPath as NSIndexPath).row].value as? [String : AnyObject]
+        
+        if((postDict?["downloadURL"])! as! String  != "")
+        {
+                        let photoRef = self.storageRef.child("users/" + Auth.auth().currentUser!.uid + "/\(postArray[(indexPath as NSIndexPath).row].key).jpg")
+        //                print("photo ref is \(photoRef)\n\n")
+        //                //                    let imageView: UIImageView = imageTableViewCell!.postImageView
+                        cell.photoCellImageView!.sd_setImage(with: photoRef)
+                        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.self.imageTapped(tapGestureRecognizer:)))
+                        cell.photoCellImageView!.addGestureRecognizer(tapGestureRecognizer)
+        //
+        ////                cell.photoCellImageView!.addBlackGradientLayer(frame: cell.bounds, colors:[.clear, .black])
+                        self.camCheck = true
+                        let month = Int((postDict?["month"] as? String)!)
+                        var realMonth = "Month"
+        //
+                        switch(month){
+                        case 1?:
+                            realMonth = "January"
+                        case 2?:
+                            realMonth = "February"
+                        case 3?:
+                            realMonth = "March"
+                        case 4?:
+                            realMonth = "April"
+                        case 5?:
+                            realMonth = "May"
+                        case 6?:
+                            realMonth = "June"
+                        case 7?:
+                            realMonth = "July"
+                        case 8?:
+                            realMonth = "August"
+                        case 9?:
+                            realMonth = "September"
+                        case 10?:
+                            realMonth = "October"
+                        case 11?:
+                            realMonth = "November"
+                        case 12?:
+                            realMonth = "December"
+                        default:
+                            realMonth = "Error"
+        
+                        }
+        //
+                        cell.photoCellDateLabel?.text = "\(realMonth) \((postDict?["day"])! as! String), \((postDict?["year"])! as! String)"
+                        cell.photoCellTextBodyView?.text = postDict?["body"] as! String
+                        cell.photoCellTextBodyView?.layer.shadowRadius = 5.0
+                        cell.photoCellTextBodyView?.layer.shadowColor = UIColor.black.cgColor
+                        cell.photoCellTextBodyView?.layer.shadowOffset = CGSize(width: 4.0, height: 4.0)
+                        cell.photoCellTextBodyView?.layer.shadowOpacity = 1.0
+        //
+        //
+        //
+        //                cell.delegate = self
+        //
+        //
+        ////                print("fuck")
+                    }
+                    else
+                    {
+        ////                print("butthole")
+                        self.camCheck = false
+        //////                cell.
+        ////                cell.photoCellImageView.image = nil
+        ////                cell.photoCellImageView.isHidden = true
+        ////                cell.isHidden = true
+                    }
+        
+                    return cell
+        
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

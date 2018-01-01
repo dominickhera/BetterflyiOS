@@ -19,13 +19,13 @@ class Post: NSObject {
     var hour: String
     var minutes: String
     var timeStamp: String
-    var reverseTimeStamp: String
+    var reverseTimeStamp: AnyObject?
     var downloadURL: String
     var body: String
     var searchTags: String
     
     
-    init(uid: String, month: String, day: String, year: String, time: String,date: String, hour: String, minutes: String, timeStamp: String, reverseTimeStamp: String, downloadURL: String, body: String, searchTags: String) {
+    init(uid: String, month: String, day: String, year: String, time: String,date: String, hour: String, minutes: String, timeStamp: String, reverseTimeStamp: AnyObject?, downloadURL: String, body: String, searchTags: String) {
         self.uid = uid
         self.month = month
         self.day = day
@@ -66,14 +66,14 @@ class Post: NSObject {
         self.hour = hour
         self.minutes = minutes
         self.timeStamp = timeStamp
-        self.reverseTimeStamp = reverseTimeStamp
+        self.reverseTimeStamp = reverseTimeStamp as AnyObject
         self.downloadURL = downloadURL
         self.body = body
         self.searchTags = searchTags
     }
     
     convenience override init() {
-        self.init(uid: "",month:"", day: "", year: "", time: "",date: "", hour: "", minutes: "", timeStamp: "", reverseTimeStamp: "", downloadURL: "", body:  "", searchTags: "")
+        self.init(uid: "",month:"", day: "", year: "", time: "",date: "", hour: "", minutes: "", timeStamp: "", reverseTimeStamp: "" as AnyObject, downloadURL: "", body:  "", searchTags: "")
     }
 }
 

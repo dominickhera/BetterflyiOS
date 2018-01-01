@@ -54,11 +54,11 @@ internal final class testSettingsViewController: QuickTableViewController, MFMai
             
             Section(title: "App Toggles", rows: [
                 SwitchRow<SwitchCell>(title: "24 Hour Time", switchValue: use24HourTime, action: weakify(self, type(of: self).toggle24HourTime)),
-                SwitchRow<SwitchCell>(title: "Manual Dark Mode", switchValue: useManualDarkMode, action: weakify(self, type(of: self).toggleManualDarkMode)),
-                SwitchRow<SwitchCell>(title: "Auto Dark Mode", switchValue: false, action: weakify(self, type(of: self).enableAutoDarkMode))], footer: "Auto Dark Mode automatically changes the app theme to dark mode at sunset until sunrise the next day."),
+                SwitchRow<SwitchCell>(title: "Dark Mode", switchValue: useManualDarkMode, action: weakify(self, type(of: self).toggleManualDarkMode))
+//                SwitchRow<SwitchCell>(title: "Auto Dark Mode", switchValue: false, action: weakify(self, type(of: self).enableAutoDarkMode))], footer: "Auto Dark Mode automatically changes the app theme to dark mode at sunset until sunrise the next day."),
 //                SwitchRow<SwitchCell>(title: "Post Reminders", switchValue: false, action: weakify(self, type(of: self).createEmail)),
 //                NavigationRow(title: "Reminder Settings", subtitle: .none, action: weakify(self, type(of: self).showDetail))
-//                ]),
+                ]),
             
             Section(title: "Links", rows: [
                 TapActionRow<CustomTapActionCell>(title: "Contact Us", action: weakify(self, type(of: self).createEmail)),
@@ -224,12 +224,12 @@ internal final class testSettingsViewController: QuickTableViewController, MFMai
 //        userDefaults.synchronize()
     }
     
-    private func enableAutoDarkMode(){
-        var locationManager: CLLocationManager!
-        locationManager = CLLocationManager()
-        locationManager.delegate = self
-        locationManager.requestAlwaysAuthorization()
-    }
+//    private func enableAutoDarkMode(){
+//        var locationManager: CLLocationManager!
+//        locationManager = CLLocationManager()
+//        locationManager.delegate = self
+//        locationManager.requestWhenInUseAuthorization()
+//    }
     
 //    private func actualEnableAutoDarkMode(){
 //
