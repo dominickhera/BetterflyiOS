@@ -11,8 +11,6 @@
 		25061A1A1FFADF75003A60CC /* newThirdPartyCreditWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25061A191FFADF75003A60CC /* newThirdPartyCreditWebViewController.swift */; };
 		2524EBA31FF5EAA60016ECBE /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D4FEF51F43950F00129E69 /* Post.swift */; };
 		2524EBA41FF5EAA60016ECBE /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C260B81F394D87008CA748 /* SignInViewController.swift */; };
-		2524EBA51FF5EAA60016ECBE /* emailSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C260C21F395AC9008CA748 /* emailSignInViewController.swift */; };
-		2524EBA61FF5EAA60016ECBE /* emailSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C260C91F395FD5008CA748 /* emailSignUpViewController.swift */; };
 		2524EBA71FF5EAA60016ECBE /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FAA3281F3044E7007E89D9 /* Onboarding.swift */; };
 		2524EBA81FF5EAA60016ECBE /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FAA32A1F304619007E89D9 /* OnboardingView.swift */; };
 		2524EBA91FF5EAA60016ECBE /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E696CD281F39BEC8008B0DDD /* TabBarViewController.swift */; };
@@ -24,8 +22,6 @@
 		2524EBB01FF5EAA60016ECBE /* ToCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259B0A731FEF169900799250 /* ToCViewController.swift */; };
 		2524EBB11FF5EAA60016ECBE /* privacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259B0A751FEF16A400799250 /* privacyPolicyViewController.swift */; };
 		2524EBB21FF5EAA60016ECBE /* AboutMeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69259DA1F5F5BBE00E3CAC7 /* AboutMeViewController.swift */; };
-		2524EBB31FF5EAA60016ECBE /* ThirdPartyCreditsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259B0A711FEF10DD00799250 /* ThirdPartyCreditsTableViewController.swift */; };
-		2524EBB41FF5EAA60016ECBE /* ThirdPartyCreditWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259B0A771FEF1FB700799250 /* ThirdPartyCreditWebViewController.swift */; };
 		2524EBB51FF5EAA60016ECBE /* Assets.xcassets in Sources */ = {isa = PBXBuildFile; fileRef = E6FAA2FD1F302CFC007E89D9 /* Assets.xcassets */; };
 		2524EBB61FF5EAA60016ECBE /* Info.plist in Sources */ = {isa = PBXBuildFile; fileRef = E6FAA3021F302CFC007E89D9 /* Info.plist */; };
 		2552A9AE1FF5DF6E00941C75 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2552A9AC1FF5DF6E00941C75 /* Main.storyboard */; };
@@ -76,7 +72,6 @@
 		25061A171FFADF16003A60CC /* newThirdPartySettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newThirdPartySettingsTableViewController.swift; sourceTree = "<group>"; };
 		25061A191FFADF75003A60CC /* newThirdPartyCreditWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newThirdPartyCreditWebViewController.swift; sourceTree = "<group>"; };
 		2519B3831FF1B870002BE46D /* FoldingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldingTableViewCell.swift; sourceTree = "<group>"; };
-		2519B3881FF1BAC8002BE46D /* FoldingPostListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldingPostListViewController.swift; sourceTree = "<group>"; };
 		253724951FF578E7001EEAA2 /* testSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testSettingsViewController.swift; sourceTree = "<group>"; };
 		2552A9A61FF5DF6E00941C75 /* Betterfly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Betterfly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2552A9A81FF5DF6E00941C75 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -92,10 +87,8 @@
 		25731CA61FF9762600A17F79 /* MobileNet.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNet.mlmodel; sourceTree = "<group>"; };
 		25731CA81FF9762C00A17F79 /* SqueezeNet.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SqueezeNet.mlmodel; sourceTree = "<group>"; };
 		25731CAA1FF9765000A17F79 /* ImageProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProcessor.swift; sourceTree = "<group>"; };
-		259B0A711FEF10DD00799250 /* ThirdPartyCreditsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdPartyCreditsTableViewController.swift; sourceTree = "<group>"; };
 		259B0A731FEF169900799250 /* ToCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToCViewController.swift; sourceTree = "<group>"; };
 		259B0A751FEF16A400799250 /* privacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = privacyPolicyViewController.swift; sourceTree = "<group>"; };
-		259B0A771FEF1FB700799250 /* ThirdPartyCreditWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdPartyCreditWebViewController.swift; sourceTree = "<group>"; };
 		25A26DFA1FF44394002475E2 /* PhotosTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewController.swift; sourceTree = "<group>"; };
 		25A26DFC1FF44469002475E2 /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
 		25A26E001FF47089002475E2 /* DesignableX */ = {isa = PBXFileReference; lastKnownFileType = folder; path = DesignableX; sourceTree = "<group>"; };
@@ -105,19 +98,9 @@
 		73DFC662913DBA7254D6AA20 /* Pods_BetterflyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BetterflyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D51738CAA8C9685ACE78754 /* Pods-Betterfly.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Betterfly.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Betterfly/Pods-Betterfly.debug.xcconfig"; sourceTree = "<group>"; };
 		C958264CD630C90C445D4773 /* Pods-Betterfly.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Betterfly.release.xcconfig"; path = "Pods/Target Support Files/Pods-Betterfly/Pods-Betterfly.release.xcconfig"; sourceTree = "<group>"; };
-		E61B7DD51F492ACB004204EB /* photoPost.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = photoPost.xib; sourceTree = "<group>"; };
-		E61B7DD71F492DDE004204EB /* photoPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = photoPost.swift; sourceTree = "<group>"; };
-		E61B7DD91F4931E5004204EB /* textPost.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = textPost.xib; sourceTree = "<group>"; };
-		E61B7DDB1F49322A004204EB /* textPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = textPost.swift; sourceTree = "<group>"; };
-		E61D623C1F3EDCAB00DE0C42 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		E61D623E1F3FDEB100DE0C42 /* JarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JarViewController.swift; sourceTree = "<group>"; };
-		E61D62401F3FEB2D00DE0C42 /* ListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewController.swift; sourceTree = "<group>"; };
-		E61D62421F3FF1A600DE0C42 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		E69259DA1F5F5BBE00E3CAC7 /* AboutMeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutMeViewController.swift; sourceTree = "<group>"; };
 		E696CD281F39BEC8008B0DDD /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		E6C260B81F394D87008CA748 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
-		E6C260C21F395AC9008CA748 /* emailSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emailSignInViewController.swift; sourceTree = "<group>"; };
-		E6C260C91F395FD5008CA748 /* emailSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emailSignUpViewController.swift; sourceTree = "<group>"; };
 		E6C4CA901F57F25F00590E58 /* IQNSArray+Sort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IQNSArray+Sort.swift"; sourceTree = "<group>"; };
 		E6C4CA911F57F25F00590E58 /* IQUIScrollView+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IQUIScrollView+Additions.swift"; sourceTree = "<group>"; };
 		E6C4CA921F57F25F00590E58 /* IQUITextFieldView+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IQUITextFieldView+Additions.swift"; sourceTree = "<group>"; };
@@ -136,12 +119,9 @@
 		E6C4CAA21F57F25F00590E58 /* IQToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IQToolbar.swift; sourceTree = "<group>"; };
 		E6C4CAA31F57F25F00590E58 /* IQUIView+IQKeyboardToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IQUIView+IQKeyboardToolbar.swift"; sourceTree = "<group>"; };
 		E6C4CAA51F57F25F00590E58 /* IQKeyboardManager.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IQKeyboardManager.bundle; sourceTree = "<group>"; };
-		E6C517CC1F437EFF00CE625A /* PostListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListViewController.swift; sourceTree = "<group>"; };
 		E6D4FEF51F43950F00129E69 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
-		E6D4FEFB1F43E40C00129E69 /* PostInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostInfoViewController.swift; sourceTree = "<group>"; };
 		E6F339BA1F397E5100B4D423 /* Betterfly.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Betterfly.entitlements; sourceTree = "<group>"; };
 		E6FAA2F41F302CFC007E89D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E6FAA2F81F302CFC007E89D9 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		E6FAA2FD1F302CFC007E89D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E6FAA3001F302CFC007E89D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E6FAA3021F302CFC007E89D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -183,29 +163,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2519B3851FF1BA2D002BE46D /* Unused Files */ = {
-			isa = PBXGroup;
-			children = (
-				259B0A711FEF10DD00799250 /* ThirdPartyCreditsTableViewController.swift */,
-				259B0A771FEF1FB700799250 /* ThirdPartyCreditWebViewController.swift */,
-				E6C260C91F395FD5008CA748 /* emailSignUpViewController.swift */,
-				E6C260C21F395AC9008CA748 /* emailSignInViewController.swift */,
-				E61D623C1F3EDCAB00DE0C42 /* SettingsViewController.swift */,
-				E6C517CC1F437EFF00CE625A /* PostListViewController.swift */,
-				E6FAA2F81F302CFC007E89D9 /* SecondViewController.swift */,
-				E61B7DD51F492ACB004204EB /* photoPost.xib */,
-				2519B3881FF1BAC8002BE46D /* FoldingPostListViewController.swift */,
-				E6D4FEFB1F43E40C00129E69 /* PostInfoViewController.swift */,
-				E61B7DDB1F49322A004204EB /* textPost.swift */,
-				E61D62401F3FEB2D00DE0C42 /* ListTableViewController.swift */,
-				E61B7DD71F492DDE004204EB /* photoPost.swift */,
-				E61D623E1F3FDEB100DE0C42 /* JarViewController.swift */,
-				E61D62421F3FF1A600DE0C42 /* TableViewController.swift */,
-				E61B7DD91F4931E5004204EB /* textPost.xib */,
-			);
-			path = "Unused Files";
-			sourceTree = "<group>";
-		};
 		2552A9A71FF5DF6E00941C75 /* Betterfly */ = {
 			isa = PBXGroup;
 			children = (
@@ -334,7 +291,6 @@
 			children = (
 				E6F339BA1F397E5100B4D423 /* Betterfly.entitlements */,
 				E6C4CA8E1F57F25F00590E58 /* IQKeyboardManagerSwift */,
-				2519B3851FF1BA2D002BE46D /* Unused Files */,
 				E6D4FEF51F43950F00129E69 /* Post.swift */,
 				25731CA41FF9761F00A17F79 /* GoogLeNetPlaces.mlmodel */,
 				25731CA61FF9762600A17F79 /* MobileNet.mlmodel */,
@@ -758,9 +714,7 @@
 				2524EBA31FF5EAA60016ECBE /* Post.swift in Sources */,
 				25731CAB1FF9765000A17F79 /* ImageProcessor.swift in Sources */,
 				2524EBA41FF5EAA60016ECBE /* SignInViewController.swift in Sources */,
-				2524EBA51FF5EAA60016ECBE /* emailSignInViewController.swift in Sources */,
 				25061A1A1FFADF75003A60CC /* newThirdPartyCreditWebViewController.swift in Sources */,
-				2524EBA61FF5EAA60016ECBE /* emailSignUpViewController.swift in Sources */,
 				25731CA51FF9761F00A17F79 /* GoogLeNetPlaces.mlmodel in Sources */,
 				2524EBA71FF5EAA60016ECBE /* Onboarding.swift in Sources */,
 				25061A181FFADF16003A60CC /* newThirdPartySettingsTableViewController.swift in Sources */,
@@ -775,9 +729,7 @@
 				2524EBB01FF5EAA60016ECBE /* ToCViewController.swift in Sources */,
 				2524EBB11FF5EAA60016ECBE /* privacyPolicyViewController.swift in Sources */,
 				2524EBB21FF5EAA60016ECBE /* AboutMeViewController.swift in Sources */,
-				2524EBB31FF5EAA60016ECBE /* ThirdPartyCreditsTableViewController.swift in Sources */,
 				25731CA91FF9762C00A17F79 /* SqueezeNet.mlmodel in Sources */,
-				2524EBB41FF5EAA60016ECBE /* ThirdPartyCreditWebViewController.swift in Sources */,
 				2524EBB51FF5EAA60016ECBE /* Assets.xcassets in Sources */,
 				2524EBB61FF5EAA60016ECBE /* Info.plist in Sources */,
 				2552A9B11FF5DF6E00941C75 /* Betterfly.xcdatamodeld in Sources */,
