@@ -11,14 +11,11 @@ import FoldingCell
 
 protocol FoldingCellDelegate: class {
     func shareFoldingCell(cell: FoldingTableViewCell)
-    func editFoldingCell(cell: FoldingTableViewCell)
+    func editFoldingCell(_: Int)
     func deleteFoldingCell(_: Int)
 }
 
 class FoldingTableViewCell: FoldingCell {
-    
-//    var postKey: String?
-//    var postRef: DatabaseReference!
     
     @IBOutlet weak var closedFullDateLabel: UILabel!
     @IBOutlet weak var closeNumberLabel: UILabel!
@@ -66,14 +63,11 @@ extension FoldingTableViewCell {
     }
     
     @IBAction func deletePost(_ sender: Any) {
-        delegate?.deleteFoldingCell((sender as AnyObject).tag)
+        delegate?.deleteFoldingCell(self.tag)
     }
     
     @IBAction func editPost(_ sender: Any) {
-        delegate?.editFoldingCell(cell: self)
+        delegate?.editFoldingCell(self.tag)
     }
-    
-    //for action functions
-    
     
 }

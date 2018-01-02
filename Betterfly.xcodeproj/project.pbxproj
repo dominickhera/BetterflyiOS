@@ -186,6 +186,8 @@
 		2519B3851FF1BA2D002BE46D /* Unused Files */ = {
 			isa = PBXGroup;
 			children = (
+				259B0A711FEF10DD00799250 /* ThirdPartyCreditsTableViewController.swift */,
+				259B0A771FEF1FB700799250 /* ThirdPartyCreditWebViewController.swift */,
 				E6C260C91F395FD5008CA748 /* emailSignUpViewController.swift */,
 				E6C260C21F395AC9008CA748 /* emailSignInViewController.swift */,
 				E61D623C1F3EDCAB00DE0C42 /* SettingsViewController.swift */,
@@ -355,8 +357,6 @@
 				2552A9AC1FF5DF6E00941C75 /* Main.storyboard */,
 				25061A171FFADF16003A60CC /* newThirdPartySettingsTableViewController.swift */,
 				25061A191FFADF75003A60CC /* newThirdPartyCreditWebViewController.swift */,
-				259B0A711FEF10DD00799250 /* ThirdPartyCreditsTableViewController.swift */,
-				259B0A771FEF1FB700799250 /* ThirdPartyCreditWebViewController.swift */,
 				E6FAA2FD1F302CFC007E89D9 /* Assets.xcassets */,
 				E6FAA2FF1F302CFC007E89D9 /* LaunchScreen.storyboard */,
 				E6FAA3021F302CFC007E89D9 /* Info.plist */,

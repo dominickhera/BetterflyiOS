@@ -296,10 +296,9 @@
             <objects>
                 <tabBarController storyboardIdentifier="navTabBar" id="49e-Tb-3d3" customClass="TabBarViewController" customModule="Betterfly" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="bXe-4i-rb0"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
+                    <tabBar key="tabBar" contentMode="scaleToFill" barStyle="black" itemPositioning="fill" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="defaultIndex">
@@ -316,7 +315,7 @@
             </objects>
             <point key="canvasLocation" x="-1844" y="-26"/>
         </scene>
-        <!--New Folding Post List Table View Controller-->
+        <!--Bettrfly-->
         <scene sceneID="Ebv-ph-MNK">
             <objects>
                 <tableViewController id="iPH-Ic-0j5" customClass="newFoldingPostListTableViewController" customModule="Betterfly" customModuleProvider="target" sceneMemberID="viewController">
@@ -530,7 +529,12 @@
                             <outlet property="delegate" destination="iPH-Ic-0j5" id="Io5-o6-qUF"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="vYx-b6-ZFS">
+                    <navigationItem key="navigationItem" title="Bettrfly" largeTitleDisplayMode="always" id="vYx-b6-ZFS">
+                        <barButtonItem key="leftBarButtonItem" springLoaded="YES" systemItem="refresh" id="iVZ-GI-EBD">
+                            <connections>
+                                <action selector="refreshListButton:" destination="iPH-Ic-0j5" id="Abv-MO-yIg"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="gCl-LP-lWZ">
                             <connections>
                                 <action selector="promptStatusBox:" destination="iPH-Ic-0j5" id="Gf4-04-vyx"/>
@@ -607,7 +611,7 @@
                             </connections>
                         </button>
                         <imageView clipsSubviews="YES" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UZr-Vp-ub7">
-                            <rect key="frame" x="10" y="237" width="306" height="146"/>
+                            <rect key="frame" x="10" y="213" width="306" height="170"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="write something positive about your day!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Skd-B7-GUw">
@@ -625,7 +629,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NXz-rN-awM">
-                            <rect key="frame" x="16" y="244" width="22" height="22"/>
+                            <rect key="frame" x="16" y="223" width="22" height="22"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="error"/>
                             <connections>
@@ -652,6 +656,9 @@
                             <state key="normal" title="Cancel">
                                 <color key="titleColor" red="0.2050135434" green="0.59736168379999999" blue="0.8569512963" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
+                            <connections>
+                                <action selector="CancelEditPost:" destination="iPH-Ic-0j5" eventType="touchUpInside" id="6wS-IY-kKe"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zhg-qz-kDM">
                             <rect key="frame" x="252" y="3" width="62" height="36"/>
@@ -660,9 +667,12 @@
                             <state key="normal" title="Update">
                                 <color key="titleColor" red="0.2050135434" green="0.59736168379999999" blue="0.8569512963" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
+                            <connections>
+                                <action selector="didTapUpdate:" destination="iPH-Ic-0j5" eventType="touchUpInside" id="Kkb-3L-1eC"/>
+                            </connections>
                         </button>
                         <imageView clipsSubviews="YES" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Dp-I7-tJf">
-                            <rect key="frame" x="10" y="237" width="306" height="146"/>
+                            <rect key="frame" x="10" y="213" width="306" height="170"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="edit your previous positive post!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pjC-oU-Fce">
@@ -680,9 +690,12 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gil-sK-NZ7">
-                            <rect key="frame" x="16" y="244" width="22" height="22"/>
+                            <rect key="frame" x="23" y="224" width="22" height="22"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="error"/>
+                            <connections>
+                                <action selector="removeEditImagePost:" destination="iPH-Ic-0j5" eventType="touchUpInside" id="CaQ-Vu-w3Y"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -860,7 +873,7 @@
             </objects>
             <point key="canvasLocation" x="5361" y="-1620"/>
         </scene>
-        <!--Test Settings View Controller-->
+        <!--Settings-->
         <scene sceneID="yNY-MN-v2u">
             <objects>
                 <viewController id="UO1-yV-Sjf" customClass="testSettingsViewController" customModule="Betterfly" customModuleProvider="target" sceneMemberID="viewController">
@@ -873,7 +886,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="more" id="otS-VM-ci5"/>
-                    <navigationItem key="navigationItem" id="Vbj-J6-EUr"/>
+                    <navigationItem key="navigationItem" title="Settings" largeTitleDisplayMode="always" id="Vbj-J6-EUr"/>
                     <connections>
                         <segue destination="VvU-Mk-jfv" kind="show" identifier="aboutMeSegue" id="LVC-9w-2h0"/>
                         <segue destination="SOp-IZ-vOA" kind="show" identifier="tocSegue" id="VyY-En-F1h"/>
@@ -1027,7 +1040,7 @@
         <scene sceneID="PoS-iS-cog">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="D8R-Hg-qO1" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="List" springLoaded="YES" id="B85-lh-q4y"/>
+                    <tabBarItem key="tabBarItem" title="List" image="listTabBarIcon" springLoaded="YES" id="B85-lh-q4y"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="aCF-8k-zj1">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -1142,9 +1155,10 @@
         <image name="instagram" width="512" height="512"/>
         <image name="jelly-jar1" width="750" height="1000"/>
         <image name="linkedin" width="512" height="512"/>
+        <image name="listTabBarIcon" width="33" height="34"/>
         <image name="photo-camera" width="512" height="512"/>
         <image name="photos" width="512" height="512"/>
-        <image name="photosTabBarIcon" width="52" height="52"/>
+        <image name="photosTabBarIcon" width="38" height="38"/>
         <image name="placeholderImage" width="4600" height="3276"/>
         <image name="second" width="30" height="30"/>
         <image name="share-3" width="512" height="512"/>

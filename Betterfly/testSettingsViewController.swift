@@ -35,13 +35,6 @@ internal final class testSettingsViewController: QuickTableViewController, MFMai
 //        let userDefaults = UserDefaults.standard
         let use24HourTime = userDefaults.bool(forKey: "is24HourTimeEnabled")
         let useManualDarkMode = userDefaults.bool(forKey: "isDarkModeEnabled")
-//        let useAutoDarkMode = userDefaults.bool(forKey: "isAutoDarkModeEnabled")
-//
-//        let gear = #imageLiteral(resourceName: "iconmonstr-gear")
-//        let globe = #imageLiteral(resourceName: "iconmonstr-globe")
-//        let time = #imageLiteral(resourceName: "iconmonstr-time")
-        
-//        print(String(describing: SwitchCell.self))
         
         tableContents = [
             Section(title: "Settings", rows: [
@@ -85,11 +78,13 @@ internal final class testSettingsViewController: QuickTableViewController, MFMai
         if self.userDefaults.bool(forKey: "isDarkModeEnabled") {
             tableView.backgroundColor = UIColor.black
             navigationController?.navigationBar.barTintColor = UIColor.black
+//            self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black]
         }
         else
         {
             navigationController?.navigationBar.barTintColor = UIColor.white
             tableView.backgroundColor = UIColor(red:0.94, green:0.94, blue:0.96, alpha:1.0)
+//            self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         }
         self.tableView.reloadData()
 //        self.navigationController!.navigationBar.isTranslucent = true
@@ -272,17 +267,6 @@ internal final class testSettingsViewController: QuickTableViewController, MFMai
     }
     
     private func rateApp() {
-//        guard let url = URL(string : "itms-apps://itunes.apple.com/app/id1282712660") else {
-//            completion(false)
-//            return
-//        }
-//        guard #available(iOS 10, *) else {
-//            completion(UIApplication.shared.openURL(url))
-//            return
-//        }
-//        UIApplication.shared.open(url, options: [:], completionHandler: completion)
-        
-        
         let url = URL(string: "itms-apps://itunes.apple.com/app/id1282712660")!
         if #available(iOS 10.0, *) {
             UIApplication.shared.open(url, options: [:])

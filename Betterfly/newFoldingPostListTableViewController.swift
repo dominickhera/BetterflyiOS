@@ -20,6 +20,9 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
     var storageRef: StorageReference!
     var camCheck = false
     var makingPost = false
+    var deleteImageCheck = false
+    var newImageCheck = false
+    var editPostCheck = false
     var ref: DatabaseReference!
     var dataSource: FUITableViewDataSource?
     
@@ -32,8 +35,7 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
     @IBOutlet var editPostView: UIView!
     @IBOutlet weak var editBodyTextView: UITextView!
     @IBOutlet weak var editEntryDate: UILabel!
-    
-    
+    @IBOutlet weak var blurEffect: UIVisualEffectView!
     @IBOutlet weak var editPostImageView: UIImageView!
     
     @IBOutlet weak var editRemoveImagePost: UIButton!
@@ -46,22 +48,36 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
     var cellHeights: [CGFloat] = []
     var postArray: Array<DataSnapshot> = []
     let userDefaults = UserDefaults.standard
+    var expandedCellIndexPath: IndexPath?
+    var tempEditKey = ""
+    var tempEditTag = 0
+ 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
         ref.keepSynced(true)
+//        blur = blurEffect.effect
+//        blurEffect.effect = nil
         self.tabBarController?.tabBar.isHidden = false
         storageRef = Storage.storage().reference()
         addPostView.layer.cornerRadius = 10
+        editPostView.layer.cornerRadius = 10
         bodyTextView.inputAccessoryView = toolBarView
+        editBodyTextView.inputAccessoryView = toolBarView
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         postImageView.isUserInteractionEnabled = false
         postImageView.addGestureRecognizer(tapGestureRecognizer)
+        editPostImageView.isUserInteractionEnabled = false
+        editPostImageView.addGestureRecognizer(tapGestureRecognizer)
         
         postImageView.isHidden = true
         postImageView.layer.cornerRadius = 5
         removeImagePost.isHidden = true
+        editPostImageView.isHidden = true
+        editPostImageView.layer.cornerRadius = 5
+        editRemoveImagePost.isHidden = true
+       
         setup()
     
     }
@@ -103,6 +119,7 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
 //            let index = 100
             self.postArray.remove(at: index)
             self.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: UITableViewRowAnimation.automatic)
+            self.tableView.reloadData()
         })
         
 //        refHandle = getQuery().observe(DataEventType.value, with: { (snapshot) in
@@ -135,6 +152,23 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         return -1
     }
     
+    func refreshList() {
+        postArray.removeAll()
+        self.tableView.reloadData()
+        //        if(makingPost == false) {
+        getQuery().observe(.childAdded, with: {  (snapshot) -> Void in
+            self.postArray.insert(snapshot, at: 0)
+            //            guard let post = Post.init(snapshot: snapshot) else { return }
+            //            print("test: \(post.body)")
+            //            self.tableView.beginUpdates()
+            self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+            //            self.tableView.endUpdates()
+        })
+    }
+    
+    @IBAction func refreshListButton(_ sender: Any) {
+        refreshList()
+    }
     func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
     {
         //        let tappedImage = tapGestureRecognizer.view as! UIImageView
@@ -217,33 +251,22 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         
         var chosenImage = UIImage()
         chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage //2
-        postImageView.contentMode = .scaleAspectFill //3
-        postImageView.image = chosenImage
-        postImageView.isUserInteractionEnabled = true
-        postImageView.isHidden = false
-        removeImagePost.isHidden = false
+        
+        if editPostCheck == false {
+            postImageView.contentMode = .scaleAspectFill //3
+            postImageView.image = chosenImage
+            postImageView.isUserInteractionEnabled = true
+            postImageView.isHidden = false
+            removeImagePost.isHidden = false
+        } else {
+            editPostImageView.contentMode = .scaleAspectFill //3
+            editPostImageView.image = chosenImage
+            editPostImageView.isUserInteractionEnabled = true
+            editPostImageView.isHidden = false
+            editRemoveImagePost.isHidden = false
+        }
         
     }
-    
-//    func permissionPrimeCameraAccess() {
-//        let alert = UIAlertController( title: "\"<Your App>\" Would Like To Access the Camera", message: "<Your App> would like to access your Camera so that you can <customer benefit>.", preferredStyle: .alert )
-//        let allowAction = UIAlertAction(title: "Allow", style: .default, handler: { (alert) -> Void in
-////            Analytics.track(event: .permissionsPrimeCameraAccepted)
-//            if AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo).count > 0 {
-//                AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo, completionHandler: { [weak self] granted in
-//                    DispatchQueue.main.async {
-//                        self?.addPictureToPost((Any).self) // try again
-//                    }
-//                })
-//            }
-//        })
-//        alert.addAction(allowAction)
-//        let declineAction = UIAlertAction(title: "Not Now", style: .cancel) { (alert) in
-////            Analytics.track(event: .permissionsPrimeCameraCancelled)
-//        }
-//        alert.addAction(declineAction)
-//        present(alert, animated: true, completion: nil)
-//    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let window = UIApplication.shared.keyWindow!
@@ -266,15 +289,21 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
             addPostView.backgroundColor = UIColor.white
         }
         let window = UIApplication.shared.keyWindow!
+        
+//        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
+//        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+//        blurEffectView.frame = window.bounds
+//        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//        window.addSubview(blurEffectView)
         window.addSubview(addPostView)
         addPostView.center = window.center
-        //        self.blurEffect.isUserInteractionEnabled = true
+//                self.blurEffect.isUserInteractionEnabled = true
         
         addPostView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
         addPostView.alpha = 0
         
         UIView.animate(withDuration: 0.4) {
-            //            self.blurEffect.effect = self.blur
+//                        self.blurEffect.effect = self.blur
             self.addPostView.alpha = 1
             self.addPostView.transform = CGAffineTransform.identity
         }
@@ -289,14 +318,84 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
             self.addPostView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
             self.addPostView.alpha = 0
             
-            //            self.blurEffect.effect = nil
-            //            self.blurEffect.isUserInteractionEnabled = false
+//                        self.blurEffect.effect = nil
+//                        self.blurEffect.isUserInteractionEnabled = false
         }) { (success:Bool) in
+            let window = UIApplication.shared.keyWindow!
             self.addPostView.removeFromSuperview()
+//            self.blurEffect.removeFromSuperview()
+//            for view in window.subviews {
+//                view.removeFromSuperview()
+//            }
         }
-        self.makingPost = false
+        
+        
+        
+//        self.makingPost = false
         self.tabBarController?.tabBar.isHidden = false
         self.view.isUserInteractionEnabled = true
+    }
+    
+    
+    func blurInEdit() {
+        //        self.makingPost = true
+        if self.userDefaults.bool(forKey: "isDarkModeEnabled"){
+            editBodyTextView.textColor = UIColor.white
+            editEntryDate.textColor = UIColor.white
+            editPostView.backgroundColor = UIColor(red:0.42, green:0.48, blue:0.54, alpha:1.0)
+            
+        }
+        else
+        {
+            editBodyTextView.textColor = UIColor.black
+            
+            editEntryDate.textColor = UIColor.black
+            editPostView.backgroundColor = UIColor.white
+        }
+        let window = UIApplication.shared.keyWindow!
+//        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
+//        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+//        blurEffectView.frame = window.bounds
+//        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//        window.addSubview(blurEffectView)
+        window.addSubview(editPostView)
+        editPostView.center = window.center
+                self.blurEffect.isUserInteractionEnabled = true
+        
+        editPostView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+        editPostView.alpha = 0
+        
+        UIView.animate(withDuration: 0.4) {
+//                        self.blurEffect.effect = self.blur
+            self.editPostView.alpha = 1
+            self.editPostView.transform = CGAffineTransform.identity
+        }
+        self.tableView.reloadData()
+        self.tabBarController?.tabBar.isHidden = true
+        self.view.isUserInteractionEnabled = false
+        editPostCheck = true
+        
+    }
+    
+    func blurOutEdit() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.editPostView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+            self.editPostView.alpha = 0
+            
+                        self.blurEffect.effect = nil
+                        self.blurEffect.isUserInteractionEnabled = false
+        }) { (success:Bool) in
+//            for view in self.view.subviews {
+//                view.removeFromSuperview()
+//            }
+            self.editPostView.removeFromSuperview()
+//            self.blurEffect.removeFromSuperview()
+        }
+//        self.makingPost = false
+        editPostCheck = false
+        self.tabBarController?.tabBar.isHidden = false
+        self.view.isUserInteractionEnabled = true
+        self.tableView.reloadData()
     }
     
     @IBAction func promptStatusBox(_ sender: Any) {
@@ -503,6 +602,157 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         //            self.ref.child("users/\(userID!)/\(date)").setValue(post)
     }
     
+    
+    @IBAction func didTapUpdate(_ sender: Any) {
+        let userID = Auth.auth().currentUser?.uid
+        let key = tempEditKey
+        let body = editBodyTextView.text
+        let tag = tempEditTag
+        let postDict = postArray[tag].value as? [String : AnyObject]
+        //        let title = titleTextField.text
+//        let nsDate = NSDate()
+        //        let postDate = ("\(nsDate)")
+//        let calendar = NSCalendar.current
+//        let year = calendar.component(.year, from: nsDate as Date)
+//        let month = calendar.component(.month, from: nsDate as Date)
+//        let day = calendar.component(.day, from: nsDate as Date)
+//        let hour = calendar.component(.hour, from: nsDate as Date)
+//        let minutes = calendar.component(.minute, from: nsDate as Date)
+        let postHour = "\((postDict?["hour"])! as! String)"
+        let postMinutes = "\((postDict?["minutes"])! as! String)"
+        
+//        if (Int(postMinutes)! < 10)
+//        {
+//            postMinutes = "0\(minutes)"
+//        }
+        
+//        let date = Date()
+//        let formatter = DateFormatter()
+        
+//        formatter.locale = Locale(identifier: "en_US_POSIX")
+//        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZ"
+//        formatter.timeZone = TimeZone(abbreviation: "UTC")
+        //        let utcTimeZoneStr = formatter.string(from: date)
+        //        let timestamp = (Date().timeIntervalSince1970 as NSString).doubleValue
+        let timeStamp = "\((postDict?["timeStamp"])! as! String)"
+        let doubleTimeStamp = Double(timeStamp)
+        let reversedTimestamp = -1.0 * doubleTimeStamp!
+        let realReverseTimeStamp = reversedTimestamp as AnyObject?
+        //        let seconds = calendar.component(.second, from: date as Date)
+        let postDate = ("\((postDict?["date"])! as! String)")
+        let postMonth = ("\((postDict?["month"])! as! String)")
+        let postDay = ("\((postDict?["day"])! as! String)")
+        let postYear = ("\((postDict?["year"])! as! String)")
+        let time = ("\((postDict?["time"])! as! String)")
+        var downloadURL = "\((postDict?["downloadURL"])! as! String)"
+        var searchTags = "\((postDict?["searchTags"])! as! String)"
+        
+        if editPostImageView.image != nil {
+            if #available(iOS 11.0, *) {
+                searchTags = "\(sceneLabel(forImage: (editPostImageView.image)!)!),\(sceneLabelTwo(forImage: (editPostImageView.image)!)!),\(sceneLabelThree(forImage: (editPostImageView.image)!)!)"
+            }
+            var data = Data()
+            data = UIImageJPEGRepresentation(editPostImageView.image!, 0.2)!
+            // set upload path
+            let filePath = "users/" + Auth.auth().currentUser!.uid + "/\(key).jpg"
+            let metaData = StorageMetadata()
+            metaData.contentType = "image/jpeg"
+            self.storageRef.child(filePath).putData(data, metadata: metaData){(metaData,error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                    return
+                }else{
+                    //store downloadURL
+                    let photoURL = metaData!.downloadURL()!.absoluteString
+                    downloadURL = photoURL
+                    //                print("download url: \(downloadURL), photourl: \(photoURL)")
+                    //                print("download url is now: \(downloadURL)")
+//                    print("\(date)")
+                    let post = ["uid": userID!,
+                                "month": postMonth,
+                                "day": postDay,
+                                "year": postYear,
+                                "time": time,
+                                "date": postDate,
+                                "hour": postHour,
+                                "minutes": postMinutes,
+                                "timeStamp": timeStamp,
+                                "reverseTimeStamp": realReverseTimeStamp as Any,
+                                "downloadURL": photoURL,
+                                "body": body!,
+                                "searchTags": searchTags]
+                    
+//                    print("\(userID!)")
+                    let childUpdates = ["/users/\(userID!)/\(key)/": post]
+                    self.ref.updateChildValues(childUpdates)
+                    //store downloadURL at database
+                }
+            }
+        }
+        else{
+            
+            if deleteImageCheck == true {
+                let imageRef = self.storageRef.child("users").child(self.getUid()).child(key).child(".jpg")
+                
+                // Delete the file
+                imageRef.delete { error in
+                    if error != nil {
+                        // Uh-oh, an error occurred!
+                    } else {
+                        // File deleted successfully
+                    }
+                }
+                downloadURL = ""
+            }
+            
+            print("download url is now: \(downloadURL)")
+//            print("\(date)")
+            let post = ["uid": userID!,
+                        "month": postMonth,
+                        "day": postDay,
+                        "year": postYear,
+                        "time": time,
+                        "date": postDate,
+                        "hour": postHour,
+                        "minutes": postMinutes,
+                        "timeStamp": timeStamp,
+                        "reverseTimeStamp": realReverseTimeStamp as Any,
+                        "downloadURL": downloadURL,
+                        "body": body!,
+                        "searchTags": searchTags]
+            
+//            print("\(userID!)")
+            let childUpdates = ["/users/\(userID!)/\(key)/": post]
+            self.ref.updateChildValues(childUpdates)
+            self.deleteImageCheck = false
+        }
+        
+        //        print("download url is now: \(downloadURL)")
+        //        print("\(date)")
+        //        let post = ["uid": userID,
+        //                    "month": postMonth,
+        //                    "day": postDay,
+        //                    "year": postYear,
+        //                    "time": time,
+        //                    "date": postDate,
+        //                    "timeStamp": timeStamp,
+        //                    "reverseTimeStamp": realReverseTimeStamp,
+        //                    "downloadURL": downloadURL,
+        //                    "body": body]
+        //
+        //        print("\(userID!)")
+        //        let childUpdates = ["/users/\(userID!)/\(key)/": post]
+        //        ref.updateChildValues(childUpdates)
+        editPostImageView.image = nil
+        editPostImageView.isUserInteractionEnabled = false
+        editPostImageView.isHidden = true
+//        tempEditTag = 0
+//        tempEditKey = ""
+        self.tableView.reloadData()
+        refreshList()
+        blurOutEdit()
+    }
+    
     func sceneLabel (forImage image:UIImage) -> String? {
         if #available(iOS 11.0, *) {
             let mLModelOne = GoogLeNetPlaces()
@@ -576,9 +826,32 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
             print("user canceled action.")
         }
         _ = alert.showWarning("Delete attached Image?", subTitle:"Don't worry, you can always add a picture to your post later.")
-        
-        
     }
+    
+    @IBAction func removeEditImagePost(_ sender: Any) {
+        self.view.endEditing(true)
+        let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
+        let alert = SCLAlertView(appearance: appearance)
+        _ = alert.addButton("Delete Image")
+        {
+            self.editPostImageView.image = nil
+            self.editPostImageView.isUserInteractionEnabled = false
+            self.editPostImageView.isHidden = true
+            self.editRemoveImagePost.isHidden = true
+            self.deleteImageCheck = true
+            //            self.blurOut()
+        }
+        _ = alert.addButton("Cancel")
+        {
+            self.editBodyTextView.becomeFirstResponder()
+            print("user canceled action.")
+        }
+        _ = alert.showWarning("Delete attached Image?", subTitle:"Image will be deleted from the current post if you proceed.")
+    
+    }
+    
+    
+    
     
     @IBAction func cancelStatus(_ sender: Any) {
         let window = UIApplication.shared.keyWindow!
@@ -605,6 +878,30 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         print("user canceled status entry")
     }
     
+    @IBAction func CancelEditPost(_ sender: Any) {
+        let window = UIApplication.shared.keyWindow!
+        //        window.addSubview(addPostView)
+        //        addPostView.center = window.center
+        window.endEditing(true)
+        let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
+        let alert = SCLAlertView(appearance: appearance)
+        _ = alert.addButton("Delete Edit")
+        {
+            self.editPostImageView.image = nil
+            self.editPostImageView.isUserInteractionEnabled = false
+            self.editPostImageView.isHidden = true
+            self.blurOutEdit()
+        }
+        _ = alert.addButton("Cancel")
+        {
+            self.editBodyTextView.becomeFirstResponder()
+            print("user canceled action.")
+        }
+        _ = alert.showWarning("Cancel current edit?", subTitle:"If you cancel now, you'll lose all the information you just edited.")
+        
+        //        blurOut()
+        print("user canceled status entry")
+    }
     
     
     func getUid() -> String {
@@ -622,11 +919,13 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         if self.userDefaults.bool(forKey: "isDarkModeEnabled") {
             tableView.backgroundColor = UIColor.black
             navigationController?.navigationBar.barTintColor = UIColor.black
+            self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         }
         else
         {
             navigationController?.navigationBar.barTintColor = UIColor.white
             tableView.backgroundColor = UIColor(red:0.18, green:0.81, blue:0.92, alpha:1.0)
+            self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black]
         }
     }
     
@@ -644,42 +943,28 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
             return
         }
         
-        
-//        dataSource = FUITableViewDataSource.init(query: (getQuery().queryOrdered(byChild: "timeStamp"))) { (tableView, indexPath, snap) -> UITableViewCell in
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "FoldingCell", for: indexPath) as! FoldingTableViewCell
-//            guard let post = Post.init(snapshot: snap) else { return cell }
-//            cell.openBodyTextView?.text = post.body
-//            //            cell.detailTextLabel?.text = post.body
-//
-//            return cell
-//        }
-//
-        
+//        cell.tag = indexPath.row
         cell.backgroundColor = .clear
         
-        if cellHeights[indexPath.row] == kCloseCellHeight {
-            cell.selectedAnimation(false, animated: false, completion:nil)
-        } else {
-            cell.selectedAnimation(true, animated: false, completion: nil)
-        }
-        
+//        if cellHeights[indexPath.row] == kCloseCellHeight {
+//            cell.selectedAnimation(false, animated: false, completion:nil)
+//        } else {
+//            cell.selectedAnimation(true, animated: false, completion: nil)
+//        }
+        let closed = cellHeights[indexPath.row] == kCloseCellHeight
+        cell.unfold(!closed, animated: false, completion: nil)
 //        cell.number = indexPath.row
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-//        let noDataLabel = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
-//        noDataLabel.text = "No posts yet - why not add one?"
-//        noDataLabel.textColor = UIColor.black
-//        noDataLabel.textAlignment = .center
-//        tableView.backgroundView = noDataLabel
-//        tableView.separatorStyle = .none
         return 1
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FoldingCell", for: indexPath) as! FoldingTableViewCell
-        cell.delegate = self
         cell.tag = indexPath.row
+        cell.delegate = self
+//        cell.tag = indexPath.row
         if self.userDefaults.bool(forKey: "isDarkModeEnabled"){
             cell.openBodyTextView?.textColor = UIColor.white
             cell.closedBodyTextView?.textColor = UIColor.white
@@ -706,15 +991,12 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         }
         
         let postDict = postArray[(indexPath as NSIndexPath).row].value as? [String : AnyObject]
-//            cell.openDateLabel.text = "b00ty"
-//        cell.openBodyTextView?.text = post.body
-//        cell.openDateLabel?.text = post.day
 
         cell.openBodyTextView?.text = postDict?["body"] as! String
         cell.openDateLabel?.text = postDict?["day"] as? String
         cell.closedBodyTextView?.text = postDict?["body"] as! String
         cell.openMonthLabel?.text = postDict?["month"] as? String
-        
+//        cell.tag = indexPath.row
         
         let month = Int((postDict?["month"] as? String)!)
         var realMonth = "Month"
@@ -794,8 +1076,18 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let cell = tableView.cellForRow(at: indexPath) as! FoldingTableViewCell
-//        print("test: <\(cell.closedFullDateLabel.text!)>")
+        if let path = expandedCellIndexPath, let expandedCell = tableView.cellForRow(at: path) as? FoldingTableViewCell {
+            expandedCell.unfold(false, animated: true, completion: nil)
+            cellHeights[path.row] = kCloseCellHeight
+            UIView.animate(withDuration: 0.8, delay: 0, options: .curveEaseOut, animations: { () -> Void in
+                tableView.beginUpdates()
+                tableView.endUpdates()
+            }, completion: nil)
+            expandedCellIndexPath = nil
+        }
+        
+        guard let cell = tableView.cellForRow(at: indexPath) as? FoldingTableViewCell else { return }
+        
         if cell.isAnimating() {
             return
         }
@@ -804,11 +1096,12 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         let cellIsCollapsed = cellHeights[indexPath.row] == kCloseCellHeight
         if cellIsCollapsed {
             cellHeights[indexPath.row] = kOpenCellHeight
-            cell.selectedAnimation(true, animated: true, completion: nil)
+            cell.unfold(true)
             duration = 0.5
+            expandedCellIndexPath = indexPath
         } else {
             cellHeights[indexPath.row] = kCloseCellHeight
-            cell.selectedAnimation(false, animated: true, completion: nil)
+            cell.unfold(false)
             duration = 0.8
         }
         
@@ -831,21 +1124,23 @@ extension newFoldingPostListTableViewController: FoldingCellDelegate {
         let alert = SCLAlertView(appearance: appearance)
         _ = alert.addButton("Delete Post")
         {
-//            let photoRef = self.storageRef.child("users/" + Auth.auth().currentUser!.uid + "/\(self.postArray[tag].key).jpg")
-            print("row is \(tag), key for post is")
+            let postKey = self.postArray[tag].key
+            print("postkey is \(postKey)")
+
+            let imageRef = self.storageRef.child("users").child(self.getUid()).child(postKey).child(".jpg")
             
-            let postDict = self.postArray[tag].value as? [String : AnyObject]
-            //            cell.openDateLabel.text = "b00ty"
-            //        cell.openBodyTextView?.text = post.body
-            //        cell.openDateLabel?.text = post.day
+            // Delete the file
+            imageRef.delete { error in
+                if error != nil {
+                    // Uh-oh, an error occurred!
+                } else {
+                    // File deleted successfully
+                }
+            }
             
-            
-              print("body is\((postDict?["body"])! as! String)")
-            //                print("row is \(IndexPath.row)")
-            //                self.postImageView.image = nil
-            //                self.postImageView.isUserInteractionEnabled = false
-            //                self.postImageView.isHidden = true
-            //                self.blurOut()
+            FirebaseDatabase.Database.database().reference(withPath: "users").child(self.getUid()).child(postKey).removeValue()
+
+            self.tableView.reloadData()
         }
         _ = alert.addButton("Cancel")
         {
@@ -858,12 +1153,84 @@ extension newFoldingPostListTableViewController: FoldingCellDelegate {
         print("user canceled status entry")
     }
     
-    func editFoldingCell(cell: FoldingTableViewCell) {
+    func editFoldingCell(_ tag: Int) {
+        
+        let postKey = self.postArray[tag].key
+        tempEditKey = postKey
+        tempEditTag = tag
+        print("postkey is \(postKey)")
+//        let post = self.postArray[tag].value
+        let postDict = postArray[tag].value as? [String : AnyObject]
+//        let date = postDict?["date"] as? String
+//        let calendar = NSCalendar.current
+//        let year = postDict?["year"] as? String
+        let month = postDict?["month"] as? String
+//        let day = postDict?["day"] as? String
+        //        let hour = calendar.component(.hour, from: date as Date)
+        //        let minutes = calendar.component(.minute, from: date as Date)
+        var realMonth = "Month"
+        
+        switch(Int(month!)){
+        case 1?:
+            realMonth = "January"
+        case 2?:
+            realMonth = "February"
+        case 3?:
+            realMonth = "March"
+        case 4?:
+            realMonth = "April"
+        case 5?:
+            realMonth = "May"
+        case 6?:
+            realMonth = "June"
+        case 7?:
+            realMonth = "July"
+        case 8?:
+            realMonth = "August"
+        case 9?:
+            realMonth = "September"
+        case 10?:
+            realMonth = "October"
+        case 11?:
+            realMonth = "November"
+        case 12?:
+            realMonth = "December"
+        default:
+            realMonth = "Error"
+            
+        }
+        
+        //        if(hour < 12 || hour == 24) {
+        //            entryDate.text = "\(realMonth) \(day), \(year) - \(hour):\(minutes) am"
+        //        }
+        //        else {
+        //            entryDate.text = "\(realMonth) \(day), \(year) - \(hour):\(minutes) pm"
+        //        }
+        editEntryDate.text = "\(realMonth) \((postDict?["day"])! as! String), \((postDict?["year"])! as! String)"
+        editBodyTextView.text = "\((postDict?["body"])! as! String)"
+        
+        if((postDict?["downloadURL"])! as! String  != "")
+        {
+            let photoRef = self.storageRef.child("users/" + Auth.auth().currentUser!.uid + "/\(postArray[tag].key).jpg")
+            print("photo ref is \(photoRef)\n\n")
+            editPostImageView.isUserInteractionEnabled = true
+            editPostImageView.isHidden = false
+            editRemoveImagePost.isHidden = false
+            //    //                    let imageView: UIImageView = imageTableViewCell!.postImageView
+            editPostImageView!.sd_setImage(with: photoRef)
+//            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.self.imageTapped(tapGestureRecognizer:)))
+//            cell.openImageView!.addGestureRecognizer(tapGestureRecognizer)
+        }
+        
+        //        let tapPhotoGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapPhotoGestureRecognizer:)))
+        //        postImageView.isUserInteractionEnabled = true
+        //        postImageView.addGestureRecognizer(tapPhotoGestureRecognizer)
+        blurInEdit()
+        editBodyTextView.becomeFirstResponder()
         print("buuts")
     }
     
     func shareFoldingCell(cell: FoldingTableViewCell) {
-        print("wtf")
         let imageToShare =  cell.openImageView.image!
         let textToShare = "\(String(describing: cell.closedFullDateLabel.text!)): \(cell.closedBodyTextView.text!)"
         let shareItems = [imageToShare, textToShare] as [Any]
@@ -871,14 +1238,6 @@ extension newFoldingPostListTableViewController: FoldingCellDelegate {
         let activityViewController = UIActivityViewController(activityItems: shareItems , applicationActivities: nil)
         self.present(activityViewController, animated: true, completion: nil)
     }
-    
-//    func editFoldingCell(cell: FoldingTableViewCell) {
-//        print("still working on it")
-//        let activityViewController = UIActivityViewController(activityItems: ["Check out this cool app called Bettrfly! itunes.apple.com/app/id1282712660"], applicationActivities: nil)
-//        present(activityViewController, animated: true, completion: {})
-//    }
-    
-    
     
 }
 
@@ -890,10 +1249,7 @@ extension UIImage {
         case high    = 0.75
         case highest = 1
     }
-    
-    /// Returns the data for the specified image in JPEG format.
-    /// If the image object’s underlying image data has been purged, calling this function forces that data to be reloaded into memory.
-    /// - returns: A data object containing the JPEG data, or nil if there was a problem generating the data. This function may return nil if the image has no data or if the underlying CGImageRef contains data in an unsupported bitmap format.
+
     func jpeg(_ quality: JPEGQuality) -> Data? {
         return UIImageJPEGRepresentation(self, quality.rawValue)
     }
