@@ -35,6 +35,7 @@
 		25731CA91FF9762C00A17F79 /* SqueezeNet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 25731CA81FF9762C00A17F79 /* SqueezeNet.mlmodel */; };
 		25731CAB1FF9765000A17F79 /* ImageProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25731CAA1FF9765000A17F79 /* ImageProcessor.swift */; };
 		2575FF6E1FF5ECFC00EF3A7D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FAA2F41F302CFC007E89D9 /* AppDelegate.swift */; };
+		25ED99A01FFD6F49007FE268 /* LoadingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ED999F1FFD6F49007FE268 /* LoadingIndicatorView.swift */; };
 		4D83351EB6A0101F338EBE9B /* Pods_BetterflyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02320E01A334F2DE3F495BD2 /* Pods_BetterflyTests.framework */; };
 		8DACD670B717D47604AF4F31 /* Pods_Betterfly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21C293A6FFD2E6A837626FEF /* Pods_Betterfly.framework */; };
 		96A210A50FE514258C5B5E55 /* Pods_BetterflyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73DFC662913DBA7254D6AA20 /* Pods_BetterflyUITests.framework */; };
@@ -92,6 +93,7 @@
 		25A26DFA1FF44394002475E2 /* PhotosTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewController.swift; sourceTree = "<group>"; };
 		25A26DFC1FF44469002475E2 /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
 		25A26E001FF47089002475E2 /* DesignableX */ = {isa = PBXFileReference; lastKnownFileType = folder; path = DesignableX; sourceTree = "<group>"; };
+		25ED999F1FFD6F49007FE268 /* LoadingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicatorView.swift; sourceTree = "<group>"; };
 		33011C69E729F2761A6E2938 /* Pods-BetterflyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BetterflyTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BetterflyTests/Pods-BetterflyTests.release.xcconfig"; sourceTree = "<group>"; };
 		4309159CCF22252BD0511778 /* Pods-BetterflyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BetterflyUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BetterflyUITests/Pods-BetterflyUITests.release.xcconfig"; sourceTree = "<group>"; };
 		449554F22918113B22896E0F /* Pods-BetterflyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BetterflyUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BetterflyUITests/Pods-BetterflyUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 		E6FAA2E81F302CFC007E89D9 = {
 			isa = PBXGroup;
 			children = (
+				25ED999F1FFD6F49007FE268 /* LoadingIndicatorView.swift */,
 				E6FAA2F31F302CFC007E89D9 /* Betterfly */,
 				E6FAA30A1F302CFD007E89D9 /* BetterflyTests */,
 				E6FAA3151F302CFD007E89D9 /* BetterflyUITests */,
@@ -713,6 +716,7 @@
 				2575FF6E1FF5ECFC00EF3A7D /* AppDelegate.swift in Sources */,
 				2524EBA31FF5EAA60016ECBE /* Post.swift in Sources */,
 				25731CAB1FF9765000A17F79 /* ImageProcessor.swift in Sources */,
+				25ED99A01FFD6F49007FE268 /* LoadingIndicatorView.swift in Sources */,
 				2524EBA41FF5EAA60016ECBE /* SignInViewController.swift in Sources */,
 				25061A1A1FFADF75003A60CC /* newThirdPartyCreditWebViewController.swift in Sources */,
 				25731CA51FF9761F00A17F79 /* GoogLeNetPlaces.mlmodel in Sources */,

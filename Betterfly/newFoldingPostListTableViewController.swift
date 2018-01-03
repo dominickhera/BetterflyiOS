@@ -14,6 +14,7 @@ import Photos
 import SCLAlertView
 import Crashlytics
 import SimpleImageViewer
+//import BTNavigationDropdownMenu
 
 class newFoldingPostListTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -77,8 +78,20 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         editPostImageView.isHidden = true
         editPostImageView.layer.cornerRadius = 5
         editRemoveImagePost.isHidden = true
-       
         setup()
+        let timeStamp = "\(Date().timeIntervalSince1970)"
+        postArray.removeAll()
+        getQuery().queryOrdered(byChild: "timeStamp").queryEnding(atValue: timeStamp).observe(.childAdded, with: {  (snapshot) -> Void in
+            self.postArray.insert(snapshot, at: 0)
+            self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+        })
+        
+        getQuery().observe(.childRemoved, with: { (snapshot) -> Void in
+            let index = self.rowCountFunction(snapshot)
+            self.postArray.remove(at: index)
+            self.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: UITableViewRowAnimation.automatic)
+//            self.tableView.reloadData()
+        })
     
     }
     
@@ -102,30 +115,34 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
     override func viewWillAppear(_ animated: Bool) {
         
         setup()
-        postArray.removeAll()
+//        postArray.removeAll()
          self.tableView.reloadData()
-//        if(makingPost == false) {
-            getQuery().observe(.childAdded, with: {  (snapshot) -> Void in
-                self.postArray.insert(snapshot, at: 0)
-    //            guard let post = Post.init(snapshot: snapshot) else { return }
-    //            print("test: \(post.body)")
-    //            self.tableView.beginUpdates()
-                self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
-    //            self.tableView.endUpdates()
-            })
-//        }
-        getQuery().observe(.childRemoved, with: { (snapshot) -> Void in
-            let index = self.rowCountFunction(snapshot)
-//            let index = 100
-            self.postArray.remove(at: index)
-            self.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: UITableViewRowAnimation.automatic)
-            self.tableView.reloadData()
-        })
+//        let date = Date()
+        let formatter = DateFormatter()
         
-//        refHandle = getQuery().observe(DataEventType.value, with: { (snapshot) in
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZ"
+        formatter.timeZone = TimeZone(abbreviation: "UTC")
+        //        let utcTimeZoneStr = formatter.string(from: date)
+        //        let timestamp = (Date().timeIntervalSince1970 as NSString).doubleValue
+        let timeStamp = "\(Date().timeIntervalSince1970)"
+//        let doubleTimeStamp = Double(timeStamp)
+//        let reversedTimestamp = -1.0 * doubleTimeStamp!
+//        let realReverseTimeStamp = reversedTimestamp as AnyObject?
+            getQuery().queryOrdered(byChild: "timeStamp").queryStarting(atValue: timeStamp).queryLimited(toLast: 1).observe(.childAdded, with: {  (snapshot) -> Void in
+//                self.tableView.beginUpdates()
+                self.postArray.insert(snapshot, at: 0)
+                self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+//                self.tableView.endUpdates()
+            })
 //
+//        getQuery().observe(.childRemoved, with: { (snapshot) -> Void in
+//            let index = self.rowCountFunction(snapshot)
+//            self.postArray.remove(at: index)
+//            self.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: UITableViewRowAnimation.automatic)
+//            self.tableView.reloadData()
 //        })
-//        self.tableView.reloadData()
+        
         //        let presenceRef = Database.database().reference(withPath: "disconnectmessage");
         // Write a string when this client loses connection
         //        presenceRef.onDisconnectSetValue("I disconnected!")
@@ -360,7 +377,7 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
 //        window.addSubview(blurEffectView)
         window.addSubview(editPostView)
         editPostView.center = window.center
-                self.blurEffect.isUserInteractionEnabled = true
+//                self.blurEffect.isUserInteractionEnabled = true
         
         editPostView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
         editPostView.alpha = 0
@@ -382,8 +399,8 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
             self.editPostView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
             self.editPostView.alpha = 0
             
-                        self.blurEffect.effect = nil
-                        self.blurEffect.isUserInteractionEnabled = false
+//                        self.blurEffect.effect = nil
+//                        self.blurEffect.isUserInteractionEnabled = false
         }) { (success:Bool) in
 //            for view in self.view.subviews {
 //                view.removeFromSuperview()
@@ -1124,20 +1141,79 @@ extension newFoldingPostListTableViewController: FoldingCellDelegate {
         let alert = SCLAlertView(appearance: appearance)
         _ = alert.addButton("Delete Post")
         {
+            let indexPath = IndexPath(row: tag, section: 0)
+            if let path = self.expandedCellIndexPath, let expandedCell = self.tableView.cellForRow(at: path) as? FoldingTableViewCell {
+//                print("im done1")
+                expandedCell.unfold(false, animated: true, completion: nil)
+//                print("im done2")
+                self.cellHeights[path.row] = self.kCloseCellHeight
+//                print("im done3")
+                UIView.animate(withDuration: 0.8, delay: 0, options: .curveEaseOut, animations: { () -> Void in
+//                    print("im done4")
+                    self.tableView.beginUpdates()
+//                    print("im done5")
+                    self.tableView.endUpdates()
+//                    print("im done6")
+                }, completion: nil)
+//                print("im done7")
+                self.expandedCellIndexPath = nil
+//                print("im done8")
+            }
+            
+            guard let cell = self.tableView.cellForRow(at: indexPath) as? FoldingTableViewCell else { return }
+            
+            if cell.isAnimating() {
+//                print("ohhhhh")
+//                return
+            }
+//
+//            var duration = 0.0
+//            let cellIsCollapsed = self.cellHeights[indexPath.row] == self.kCloseCellHeight
+//            if cellIsCollapsed {
+//                self.cellHeights[indexPath.row] = self.kOpenCellHeight
+//                cell.unfold(true)
+//                duration = 0.5
+//                self.expandedCellIndexPath = indexPath
+//            } else {
+//                print("im done")
+//                self.cellHeights[indexPath.row] = self.self.kCloseCellHeight
+//                print("im done")
+//                cell.unfold(false)
+//                print("im done")
+//                duration = 0.8
+//                print("im done")
+//            }
+//
+//            UIView.animate(withDuration: duration, delay: 0, options: .curveEaseOut, animations: { () -> Void in
+//                print("im done")
+//                self.tableView.beginUpdates()
+//                print("im done")
+//                self.tableView.endUpdates()
+                print("im done9")
+//            }, completion: nil)
+//
+            
+            
+            
+            
             let postKey = self.postArray[tag].key
             print("postkey is \(postKey)")
-
-            let imageRef = self.storageRef.child("users").child(self.getUid()).child(postKey).child(".jpg")
-            
+            let postDict = self.postArray[tag].value as? [String : AnyObject]
+            let downloadURL = postDict?["downloadURL"] as? String
+//            let imageRef = self.storageRef.child("users").child(self.getUid()).child(postKey).child(".jpg")
+            let filePath = self.storageRef.child("users/").child(self.getUid()).child("/\(postKey).jpg")
+//            let imageRef = self.storageRef.child("users").child(self.getUid()).child(postKey).child(downloadURL!)
             // Delete the file
-            imageRef.delete { error in
+            filePath.delete { error in
                 if error != nil {
+                    print("image not deleted")
                     // Uh-oh, an error occurred!
                 } else {
+                    print("image is deleted")
                     // File deleted successfully
                 }
             }
-            
+
             FirebaseDatabase.Database.database().reference(withPath: "users").child(self.getUid()).child(postKey).removeValue()
 
             self.tableView.reloadData()

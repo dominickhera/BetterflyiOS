@@ -19,11 +19,12 @@ class PhotosTableViewController: UITableViewController, UIImagePickerControllerD
 
     var storageRef: StorageReference!
     var camCheck = false
+    var dupeCheck = false
     var ref: DatabaseReference!
 //    var dataSource: FUITableViewDataSource?
     let userDefaults = UserDefaults.standard
     var postArray: Array<DataSnapshot> = []
-    
+    let timeStamp = "\(Date().timeIntervalSince1970)"
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
@@ -31,6 +32,12 @@ class PhotosTableViewController: UITableViewController, UIImagePickerControllerD
         self.tabBarController?.tabBar.isHidden = false
         storageRef = Storage.storage().reference()
         self.tableView.separatorColor = UIColor.clear
+//        let timeStamp = "\(Date().timeIntervalSince1970)"
+        postArray.removeAll()
+        getQuery().queryOrdered(byChild: "timeStamp").observe(.childAdded, with: {  (snapshot) -> Void in
+            self.postArray.insert(snapshot, at: 0)
+            self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+        })
 //        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
 //        dataSource = FUITableViewDataSource.init(query: (getQuery().queryOrdered(byChild: "reverseTimeStamp"))) { (tableView, indexPath, snap) -> UITableViewCell in
 //            let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoCell", for: indexPath) as! PhotosTableViewCell
@@ -111,7 +118,7 @@ class PhotosTableViewController: UITableViewController, UIImagePickerControllerD
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        postArray.removeAll()
+//        postArray.removeAll()
         self.tableView.reloadData()
         if self.userDefaults.bool(forKey: "isDarkModeEnabled") {
             tableView.backgroundColor = UIColor.black
@@ -124,13 +131,34 @@ class PhotosTableViewController: UITableViewController, UIImagePickerControllerD
         }
         
         //        if(makingPost == false) {
-        getQuery().queryOrdered(byChild: "reverseTimeStamp").observe(.childAdded, with: {  (snapshot) -> Void in
-            self.postArray.append(snapshot)
-            //            guard let post = Post.init(snapshot: snapshot) else { return }
-            //            print("test: \(post.body)")
-            //            self.tableView.beginUpdates()
-            self.tableView.insertRows(at: [IndexPath(row: self.postArray.count-1, section: 0)], with: .automatic)
-            //            self.tableView.endUpdates()
+//        getQuery().queryOrdered(byChild: "reverseTimeStamp").observe(.childAdded, with: {  (snapshot) -> Void in
+//            self.postArray.append(snapshot)
+//            //            guard let post = Post.init(snapshot: snapshot) else { return }
+//            //            print("test: \(post.body)")
+//            //            self.tableView.beginUpdates()
+//            self.tableView.insertRows(at: [IndexPath(row: self.postArray.count-1, section: 0)], with: .automatic)
+//            //            self.tableView.endUpdates()
+//        })
+//        let timeStamp = "\(Date().timeIntervalSince1970)"
+        getQuery().queryOrdered(byChild: "timeStamp").queryStarting(atValue: timeStamp).queryLimited(toLast: 1).observe(.childAdded, with: {  (snapshot) -> Void in
+            //                self.tableView.beginUpdates()
+            for postArray in self.postArray {
+                if snapshot.key == postArray.key {
+                    self.dupeCheck = true
+                }
+            }
+            if(self.dupeCheck == false) {
+                self.postArray.insert(snapshot, at: 0)
+                self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+            }
+            //                self.tableView.endUpdates()
+        })
+//        self.tableView.reloadData()
+        getQuery().queryOrdered(byChild: "timeStamp").observe(.childRemoved, with: { (snapshot) -> Void in
+            let index = self.rowCountFunction(snapshot)
+            self.postArray.remove(at: index)
+            self.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: UITableViewRowAnimation.automatic)
+//                self.tableView.reloadData()
         })
 //        self.tableView.reloadData()
     }
@@ -138,6 +166,18 @@ class PhotosTableViewController: UITableViewController, UIImagePickerControllerD
     override func viewWillDisappear(_ animated: Bool) {
         getQuery().removeAllObservers()
     }
+    
+    func rowCountFunction(_ snapshot: DataSnapshot) -> Int {
+        var index = 0
+        for postArray in self.postArray {
+            if snapshot.key == postArray.key {
+                return index
+            }
+            index += 1
+        }
+        return -1
+    }
+    
     
     func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
     {

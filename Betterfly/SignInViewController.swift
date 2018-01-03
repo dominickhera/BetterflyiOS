@@ -19,16 +19,22 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate {
     
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var emailAddressTextField: UITextField!
+    @IBOutlet var createAccountView: UIView!
+    @IBOutlet weak var createAccountEmailAddressTextField: UITextField!
+    @IBOutlet weak var createAccountPasswordTextField: UITextField!
+    @IBOutlet weak var createAccountPasswordConfirmationTextField: UITextField!
     
+    @IBOutlet weak var blurEffect: UIVisualEffectView!
     
     var segueInProcess = false
-var handle: AuthStateDidChangeListenerHandle?
+    var handle: AuthStateDidChangeListenerHandle?
     var ref: DatabaseReference!
     let userDefaults = UserDefaults.standard
 //    @IBOutlet weak var SignInButton: GIDSignInButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         entryFieldViews.layer.cornerRadius = 10
+        createAccountView.layer.cornerRadius = 10
         if(!segueInProcess){
             let googleButton = GIDSignInButton()
             googleButton.frame = CGRect(x: 16, y: view.frame.height - 190, width: view.frame.width - 32, height: 40)
@@ -93,7 +99,7 @@ var handle: AuthStateDidChangeListenerHandle?
         //        emailButton.contentHorizontalAlignment = .left
         createAccountButton.backgroundColor = UIColor(red:0.93, green:0.39, blue:0.29, alpha:1.0)
         createAccountButton.setTitleColor(UIColor.white, for: .normal)
-        createAccountButton.addTarget(self, action: #selector(createNewAccount), for: .touchUpInside)
+        createAccountButton.addTarget(self, action: #selector(promptNewAccountCreate), for: .touchUpInside)
         self.view.addSubview(createAccountButton)
         
 //        let facebookButton = UIButton(type: .custom)
@@ -249,6 +255,7 @@ var handle: AuthStateDidChangeListenerHandle?
     
     func generalLogin(_ credential: AuthCredential)
     {
+        LoadingIndicatorView.show("Signing In...")
         Auth.auth().signIn(with: credential) { (user, error) in
             if error != nil {
                 // ...
@@ -256,8 +263,159 @@ var handle: AuthStateDidChangeListenerHandle?
             }
             // User is signed in
             // ...
+            
+            LoadingIndicatorView.hide()
         }
    
+    }
+    
+    
+    func blurIn() {
+        let window = UIApplication.shared.keyWindow!
+        
+        //        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
+        //        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        //        blurEffectView.frame = window.bounds
+        //        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        //        window.addSubview(blurEffectView)
+        window.addSubview(createAccountView)
+        createAccountView.center = window.center
+        //                self.blurEffect.isUserInteractionEnabled = true
+        
+        createAccountView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+        createAccountView.alpha = 0
+        
+        UIView.animate(withDuration: 0.4) {
+            //                        self.blurEffect.effect = self.blur
+            self.createAccountView.alpha = 1
+            self.createAccountView.transform = CGAffineTransform.identity
+        }
+//        self.tableView.reloadData()
+//        self.tabBarController?.tabBar.isHidden = true
+        self.view.isUserInteractionEnabled = false
+        
+    }
+    
+    func blurOut() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.createAccountView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+            self.createAccountView.alpha = 0
+            
+            //                        self.blurEffect.effect = nil
+            //                        self.blurEffect.isUserInteractionEnabled = false
+        }) { (success:Bool) in
+            let window = UIApplication.shared.keyWindow!
+            self.createAccountView.removeFromSuperview()
+            //            self.blurEffect.removeFromSuperview()
+            //            for view in window.subviews {
+            //                view.removeFromSuperview()
+            //            }
+        }
+        
+        
+        
+        //        self.makingPost = false
+//        self.tabBarController?.tabBar.isHidden = false
+        self.view.isUserInteractionEnabled = true
+    }
+    
+    func promptNewAccountCreate() {
+        createAccountPasswordTextField.text = ""
+        createAccountEmailAddressTextField.text = ""
+        createAccountPasswordConfirmationTextField.text = ""
+        blurIn()
+        createAccountEmailAddressTextField.becomeFirstResponder()
+    }
+    
+    
+    @IBAction func cancelNewAccountCreate(_ sender: Any) {
+        let window = UIApplication.shared.keyWindow!
+        //        window.addSubview(addPostView)
+        //        addPostView.center = window.center
+        window.endEditing(true)
+        let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
+        let alert = SCLAlertView(appearance: appearance)
+        _ = alert.addButton("Cancel New Account")
+        {
+//            self.postImageView.image = nil
+//            self.postImageView.isUserInteractionEnabled = false
+//            self.postImageView.isHidden = true
+            self.blurOut()
+        }
+        _ = alert.addButton("Cancel")
+        {
+//            self.bodyTextView.becomeFirstResponder()
+            print("user canceled action.")
+        }
+        _ = alert.showWarning("Cancel New Account?", subTitle:"If you cancel now, you'll lose all the information you just wrote out!")
+        
+        //        blurOut()
+        print("user canceled status entry")
+    }
+    
+    
+    @IBAction func createNewAccountButton(_ sender: Any) {
+        
+        if(createAccountEmailAddressTextField.text == "" || createAccountPasswordConfirmationTextField.text == "" || createAccountPasswordTextField.text == "")
+        {
+            
+            
+            let appearance = SCLAlertView.SCLAppearance(showCloseButton: true)
+            let alert = SCLAlertView(appearance: appearance)
+            _ = alert.showError("Empty Text Field", subTitle:"Please make sure you filled out all of the required text fields below.")
+        }
+        else
+        {
+            if(createAccountPasswordTextField.text != createAccountPasswordConfirmationTextField.text)
+            {
+                
+                let appearance = SCLAlertView.SCLAppearance(showCloseButton: true)
+                let alert = SCLAlertView(appearance: appearance)
+                _ = alert.showError("Passwords Don't Match", subTitle:"Please make sure both password fields are filled out exactly the same.")
+            }
+            else
+            {
+                if(isPasswordValid(createAccountPasswordTextField.text!))
+                {
+                    LoadingIndicatorView.show("Creating New Account...")
+                    Auth.auth().createUser(withEmail: createAccountEmailAddressTextField.text!, password: createAccountPasswordTextField.text!) { (user, error) in
+                        if error != nil {
+                            let appearance = SCLAlertView.SCLAppearance(showCloseButton: true)
+                            let alert = SCLAlertView(appearance: appearance)
+                            _ = alert.showError("Error", subTitle:"Are you sure you dont already have an account and the spelling is correct?")
+                            return
+                        }
+                        
+                        Auth.auth().currentUser?.sendEmailVerification { (error) in
+                            // ...
+                        }
+                        Auth.auth().useAppLanguage()
+                    }
+                    
+                    LoadingIndicatorView.hide()
+                    
+                    let appearance = SCLAlertView.SCLAppearance(showCloseButton: true)
+                    let alert = SCLAlertView(appearance: appearance)
+                    _ = alert.showSuccess("Account Created!", subTitle:"Please make to check your email for a verification email to make sure that's your account!")
+                        self.blurOut()
+                        let userDefaults = UserDefaults.standard
+                        
+                        userDefaults.set(true, forKey: "isSignedIn")
+                        
+                        userDefaults.synchronize()
+                    
+                }
+                else
+                {
+                    let appearance = SCLAlertView.SCLAppearance(showCloseButton: true)
+                    let alert = SCLAlertView(appearance: appearance)
+                    _ = alert.showError("Password Too Weak", subTitle:"Please make sure your password is at least 8 characters long, and has at least 1 letter and 1 number.")
+                }
+            }
+        }
+        
+        
+//        print(isPasswordValid(createAccountPasswordTextField.text!)
     }
     
     func createNewAccount(){
@@ -281,12 +439,6 @@ var handle: AuthStateDidChangeListenerHandle?
                 userDefaults.set(true, forKey: "isSignedIn")
                 
                 userDefaults.synchronize()
-//                if let VC = self.storyboard?.instantiateViewController(withIdentifier: "signUpPage")
-//                {
-//                    //                            print("peeholesign up")
-//                    self.present(VC, animated: true, completion: nil)
-//                }
-                //                         self.navigationController!.popViewController(animated: true)
             }
        
         }
@@ -295,6 +447,11 @@ var handle: AuthStateDidChangeListenerHandle?
             print("user canceled action.")
         }
         _ = alert.showEdit("New Account Creation", subTitle:"Enter your email and a password for your new account.")
+    }
+    
+    func isPasswordValid(_ password : String) -> Bool{
+        let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[0-9]).{8,}")
+        return passwordTest.evaluate(with: password)
     }
     
     func resetPassword(){
