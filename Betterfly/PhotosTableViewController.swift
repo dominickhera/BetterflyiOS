@@ -14,6 +14,7 @@ import Photos
 import SCLAlertView
 import Crashlytics
 import SimpleImageViewer
+import Floaty
 
 class PhotosTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -33,11 +34,30 @@ class PhotosTableViewController: UITableViewController, UIImagePickerControllerD
         storageRef = Storage.storage().reference()
         self.tableView.separatorColor = UIColor.clear
 //        let timeStamp = "\(Date().timeIntervalSince1970)"
-        postArray.removeAll()
+//        postArray.removeAll()
         getQuery().queryOrdered(byChild: "timeStamp").observe(.childAdded, with: {  (snapshot) -> Void in
             self.postArray.insert(snapshot, at: 0)
             self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
         })
+        
+//        let floaty = Floaty()
+//        //        let fab = KCFloatingActionButton()
+//        floaty.addItem("Create New Post", icon: UIImage(named: "edit-3")!, handler: { item in
+////            self.promptStatusBox((Any).self)
+//            floaty.close()
+//        })
+//        floaty.addItem("Refresh List", icon: UIImage(named: "repeat")!, handler: { item in
+//
+//            self.self.refreshList()
+//            floaty.close()
+//        })
+//        floaty.addItem("Search", icon: UIImage(named: "search-2")!, handler: { item in
+//            floaty.close()
+//        })
+//        floaty.paddingY = 100
+//        floaty.friendlyTap = false
+//        floaty.sticky = true
+//        self.view.addSubview(floaty)
 //        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
 //        dataSource = FUITableViewDataSource.init(query: (getQuery().queryOrdered(byChild: "reverseTimeStamp"))) { (tableView, indexPath, snap) -> UITableViewCell in
 //            let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoCell", for: indexPath) as! PhotosTableViewCell
@@ -119,15 +139,17 @@ class PhotosTableViewController: UITableViewController, UIImagePickerControllerD
     
     override func viewWillAppear(_ animated: Bool) {
 //        postArray.removeAll()
-        self.tableView.reloadData()
+//        self.tableView.reloadData()
         if self.userDefaults.bool(forKey: "isDarkModeEnabled") {
             tableView.backgroundColor = UIColor.black
             navigationController?.navigationBar.barTintColor = UIColor.black
+            self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         }
         else
         {
             navigationController?.navigationBar.barTintColor = UIColor.white
             tableView.backgroundColor = UIColor(red:0.18, green:0.81, blue:0.92, alpha:1.0)
+            self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black]
         }
         
         //        if(makingPost == false) {
@@ -178,6 +200,20 @@ class PhotosTableViewController: UITableViewController, UIImagePickerControllerD
         return -1
     }
     
+    
+    func refreshList() {
+        postArray.removeAll()
+        self.tableView.reloadData()
+        //        if(makingPost == false) {
+        getQuery().observe(.childAdded, with: {  (snapshot) -> Void in
+            self.postArray.insert(snapshot, at: 0)
+            //            guard let post = Post.init(snapshot: snapshot) else { return }
+            //            print("test: \(post.body)")
+            //            self.tableView.beginUpdates()
+            self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+            //            self.tableView.endUpdates()
+        })
+    }
     
     func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
     {

@@ -14,18 +14,29 @@ import Photos
 import SCLAlertView
 import Crashlytics
 import SimpleImageViewer
-//import BTNavigationDropdownMenu
+import BTNavigationDropdownMenu
+import Instructions
+import Floaty
 
-class newFoldingPostListTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class newFoldingPostListTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CoachMarksControllerDataSource, CoachMarksControllerDelegate {
+    
+    let coachMarksController = CoachMarksController()
     
     var storageRef: StorageReference!
     var camCheck = false
     var makingPost = false
+    var dupeCheck = false
     var deleteImageCheck = false
     var newImageCheck = false
     var editPostCheck = false
     var ref: DatabaseReference!
     var dataSource: FUITableViewDataSource?
+//    @IBOutlet weak var selectedCellLabel: UILabel!
+//    var menuView: BTNavigationDropdownMenu!
+    
+    
+    @IBOutlet weak var createPostButton: UIBarButtonItem!
+    
     
     @IBOutlet weak var removeImagePost: UIButton!
     @IBOutlet var toolBarView: UIView!
@@ -36,7 +47,7 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
     @IBOutlet var editPostView: UIView!
     @IBOutlet weak var editBodyTextView: UITextView!
     @IBOutlet weak var editEntryDate: UILabel!
-    @IBOutlet weak var blurEffect: UIVisualEffectView!
+//    @IBOutlet weak var blurEffect: UIVisualEffectView!
     @IBOutlet weak var editPostImageView: UIImageView!
     
     @IBOutlet weak var editRemoveImagePost: UIButton!
@@ -52,10 +63,49 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
     var expandedCellIndexPath: IndexPath?
     var tempEditKey = ""
     var tempEditTag = 0
- 
+//    let timeStamp = "\(Date().timeIntervalSince1970)"
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let window = UIApplication.shared.keyWindow!
+        self.coachMarksController.dataSource = self
+//        Float.global.button.paddingY = 100
+//        Floaty.global.show()
+//        let items = ["Most Popular", "Latest", "Trending", "Nearest", "Top Picks"]
+//        self.selectedCellLabel.text = items.first
+//        self.navigationController?.navigationBar.isTranslucent = false
+//        self.navigationController?.navigationBar.barTintColor = UIColor(red:0.93, green:0.39, blue:0.29, alpha:1.0)
+//        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+//
+//        // "Old" version
+//        // menuView = BTNavigationDropdownMenu(navigationController: self.navigationController, containerView: self.navigationController!.view, title: "Dropdown Menu", items: items)
+//
+//        menuView = BTNavigationDropdownMenu(navigationController: self.navigationController, containerView: self.navigationController!.view, title: BTTitle.index(2), items: items)
+//
+//        // Another way to initialize:
+//         menuView = BTNavigationDropdownMenu(navigationController: self.navigationController, containerView: self.navigationController!.view, title: BTTitle.title("Dropdown Menu"), items: items)
+//
+//        menuView.cellHeight = 50
+//        menuView.cellBackgroundColor = self.navigationController?.navigationBar.barTintColor
+//        menuView.cellSelectionColor = UIColor(red: 0.0/255.0, green:160.0/255.0, blue:195.0/255.0, alpha: 1.0)
+//        menuView.shouldKeepSelectedCellColor = true
+//        menuView.cellTextLabelColor = UIColor.white
+//        menuView.cellTextLabelFont = UIFont(name: "Avenir-Heavy", size: 17)
+//        menuView.cellTextLabelAlignment = .left // .Center // .Right // .Left
+//        menuView.arrowPadding = 15
+//        menuView.animationDuration = 0.5
+//        menuView.maskBackgroundColor = UIColor.black
+//        menuView.maskBackgroundOpacity = 0.3
+//        menuView.didSelectItemAtIndexHandler = {(indexPath: Int) -> Void in
+//            print("Did select item at index: \(indexPath)")
+//            self.selectedCellLabel.text = items[indexPath]
+//        }
+//
+//        self.navigationItem.titleView = menuView
+        
+        
+        
+        
         ref = Database.database().reference()
         ref.keepSynced(true)
 //        blur = blurEffect.effect
@@ -86,12 +136,25 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
             self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
         })
         
-        getQuery().observe(.childRemoved, with: { (snapshot) -> Void in
-            let index = self.rowCountFunction(snapshot)
-            self.postArray.remove(at: index)
-            self.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: UITableViewRowAnimation.automatic)
-//            self.tableView.reloadData()
+        let floaty = Floaty()
+        //        let fab = KCFloatingActionButton()
+        floaty.addItem("Create New Post", icon: UIImage(named: "edit-3")!, handler: { item in
+            self.promptStatusBox((Any).self)
+            floaty.close()
         })
+        floaty.addItem("Refresh List", icon: UIImage(named: "repeat")!, handler: { item in
+            
+            self.self.refreshList()
+            floaty.close()
+        })
+        floaty.addItem("Search", icon: UIImage(named: "search-2")!, handler: { item in
+            floaty.close()
+        })
+        floaty.paddingY = 90
+        floaty.friendlyTap = false
+        floaty.sticky = true
+        self.view.addSubview(floaty)
+//        self.coachMarksController.start(on: self)
     
     }
     
@@ -118,11 +181,11 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
 //        postArray.removeAll()
          self.tableView.reloadData()
 //        let date = Date()
-        let formatter = DateFormatter()
+//        let formatter = DateFormatter()
         
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZ"
-        formatter.timeZone = TimeZone(abbreviation: "UTC")
+//        formatter.locale = Locale(identifier: "en_US_POSIX")
+//        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZ"
+//        formatter.timeZone = TimeZone(abbreviation: "UTC")
         //        let utcTimeZoneStr = formatter.string(from: date)
         //        let timestamp = (Date().timeIntervalSince1970 as NSString).doubleValue
         let timeStamp = "\(Date().timeIntervalSince1970)"
@@ -130,18 +193,23 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
 //        let reversedTimestamp = -1.0 * doubleTimeStamp!
 //        let realReverseTimeStamp = reversedTimestamp as AnyObject?
             getQuery().queryOrdered(byChild: "timeStamp").queryStarting(atValue: timeStamp).queryLimited(toLast: 1).observe(.childAdded, with: {  (snapshot) -> Void in
-//                self.tableView.beginUpdates()
-                self.postArray.insert(snapshot, at: 0)
-                self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
-//                self.tableView.endUpdates()
+                for postArray in self.postArray {
+                if snapshot.key == postArray.key {
+                    self.dupeCheck = true
+                }
+        }
+//        if(self.dupeCheck == false) {
+            self.postArray.insert(snapshot, at: 0)
+            self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+//        }
             })
 //
-//        getQuery().observe(.childRemoved, with: { (snapshot) -> Void in
-//            let index = self.rowCountFunction(snapshot)
-//            self.postArray.remove(at: index)
-//            self.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: UITableViewRowAnimation.automatic)
+        getQuery().observe(.childRemoved, with: { (snapshot) -> Void in
+            let index = self.rowCountFunction(snapshot)
+            self.postArray.remove(at: index)
+            self.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: UITableViewRowAnimation.automatic)
 //            self.tableView.reloadData()
-//        })
+        })
         
         //        let presenceRef = Database.database().reference(withPath: "disconnectmessage");
         // Write a string when this client loses connection
@@ -1128,6 +1196,30 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         }, completion: nil)
         
     }
+    
+    
+    
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
+        return coachMarksController.helper.makeCoachMark(for: self.navigationController?.navigationBar) { (frame: CGRect) -> UIBezierPath in
+            // This will make a cutoutPath matching the shape of
+            // the component (no padding, no rounded corners).
+            return UIBezierPath(rect: frame)
+        }
+
+    }
+    
+    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
+        return 1
+    }
+    
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+       let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
+        
+//        coachViews.bodyView.hintLabel.text = self.profileSectionText
+//        coachViews.bodyView.nextLabel.text = self.nextButtonText
+        
+        return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
+    }
 
 }
 
@@ -1189,7 +1281,7 @@ extension newFoldingPostListTableViewController: FoldingCellDelegate {
 //                self.tableView.beginUpdates()
 //                print("im done")
 //                self.tableView.endUpdates()
-                print("im done9")
+//                print("im done9")
 //            }, completion: nil)
 //
             
@@ -1198,25 +1290,43 @@ extension newFoldingPostListTableViewController: FoldingCellDelegate {
             
             let postKey = self.postArray[tag].key
             print("postkey is \(postKey)")
-            let postDict = self.postArray[tag].value as? [String : AnyObject]
-            let downloadURL = postDict?["downloadURL"] as? String
-//            let imageRef = self.storageRef.child("users").child(self.getUid()).child(postKey).child(".jpg")
+//            let postDict = self.postArray[tag].value as? [String : AnyObject]
+//            let downloadURL = postDict?["downloadURL"] as? String
+////            let imageRef = self.storageRef.child("users").child(self.getUid()).child(postKey).child(".jpg")
+//            let filePath = self.storageRef.child("users/").child(self.getUid()).child("/\(postKey).jpg")
+////            let imageRef = self.storageRef.child("users").child(self.getUid()).child(postKey).child(downloadURL!)
+//            // Delete the file
+//            filePath.delete { error in
+//                if error != nil {
+//                    print("image not deleted")
+//                    // Uh-oh, an error occurred!
+//                } else {
+//                    print("image is deleted")
+//                    // File deleted successfully
+//                }
+//            }
+
+            FirebaseDatabase.Database.database().reference(withPath: "users").child(self.getUid()).child(postKey).removeValue()
+//            let postKey = self.postArray[tag].key
+//            print("postkey is \(postKey)")
+//            let postDict = self.postArray[tag].value as? [String : AnyObject]
+//            let downloadURL = postDict?["downloadURL"] as? String
+            //            let imageRef = self.storageRef.child("users").child(self.getUid()).child(postKey).child(".jpg")
             let filePath = self.storageRef.child("users/").child(self.getUid()).child("/\(postKey).jpg")
-//            let imageRef = self.storageRef.child("users").child(self.getUid()).child(postKey).child(downloadURL!)
+            //            let imageRef = self.storageRef.child("users").child(self.getUid()).child(postKey).child(downloadURL!)
             // Delete the file
             filePath.delete { error in
                 if error != nil {
                     print("image not deleted")
+                    self.tableView.reloadData()
                     // Uh-oh, an error occurred!
                 } else {
                     print("image is deleted")
+                    self.tableView.reloadData()
                     // File deleted successfully
                 }
             }
 
-            FirebaseDatabase.Database.database().reference(withPath: "users").child(self.getUid()).child(postKey).removeValue()
-
-            self.tableView.reloadData()
         }
         _ = alert.addButton("Cancel")
         {

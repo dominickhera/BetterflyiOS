@@ -7,6 +7,10 @@ target 'Betterfly' do
 
   # Pods for Betterfly
   pod 'SwipeableTabBarController'
+  pod "Floaty", "~> 3.0.0" 
+  pod 'Instructions', '~> 1.0.0' 
+  pod 'BTNavigationDropdownMenu', :git =>
+'https://github.com/PhamBaTho/BTNavigationDropdownMenu.git' 
   pod 'Weakify', '~> 0.4.0' 
   pod 'Crashlytics', '~> 3.9.3'
   pod 'QuickTableViewController', '~> 0.7.0' 

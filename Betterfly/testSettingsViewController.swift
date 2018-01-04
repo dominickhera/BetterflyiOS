@@ -78,13 +78,13 @@ internal final class testSettingsViewController: QuickTableViewController, MFMai
         if self.userDefaults.bool(forKey: "isDarkModeEnabled") {
             tableView.backgroundColor = UIColor.black
             navigationController?.navigationBar.barTintColor = UIColor.black
-//            self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black]
+            self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black]
         }
         else
         {
             navigationController?.navigationBar.barTintColor = UIColor.white
             tableView.backgroundColor = UIColor(red:0.94, green:0.94, blue:0.96, alpha:1.0)
-//            self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+            self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         }
         self.tableView.reloadData()
 //        self.navigationController!.navigationBar.isTranslucent = true
