@@ -8,13 +8,14 @@
 
 import UIKit
 import Firebase
-//import FirebaseDatabaseUI
+import Kingfisher
 import FirebaseStorageUI
 import Photos
 import SCLAlertView
 import Crashlytics
 import SimpleImageViewer
 import Floaty
+import Kingfisher
 
 class PhotosTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -325,10 +326,14 @@ class PhotosTableViewController: UITableViewController, UIImagePickerControllerD
         
         if((postDict?["downloadURL"])! as! String  != "")
         {
-                        let photoRef = self.storageRef.child("users/" + Auth.auth().currentUser!.uid + "/\(postArray[(indexPath as NSIndexPath).row].key).jpg")
+//                        let photoRef = self.storageRef.child("users/" + Auth.auth().currentUser!.uid + "/\(postArray[(indexPath as NSIndexPath).row].key).jpg")
         //                print("photo ref is \(photoRef)\n\n")
         //                //                    let imageView: UIImageView = imageTableViewCell!.postImageView
-                        cell.photoCellImageView!.sd_setImage(with: photoRef)
+//                        cell.photoCellImageView!.sd_setImage(with: photoRef)
+            let imageURL = URL(string: (postDict?["downloadURL"])! as! String)
+            cell.photoCellImageView!.kf.indicatorType = .activity
+            cell.photoCellImageView!.kf.setImage(with: imageURL, options: [.onlyFromCache, .transition(.fade(0.2))])
+            
                         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.self.imageTapped(tapGestureRecognizer:)))
                         cell.photoCellImageView!.addGestureRecognizer(tapGestureRecognizer)
         //

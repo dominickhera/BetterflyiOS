@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '5E2B3608C1D66F2611C82E04FFA3794F'
+               BlueprintIdentifier = '2A0D88E1531163B822A41475C2D74B55'
                BlueprintName = 'QuickTableViewController'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'QuickTableViewController.framework'>

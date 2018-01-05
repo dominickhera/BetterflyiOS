@@ -7,6 +7,7 @@ target 'Betterfly' do
 
   # Pods for Betterfly
   pod 'SwipeableTabBarController'
+  pod 'Kingfisher', '~> 3.13' 
   pod "Floaty", "~> 3.0.0" 
   pod 'Instructions', '~> 1.0.0' 
   pod 'BTNavigationDropdownMenu', :git =>

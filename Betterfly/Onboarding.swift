@@ -39,12 +39,12 @@ class ViewController: UIViewController, PaperOnboardingDataSource, PaperOnboardi
         let backgroundColorOne = UIColor(red: 58/255, green: 83/255, blue: 155/255, alpha: 1)
         let backgroundColorThree = UIColor(red: 3/255, green: 201/255, blue: 169/255, alpha: 1)
         
-        let titleFont = UIFont(name: "AvenirNext-Bold", size: 24)!
-        let descirptionFont = UIFont(name: "AvenirNext-Regular", size: 18)!
+        let titleFont = UIFont(name: "AvenirNext-Bold", size: 22)!
+        let descirptionFont = UIFont(name: "AvenirNext-Regular", size: 14)!
         
         return [("cloud", "Bad Days Happen", "Sometimes bad days happen and we lose sight of all the positive things that happen in our life.", "", backgroundColorOne, UIColor.white, UIColor.white, titleFont, descirptionFont),
                 
-                ("sun", "Remember the Good Times", "Every time something good happens, jot it down in Betterfly. When you’re feeling down, you can go through your collection and remember all the little things that make life worth living.", "", backgroundColorTwo, UIColor.white, UIColor.white, titleFont, descirptionFont),
+                ("sun", "Remember the Good Times", "Every time something good happens, jot it down in Bettrfly. When you’re feeling down, you can go through your collection and remember all the little things that make life worth living.", "", backgroundColorTwo, UIColor.white, UIColor.white, titleFont, descirptionFont),
                 
                 ("createIcon", "Start Writing", "Ready to start collecting good thoughts?", "", backgroundColorThree, UIColor.white, UIColor.white, titleFont, descirptionFont)][index]
         

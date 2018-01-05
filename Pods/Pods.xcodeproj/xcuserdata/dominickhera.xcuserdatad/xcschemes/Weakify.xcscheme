@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '22A2E76BEF594CDC94D40B8E0F9F0AB6'
+               BlueprintIdentifier = 'B99D2A3FDB3326C8C5FCD3EAD96D249E'
                BlueprintName = 'Weakify'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Weakify.framework'>
