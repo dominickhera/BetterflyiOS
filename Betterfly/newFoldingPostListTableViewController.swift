@@ -58,7 +58,7 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
     let kOpenCellHeight: CGFloat = 488
     let kRowsCount = 10000
     var cellHeights: [CGFloat] = []
-    var postArray: Array<DataSnapshot> = []
+//    var postArray: Array<DataSnapshot> = []
     let userDefaults = UserDefaults.standard
     var expandedCellIndexPath: IndexPath?
     var tempEditKey = ""
@@ -74,41 +74,6 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         self.coachMarksController.dataSource = self
 //        Float.global.button.paddingY = 100
 //        Floaty.global.show()
-//        let items = ["Most Popular", "Latest", "Trending", "Nearest", "Top Picks"]
-//        self.selectedCellLabel.text = items.first
-//        self.navigationController?.navigationBar.isTranslucent = false
-//        self.navigationController?.navigationBar.barTintColor = UIColor(red:0.93, green:0.39, blue:0.29, alpha:1.0)
-//        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
-//
-//        // "Old" version
-//        // menuView = BTNavigationDropdownMenu(navigationController: self.navigationController, containerView: self.navigationController!.view, title: "Dropdown Menu", items: items)
-//
-//        menuView = BTNavigationDropdownMenu(navigationController: self.navigationController, containerView: self.navigationController!.view, title: BTTitle.index(2), items: items)
-//
-//        // Another way to initialize:
-//         menuView = BTNavigationDropdownMenu(navigationController: self.navigationController, containerView: self.navigationController!.view, title: BTTitle.title("Dropdown Menu"), items: items)
-//
-//        menuView.cellHeight = 50
-//        menuView.cellBackgroundColor = self.navigationController?.navigationBar.barTintColor
-//        menuView.cellSelectionColor = UIColor(red: 0.0/255.0, green:160.0/255.0, blue:195.0/255.0, alpha: 1.0)
-//        menuView.shouldKeepSelectedCellColor = true
-//        menuView.cellTextLabelColor = UIColor.white
-//        menuView.cellTextLabelFont = UIFont(name: "Avenir-Heavy", size: 17)
-//        menuView.cellTextLabelAlignment = .left // .Center // .Right // .Left
-//        menuView.arrowPadding = 15
-//        menuView.animationDuration = 0.5
-//        menuView.maskBackgroundColor = UIColor.black
-//        menuView.maskBackgroundOpacity = 0.3
-//        menuView.didSelectItemAtIndexHandler = {(indexPath: Int) -> Void in
-//            print("Did select item at index: \(indexPath)")
-//            self.selectedCellLabel.text = items[indexPath]
-//        }
-//
-//        self.navigationItem.titleView = menuView
-        
-        
-        
-        
         ref = Database.database().reference()
         ref.keepSynced(true)
 //        blur = blurEffect.effect
@@ -133,9 +98,9 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         editRemoveImagePost.isHidden = true
         setup()
         let timeStamp = "\(Date().timeIntervalSince1970)"
-        postArray.removeAll()
+        globalVariables.postArray.removeAll()
         getQuery().queryOrdered(byChild: "timeStamp").queryEnding(atValue: timeStamp).observe(.childAdded, with: {  (snapshot) -> Void in
-            self.postArray.insert(snapshot, at: 0)
+            globalVariables.postArray.insert(snapshot, at: 0)
             self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
         })
         
@@ -201,13 +166,13 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
 //        let reversedTimestamp = -1.0 * doubleTimeStamp!
 //        let realReverseTimeStamp = reversedTimestamp as AnyObject?
             getQuery().queryOrdered(byChild: "timeStamp").queryStarting(atValue: timeStamp).queryLimited(toLast: 1).observe(.childAdded, with: {  (snapshot) -> Void in
-                for postArray in self.postArray {
+                for postArray in globalVariables.postArray {
                 if snapshot.key == postArray.key {
                     self.dupeCheck = true
                 }
         }
 //        if(self.dupeCheck == false) {
-            self.postArray.insert(snapshot, at: 0)
+            globalVariables.postArray.insert(snapshot, at: 0)
             self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
 //        }
             })
@@ -236,7 +201,7 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
     
     func rowCountFunction(_ snapshot: DataSnapshot) -> Int {
         var index = 0
-        for postArray in self.postArray {
+        for postArray in globalVariables.postArray {
             if snapshot.key == postArray.key {
                 return index
             }
@@ -246,11 +211,11 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
     }
     
     func refreshList() {
-        postArray.removeAll()
+        globalVariables.postArray.removeAll()
         self.tableView.reloadData()
         //        if(makingPost == false) {
         getQuery().observe(.childAdded, with: {  (snapshot) -> Void in
-            self.postArray.insert(snapshot, at: 0)
+            globalVariables.postArray.insert(snapshot, at: 0)
             //            guard let post = Post.init(snapshot: snapshot) else { return }
             //            print("test: \(post.body)")
             //            self.tableView.beginUpdates()
@@ -709,7 +674,7 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         let key = tempEditKey
         let body = editBodyTextView.text
         let tag = tempEditTag
-        let postDict = postArray[tag].value as? [String : AnyObject]
+        let postDict = globalVariables.postArray[tag].value as? [String : AnyObject]
         //        let title = titleTextField.text
 //        let nsDate = NSDate()
         //        let postDate = ("\(nsDate)")
@@ -1089,7 +1054,7 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
 //extension newFoldingPostListTableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.postArray.count
+        return globalVariables.postArray.count
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -1144,7 +1109,7 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
             cell.secondContainerView.backgroundColor = UIColor.white
         }
         
-        let postDict = postArray[(indexPath as NSIndexPath).row].value as? [String : AnyObject]
+        let postDict = globalVariables.postArray[(indexPath as NSIndexPath).row].value as? [String : AnyObject]
 
         cell.openBodyTextView?.text = postDict?["body"] as! String
         cell.openDateLabel?.text = postDict?["day"] as? String
@@ -1205,7 +1170,7 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         
         if((postDict?["downloadURL"])! as! String  != "")
                     {
-                        let photoRef = self.storageRef.child("users/" + Auth.auth().currentUser!.uid + "/\(postArray[(indexPath as NSIndexPath).row].key).jpg")
+                        let photoRef = self.storageRef.child("users/" + Auth.auth().currentUser!.uid + "/\(globalVariables.postArray[(indexPath as NSIndexPath).row].key).jpg")
                         print("photo ref is \(photoRef)\n\n")
         //    //                    let imageView: UIImageView = imageTableViewCell!.postImageView
                         
@@ -1213,7 +1178,7 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
 //                        imageView.kf.indicatorType = .activity
 //                        imageView.kf.setImage(with: url)
                         
-                        ImageCache.default.retrieveImage(forKey: "\(postArray[(indexPath as NSIndexPath).row].key).jpg", options: nil) {
+                        ImageCache.default.retrieveImage(forKey: "\(globalVariables.postArray[(indexPath as NSIndexPath).row].key).jpg", options: nil) {
                             image, cacheType in
                             if let image = image {
                                 cell.openImageView!.image = image
@@ -1221,18 +1186,14 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
                                 //In this code snippet, the `cacheType` is .disk
                             } else {
                                 let imageURL = URL(string: (postDict?["downloadURL"])! as! String)
-//                                cell.openImageView!.kf.indicatorType = .activity
-//                                cell.openImageView!.kf.setImage(with: imageURL)
-//                                cell.openImageView!.image = UIImage(named: "placeholderImage")!
-//                                if(postArray[(indexPath as NSIndexPath).row].key)
                                 cell.openImageView!.kf.indicatorType = .activity
-                                cell.openImageView!.kf.setImage(with: imageURL)
+                                cell.openImageView!.kf.setImage(with: imageURL, options: [.transition(.fade(0.2))])
                                 
                                 ImageDownloader.default.downloadImage(with: imageURL!, options: [], progressBlock: nil) {
                                     (imageStore, error, url, data) in
                                     if(imageStore != nil)
                                     {
-                                        ImageCache.default.store(imageStore!, forKey: "\(self.postArray[(indexPath as NSIndexPath).row].key).jpg")
+                                        ImageCache.default.store(imageStore!, forKey: "\(globalVariables.postArray[(indexPath as NSIndexPath).row].key).jpg")
                                     }
 //                                    print("Downloaded Image: \(image)")
                                 }
@@ -1366,7 +1327,7 @@ extension newFoldingPostListTableViewController: FoldingCellDelegate {
 //                return
             }
             
-            let postKey = self.postArray[tag].key
+            let postKey = globalVariables.postArray[tag].key
             print("postkey is \(postKey)")
 
             FirebaseDatabase.Database.database().reference(withPath: "users").child(self.getUid()).child(postKey).removeValue()
@@ -1386,7 +1347,7 @@ extension newFoldingPostListTableViewController: FoldingCellDelegate {
                 }
             }
             
-            self.postArray.remove(at: tag)
+            globalVariables.postArray.remove(at: tag)
             self.tableView.deleteRows(at: [IndexPath(row: tag, section: 0)], with: UITableViewRowAnimation.automatic)
 
         }
@@ -1403,12 +1364,12 @@ extension newFoldingPostListTableViewController: FoldingCellDelegate {
     
     func editFoldingCell(_ tag: Int) {
         
-        let postKey = self.postArray[tag].key
+        let postKey = globalVariables.postArray[tag].key
         tempEditKey = postKey
         tempEditTag = tag
         print("postkey is \(postKey)")
 //        let post = self.postArray[tag].value
-        let postDict = postArray[tag].value as? [String : AnyObject]
+        let postDict = globalVariables.postArray[tag].value as? [String : AnyObject]
 //        let date = postDict?["date"] as? String
 //        let calendar = NSCalendar.current
 //        let year = postDict?["year"] as? String
@@ -1459,7 +1420,7 @@ extension newFoldingPostListTableViewController: FoldingCellDelegate {
         
         if((postDict?["downloadURL"])! as! String  != "")
         {
-            let photoRef = self.storageRef.child("users/" + Auth.auth().currentUser!.uid + "/\(postArray[tag].key).jpg")
+            let photoRef = self.storageRef.child("users/" + Auth.auth().currentUser!.uid + "/\(globalVariables.postArray[tag].key).jpg")
             print("photo ref is \(photoRef)\n\n")
             editPostImageView.isUserInteractionEnabled = true
             editPostImageView.isHidden = false
@@ -1469,7 +1430,7 @@ extension newFoldingPostListTableViewController: FoldingCellDelegate {
             //    //                    let imageView: UIImageView = imageTableViewCell!.postImageView
 //            editPostImageView!.sd_setImage(with: photoRef)
             editPostImageView.kf.indicatorType = .activity
-            editPostImageView!.kf.setImage(with: imageURL)
+            editPostImageView.kf.setImage(with: imageURL)
 //            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.self.imageTapped(tapGestureRecognizer:)))
 //            cell.openImageView!.addGestureRecognizer(tapGestureRecognizer)
         }
@@ -1520,6 +1481,10 @@ extension UIImage {
         draw(in: CGRect(origin: .zero, size: canvasSize))
         return UIGraphicsGetImageFromCurrentImageContext()
     }
+}
+
+struct globalVariables {
+    static var postArray: Array<DataSnapshot> = []
 }
 
 

@@ -18,14 +18,16 @@ import Floaty
 import Kingfisher
 
 class PhotosTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+    
+//    var newFoldingPostListTableViewController: UITableViewController = UITableViewController()
     var storageRef: StorageReference!
     var camCheck = false
     var dupeCheck = false
     var ref: DatabaseReference!
 //    var dataSource: FUITableViewDataSource?
     let userDefaults = UserDefaults.standard
-    var postArray: Array<DataSnapshot> = []
+//    var postArray: Array<DataSnapshot> = []
+//    var postArray: Array<DataSnapshot> = newFoldingPostListTableViewController.postArr
     let timeStamp = "\(Date().timeIntervalSince1970)"
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,28 +39,30 @@ class PhotosTableViewController: UITableViewController, UIImagePickerControllerD
 //        let timeStamp = "\(Date().timeIntervalSince1970)"
 //        postArray.removeAll()
         getQuery().queryOrdered(byChild: "timeStamp").observe(.childAdded, with: {  (snapshot) -> Void in
-            self.postArray.insert(snapshot, at: 0)
+            globalVariables.postArray.insert(snapshot, at: 0)
             self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
         })
         
-//        let floaty = Floaty()
+        let floaty = Floaty()
 //        //        let fab = KCFloatingActionButton()
-//        floaty.addItem("Create New Post", icon: UIImage(named: "edit-3")!, handler: { item in
+        floaty.addItem("Add Image", icon: UIImage(named: "picture-4")!, handler: { item in
 ////            self.promptStatusBox((Any).self)
-//            floaty.close()
-//        })
-//        floaty.addItem("Refresh List", icon: UIImage(named: "repeat")!, handler: { item in
+            floaty.close()
+        })
+        floaty.addItem("Refresh List", icon: UIImage(named: "repeat")!, handler: { item in
 //
-//            self.self.refreshList()
-//            floaty.close()
-//        })
-//        floaty.addItem("Search", icon: UIImage(named: "search-2")!, handler: { item in
-//            floaty.close()
-//        })
+            self.self.refreshList()
+            floaty.close()
+        })
+        floaty.addItem("Search", icon: UIImage(named: "search-2")!, handler: { item in
+            floaty.close()
+        })
 //        floaty.paddingY = 100
-//        floaty.friendlyTap = false
-//        floaty.sticky = true
-//        self.view.addSubview(floaty)
+        floaty.paddingY = self.view.frame.height/6 - floaty.frame.height/2
+//        floaty.buttonColor = UIColor(red:0.93, green:0.39, blue:0.29, alpha:1.0)
+        floaty.friendlyTap = false
+        floaty.sticky = true
+        self.view.addSubview(floaty)
 //        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
 //        dataSource = FUITableViewDataSource.init(query: (getQuery().queryOrdered(byChild: "reverseTimeStamp"))) { (tableView, indexPath, snap) -> UITableViewCell in
 //            let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoCell", for: indexPath) as! PhotosTableViewCell
@@ -163,27 +167,41 @@ class PhotosTableViewController: UITableViewController, UIImagePickerControllerD
 //            //            self.tableView.endUpdates()
 //        })
 //        let timeStamp = "\(Date().timeIntervalSince1970)"
-        getQuery().queryOrdered(byChild: "timeStamp").queryStarting(atValue: timeStamp).queryLimited(toLast: 1).observe(.childAdded, with: {  (snapshot) -> Void in
-            //                self.tableView.beginUpdates()
-            for postArray in self.postArray {
-                if snapshot.key == postArray.key {
-                    self.dupeCheck = true
-                }
-            }
-            if(self.dupeCheck == false) {
-                self.postArray.insert(snapshot, at: 0)
-                self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
-            }
-            //                self.tableView.endUpdates()
-        })
+//        getQuery().queryOrdered(byChild: "timeStamp").queryStarting(atValue: timeStamp).queryLimited(toLast: 1).observe(.childAdded, with: {  (snapshot) -> Void in
+//            //                self.tableView.beginUpdates()
+//            for postArray in globalVariables.postArray {
+//                if snapshot.key == postArray.key {
+//                    self.dupeCheck = true
+//                }
+//            }
+//            if(self.dupeCheck == false) {
+//                globalVariables.postArray.insert(snapshot, at: 0)
+//                self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+//            }
+//            //                self.tableView.endUpdates()
+//        })
 //        self.tableView.reloadData()
-        getQuery().queryOrdered(byChild: "timeStamp").observe(.childRemoved, with: { (snapshot) -> Void in
-            let index = self.rowCountFunction(snapshot)
-            self.postArray.remove(at: index)
-            self.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: UITableViewRowAnimation.automatic)
+//        getQuery().queryOrdered(byChild: "timeStamp").observe(.childRemoved, with: { (snapshot) -> Void in
+//            for postArray in self.postArray {
+//                ImageCache.default.retrieveImage(forKey: "\(postArray.key).jpg", options: nil) {
+//                    image, cacheType in
+//                    if let image = image {
+//                        print("cacheType: \(cacheType).")
+//                        //In this code snippet, the `cacheType` is .disk
+//                    } else {
+//                        print("Not exist in cache.")
+//                        let index = self.rowCountFunction(snapshot)
+//                        self.postArray.remove(at: index)
+//                        self.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: UITableViewRowAnimation.automatic)
+//                    }
+//                }
+//            }
+//            let index = self.rowCountFunction(snapshot)
+//            globalVariables.postArray.remove(at: index)
+//            self.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: UITableViewRowAnimation.automatic)
 //                self.tableView.reloadData()
-        })
-//        self.tableView.reloadData()
+//        })
+        self.tableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -192,7 +210,7 @@ class PhotosTableViewController: UITableViewController, UIImagePickerControllerD
     
     func rowCountFunction(_ snapshot: DataSnapshot) -> Int {
         var index = 0
-        for postArray in self.postArray {
+        for postArray in globalVariables.postArray {
             if snapshot.key == postArray.key {
                 return index
             }
@@ -203,11 +221,11 @@ class PhotosTableViewController: UITableViewController, UIImagePickerControllerD
     
     
     func refreshList() {
-        postArray.removeAll()
+        globalVariables.postArray.removeAll()
         self.tableView.reloadData()
         //        if(makingPost == false) {
         getQuery().observe(.childAdded, with: {  (snapshot) -> Void in
-            self.postArray.insert(snapshot, at: 0)
+            globalVariables.postArray.insert(snapshot, at: 0)
             //            guard let post = Post.init(snapshot: snapshot) else { return }
             //            print("test: \(post.body)")
             //            self.tableView.beginUpdates()
@@ -315,14 +333,14 @@ class PhotosTableViewController: UITableViewController, UIImagePickerControllerD
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.postArray.count
+        return globalVariables.postArray.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoCell", for: indexPath) as! PhotosTableViewCell
         cell.delegate = self
-        let postDict = postArray[(indexPath as NSIndexPath).row].value as? [String : AnyObject]
+        let postDict = globalVariables.postArray[(indexPath as NSIndexPath).row].value as? [String : AnyObject]
         
         if((postDict?["downloadURL"])! as! String  != "")
         {
@@ -330,9 +348,21 @@ class PhotosTableViewController: UITableViewController, UIImagePickerControllerD
         //                print("photo ref is \(photoRef)\n\n")
         //                //                    let imageView: UIImageView = imageTableViewCell!.postImageView
 //                        cell.photoCellImageView!.sd_setImage(with: photoRef)
-            let imageURL = URL(string: (postDict?["downloadURL"])! as! String)
-            cell.photoCellImageView!.kf.indicatorType = .activity
-            cell.photoCellImageView!.kf.setImage(with: imageURL, options: [.onlyFromCache, .transition(.fade(0.2))])
+            
+            ImageCache.default.retrieveImage(forKey: "\(globalVariables.postArray[(indexPath as NSIndexPath).row].key).jpg", options: nil) {
+                image, cacheType in
+                if let image = image {
+                    cell.photoCellImageView!.image = image
+                    //                                print("Get image \(image), cacheType: \(cacheType).")
+                    //In this code snippet, the `cacheType` is .dis
+            
+            
+            
+            
+            
+//            let imageURL = URL(string: (postDict?["downloadURL"])! as! String)
+//            cell.photoCellImageView!.kf.indicatorType = .activity
+//            cell.photoCellImageView!.kf.setImage(with: imageURL, options: [.onlyFromCache, .transition(.fade(0.2))])
             
                         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.self.imageTapped(tapGestureRecognizer:)))
                         cell.photoCellImageView!.addGestureRecognizer(tapGestureRecognizer)
@@ -378,6 +408,24 @@ class PhotosTableViewController: UITableViewController, UIImagePickerControllerD
                         cell.photoCellTextBodyView?.layer.shadowColor = UIColor.black.cgColor
                         cell.photoCellTextBodyView?.layer.shadowOffset = CGSize(width: 4.0, height: 4.0)
                         cell.photoCellTextBodyView?.layer.shadowOpacity = 1.0
+                    
+                } else {
+                    let imageURL = URL(string: (postDict?["downloadURL"])! as! String)
+                    cell.photoCellImageView!.kf.indicatorType = .activity
+                    cell.photoCellImageView!.kf.setImage(with: imageURL, options: [.transition(.fade(0.2))])
+                    
+                    ImageDownloader.default.downloadImage(with: imageURL!, options: [], progressBlock: nil) {
+                        (imageStore, error, url, data) in
+                        if(imageStore != nil)
+                        {
+                            ImageCache.default.store(imageStore!, forKey: "\(globalVariables.postArray[(indexPath as NSIndexPath).row].key).jpg")
+                        }
+                        //                                    print("Downloaded Image: \(image)")
+                    }
+                    //                                ImageCache.default.store(cell.openImageView!.image!, forKey: "\(self.postArray[(indexPath as NSIndexPath).row].key).jpg")
+                    //                                print("Not exist in cache.")
+                }
+            }
         //
         //
         //

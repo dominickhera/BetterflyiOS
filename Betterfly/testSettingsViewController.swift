@@ -15,6 +15,7 @@ import MessageUI
 import Crashlytics
 import FBSDKCoreKit
 import FBSDKLoginKit
+import Kingfisher
 
 internal final class testSettingsViewController: QuickTableViewController, MFMailComposeViewControllerDelegate {
     let userDefaults = UserDefaults.standard
@@ -290,6 +291,8 @@ internal final class testSettingsViewController: QuickTableViewController, MFMai
         userDefaults.set("", forKey: "signInMode")
         userDefaults.set(false, forKey: "is24HourTimeEnabled")
         userDefaults.set(false, forKey: "isDarkModeEnabled")
+//        ImageCache.clearMemoryCache()
+//        ImageCache.clearDiskCache()
         if let VC = self.storyboard?.instantiateViewController(withIdentifier: "signUpPage")
         {
             //            print("peehole")
