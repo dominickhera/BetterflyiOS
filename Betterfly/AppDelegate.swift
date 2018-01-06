@@ -12,7 +12,7 @@ import FirebaseAuthUI
 import FirebaseGoogleAuthUI
 //import FirebaseFacebookAuthUI
 import GoogleSignIn
-import FBSDKCoreKit
+//import FBSDKCoreKit
 import FBSDKLoginKit
 import Bolts
 import Fabric

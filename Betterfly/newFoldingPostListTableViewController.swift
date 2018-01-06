@@ -70,7 +70,7 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
     override func viewDidLoad() {
         super.viewDidLoad()
         LoadingIndicatorView.show("Loading Posts...")
-//        let window = UIApplication.shared.keyWindow!
+        let window = UIApplication.shared.keyWindow!
         self.coachMarksController.dataSource = self
 //        Float.global.button.paddingY = 100
 //        Floaty.global.show()
@@ -110,6 +110,10 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
             self.promptStatusBox((Any).self)
             floaty.close()
         })
+        floaty.addItem("Add Image Only", icon: UIImage(named: "picture-4")!, handler: { item in
+            //////            self.promptStatusBox((Any).self)
+            floaty.close()
+        })
         floaty.addItem("Refresh List", icon: UIImage(named: "repeat")!, handler: { item in
             
             self.self.refreshList()
@@ -125,7 +129,7 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
 //        floaty.paddingX = self.view.frame.width/2 - floaty.frame.width/2
         floaty.friendlyTap = false
         floaty.sticky = true
-        self.view.addSubview(floaty)
+        window.addSubview(floaty)
 //        self.coachMarksController.start(on: self)
         LoadingIndicatorView.hide()
     
@@ -1222,6 +1226,10 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let postDict = globalVariables.postArray[(indexPath as NSIndexPath).row].value as? [String : AnyObject]
+        if((postDict?["body"])! as! String == ""){
+            return 0
+        }
         return cellHeights[indexPath.row]
     }
     
