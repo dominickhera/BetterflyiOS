@@ -29,6 +29,7 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
     var deleteImageCheck = false
     var newImageCheck = false
     var editPostCheck = false
+    var imageOnlyCheck = false
     var ref: DatabaseReference!
     var dataSource: FUITableViewDataSource?
 //    @IBOutlet weak var selectedCellLabel: UILabel!
@@ -52,8 +53,12 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
     
     @IBOutlet weak var editRemoveImagePost: UIButton!
     
+    @IBOutlet var imagePostView: UIView!
     
+    @IBOutlet weak var imageEntryDate: UILabel!
+    @IBOutlet weak var imagePostImageView: UIImageView!
     
+    @IBOutlet weak var imagePostRemoveImage: UIButton!
     let kCloseCellHeight: CGFloat = 108
     let kOpenCellHeight: CGFloat = 488
     let kRowsCount = 10000
@@ -82,6 +87,7 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         storageRef = Storage.storage().reference()
         addPostView.layer.cornerRadius = 10
         editPostView.layer.cornerRadius = 10
+        imagePostView.layer.cornerRadius = 10
         bodyTextView.inputAccessoryView = toolBarView
         editBodyTextView.inputAccessoryView = toolBarView
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
@@ -89,13 +95,16 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         postImageView.addGestureRecognizer(tapGestureRecognizer)
         editPostImageView.isUserInteractionEnabled = false
         editPostImageView.addGestureRecognizer(tapGestureRecognizer)
-        
+        imagePostImageView.isUserInteractionEnabled = false
+        imagePostImageView.addGestureRecognizer(tapGestureRecognizer)
         postImageView.isHidden = true
         postImageView.layer.cornerRadius = 5
         removeImagePost.isHidden = true
         editPostImageView.isHidden = true
         editPostImageView.layer.cornerRadius = 5
         editRemoveImagePost.isHidden = true
+        imagePostImageView.layer.cornerRadius = 5
+        imagePostImageView.isHidden = true
         setup()
         let timeStamp = "\(Date().timeIntervalSince1970)"
         globalVariables.postArray.removeAll()
@@ -112,6 +121,7 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         })
         floaty.addItem("Add Image Only", icon: UIImage(named: "picture-4")!, handler: { item in
             //////            self.promptStatusBox((Any).self)
+            self.promptImageView((Any).self)
             floaty.close()
         })
         floaty.addItem("Refresh List", icon: UIImage(named: "repeat")!, handler: { item in
@@ -315,19 +325,29 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage //2
         
         if editPostCheck == false {
-            postImageView.contentMode = .scaleAspectFill //3
-            postImageView.image = chosenImage
-            postImageView.isUserInteractionEnabled = true
-            postImageView.isHidden = false
-            removeImagePost.isHidden = false
-            bodyTextView.becomeFirstResponder()
+            if imageOnlyCheck == false {
+                postImageView.contentMode = .scaleAspectFill //3
+                postImageView.image = chosenImage
+                postImageView.isUserInteractionEnabled = true
+                postImageView.isHidden = false
+                removeImagePost.isHidden = false
+                bodyTextView.becomeFirstResponder()
+            } else {
+                
+                imagePostImageView.contentMode = .scaleAspectFill //3
+                imagePostImageView.image = chosenImage
+                imagePostImageView.isUserInteractionEnabled = true
+                imagePostImageView.isHidden = false
+                imagePostRemoveImage.isHidden = false
+            }
         } else {
-            editPostImageView.contentMode = .scaleAspectFill //3
-            editPostImageView.image = chosenImage
-            editPostImageView.isUserInteractionEnabled = true
-            editPostImageView.isHidden = false
-            editRemoveImagePost.isHidden = false
-            editBodyTextView.becomeFirstResponder()
+            
+                editPostImageView.contentMode = .scaleAspectFill //3
+                editPostImageView.image = chosenImage
+                editPostImageView.isUserInteractionEnabled = true
+                editPostImageView.isHidden = false
+                editRemoveImagePost.isHidden = false
+                editBodyTextView.becomeFirstResponder()
         }
         
     }
@@ -428,7 +448,7 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         
         editPostView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
         editPostView.alpha = 0
-        
+//        imagePostRemoveImage.isHidden = true
         UIView.animate(withDuration: 0.4) {
 //                        self.blurEffect.effect = self.blur
             self.editPostView.alpha = 1
@@ -457,6 +477,68 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         }
 //        self.makingPost = false
         editPostCheck = false
+        self.tabBarController?.tabBar.isHidden = false
+        self.view.isUserInteractionEnabled = true
+        self.tableView.reloadData()
+    }
+    
+    func blurInImage() {
+        //        self.makingPost = true
+        if self.userDefaults.bool(forKey: "isDarkModeEnabled"){
+//            editBodyTextView.textColor = UIColor.white
+            imageEntryDate.textColor = UIColor.white
+            imagePostView.backgroundColor = UIColor(red:0.42, green:0.48, blue:0.54, alpha:1.0)
+            
+        }
+        else
+        {
+//            editBodyTextView.textColor = UIColor.black
+            
+            imageEntryDate.textColor = UIColor.black
+            imagePostView.backgroundColor = UIColor.white
+        }
+        let window = UIApplication.shared.keyWindow!
+        //        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
+        //        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        //        blurEffectView.frame = window.bounds
+        //        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        //        window.addSubview(blurEffectView)
+        window.addSubview(imagePostView)
+        imagePostRemoveImage.isHidden = true
+        imagePostView.center = window.center
+        //                self.blurEffect.isUserInteractionEnabled = true
+        
+        imagePostView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+        imagePostView.alpha = 0
+        
+        UIView.animate(withDuration: 0.4) {
+            //                        self.blurEffect.effect = self.blur
+            self.imagePostView.alpha = 1
+            self.imagePostView.transform = CGAffineTransform.identity
+        }
+        self.tableView.reloadData()
+        self.tabBarController?.tabBar.isHidden = true
+        self.view.isUserInteractionEnabled = false
+        imageOnlyCheck = true
+        
+    }
+    
+    func blurOutImage() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.imagePostView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+            self.imagePostView.alpha = 0
+            
+            //                        self.blurEffect.effect = nil
+            //                        self.blurEffect.isUserInteractionEnabled = false
+        }) { (success:Bool) in
+            //            for view in self.view.subviews {
+            //                view.removeFromSuperview()
+            //            }
+            self.imagePostView.removeFromSuperview()
+            //            self.blurEffect.removeFromSuperview()
+        }
+        //        self.makingPost = false
+        imageOnlyCheck = false
         self.tabBarController?.tabBar.isHidden = false
         self.view.isUserInteractionEnabled = true
         self.tableView.reloadData()
@@ -515,6 +597,61 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         //        postImageView.addGestureRecognizer(tapPhotoGestureRecognizer)
         blurIn()
         bodyTextView.becomeFirstResponder()
+    }
+    
+    func promptImageView(_ sender: Any) {
+        let date = NSDate()
+        let calendar = NSCalendar.current
+        let year = calendar.component(.year, from: date as Date)
+        let month = calendar.component(.month, from: date as Date)
+        let day = calendar.component(.day, from: date as Date)
+        //        let hour = calendar.component(.hour, from: date as Date)
+        //        let minutes = calendar.component(.minute, from: date as Date)
+        var realMonth = "Month"
+        
+        switch(month){
+        case 1:
+            realMonth = "January"
+        case 2:
+            realMonth = "February"
+        case 3:
+            realMonth = "March"
+        case 4:
+            realMonth = "April"
+        case 5:
+            realMonth = "May"
+        case 6:
+            realMonth = "June"
+        case 7:
+            realMonth = "July"
+        case 8:
+            realMonth = "August"
+        case 9:
+            realMonth = "September"
+        case 10:
+            realMonth = "October"
+        case 11:
+            realMonth = "November"
+        case 12:
+            realMonth = "December"
+        default:
+            realMonth = "Error"
+            
+        }
+        
+        //        if(hour < 12 || hour == 24) {
+        //            entryDate.text = "\(realMonth) \(day), \(year) - \(hour):\(minutes) am"
+        //        }
+        //        else {
+        //            entryDate.text = "\(realMonth) \(day), \(year) - \(hour):\(minutes) pm"
+        //        }
+        imageEntryDate.text = "\(realMonth) \(day), \(year)"
+//        bodyTextView.text = ""
+        //        let tapPhotoGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapPhotoGestureRecognizer:)))
+        //        postImageView.isUserInteractionEnabled = true
+        //        postImageView.addGestureRecognizer(tapPhotoGestureRecognizer)
+        blurInImage()
+//        bodyTextView.becomeFirstResponder()
     }
     
     func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
@@ -863,6 +1000,137 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         blurOutEdit()
     }
     
+    
+    
+    @IBAction func didTapShareImage(_ sender: Any) {
+        
+//        LoadingIndicatorView.show("Uploading Post...")
+        let userID = Auth.auth().currentUser?.uid
+        let key = ref.child("posts").childByAutoId().key
+        let body = ""
+        //        let title = titleTextField.text
+        let nsDate = NSDate()
+        //        let postDate = ("\(nsDate)")
+        let calendar = NSCalendar.current
+        let year = calendar.component(.year, from: nsDate as Date)
+        let month = calendar.component(.month, from: nsDate as Date)
+        let day = calendar.component(.day, from: nsDate as Date)
+        let hour = calendar.component(.hour, from: nsDate as Date)
+        let minutes = calendar.component(.minute, from: nsDate as Date)
+        let postHour = "\(hour)"
+        var postMinutes = "\(minutes)"
+        
+        if (Int(postMinutes)! < 10)
+        {
+            postMinutes = "0\(minutes)"
+        }
+        
+        let date = Date()
+        let formatter = DateFormatter()
+        
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZ"
+        formatter.timeZone = TimeZone(abbreviation: "UTC")
+        //        let utcTimeZoneStr = formatter.string(from: date)
+        //        let timestamp = (Date().timeIntervalSince1970 as NSString).doubleValue
+        let timeStamp = "\(Date().timeIntervalSince1970)"
+        let doubleTimeStamp = Double(timeStamp)
+        let reversedTimestamp = -1.0 * doubleTimeStamp!
+        let realReverseTimeStamp = reversedTimestamp as AnyObject?
+        //        let seconds = calendar.component(.second, from: date as Date)
+        let postDate = ("\(month)-\(day)-\(year)")
+        let postMonth = ("\(month)")
+        let postDay = ("\(day)")
+        let postYear = ("\(year)")
+        let time = ("\(hour):\(postMinutes)")
+        var downloadURL = ""
+        var searchTags = ""
+        
+        if imagePostImageView.image != nil {
+            if #available(iOS 11.0, *) {
+                searchTags = "\(sceneLabel(forImage: (imagePostImageView.image)!)!),\(sceneLabelTwo(forImage: (imagePostImageView.image)!)!),\(sceneLabelThree(forImage: (imagePostImageView.image)!)!)"
+            }
+            
+            let image: UIImage = self.imagePostImageView.image!
+            ImageCache.default.store(image, forKey: "\(key).jpg")
+            var data = Data()
+            data = UIImageJPEGRepresentation(imagePostImageView.image!, 0.2)!
+            // set upload path
+            let filePath = "users/" + Auth.auth().currentUser!.uid + "/\(key).jpg"
+            let metaData = StorageMetadata()
+            metaData.contentType = "image/jpeg"
+            self.storageRef.child(filePath).putData(data, metadata: metaData){(metaData,error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                    return
+                }else{
+                    
+                    //store downloadURL
+                    let photoURL = metaData!.downloadURL()!.absoluteString
+                    downloadURL = photoURL
+                    //                print("download url: \(downloadURL), photourl: \(photoURL)")
+                    //                print("download url is now: \(downloadURL)")
+                    print("\(date)")
+                    let post = ["uid": userID!,
+                                "month": postMonth,
+                                "day": postDay,
+                                "year": postYear,
+                                "time": time,
+                                "date": postDate,
+                                "hour": postHour,
+                                "minutes": postMinutes,
+                                "timeStamp": timeStamp,
+                                "reverseTimeStamp": realReverseTimeStamp as Any,
+                                "downloadURL": photoURL,
+                                "body": body,
+                                "searchTags": searchTags]
+                    
+                    print("\(userID!)")
+                    let childUpdates = ["/users/\(userID!)/\(key)/": post]
+                    self.ref.updateChildValues(childUpdates)
+                    //store downloadURL at database
+                }
+            }
+            
+            imagePostImageView.image = nil
+            imagePostImageView.isUserInteractionEnabled = false
+            imagePostImageView.isHidden = true
+            blurOutImage()
+//            LoadingIndicatorView.hide()
+        }
+        else{
+            let appearance = SCLAlertView.SCLAppearance(showCloseButton: true)
+            let alert = SCLAlertView(appearance: appearance)
+            _ = alert.showError("No Image!", subTitle:"You need to attach an image to post this!")
+        }
+        
+        //        print("download url is now: \(downloadURL)")
+        //        print("\(date)")
+        //        let post = ["uid": userID,
+        //                    "month": postMonth,
+        //                    "day": postDay,
+        //                    "year": postYear,
+        //                    "time": time,
+        //                    "date": postDate,
+        //                    "timeStamp": timeStamp,
+        //                    "reverseTimeStamp": realReverseTimeStamp,
+        //                    "downloadURL": downloadURL,
+        //                    "body": body]
+        //
+        //        print("\(userID!)")
+        //        let childUpdates = ["/users/\(userID!)/\(key)/": post]
+        //        ref.updateChildValues(childUpdates)
+//        postImageView.image = nil
+//        postImageView.isUserInteractionEnabled = false
+//        postImageView.isHidden = true
+//        blurOut()
+//        LoadingIndicatorView.hide()
+        
+    }
+    
+    
+    
+    
     func sceneLabel (forImage image:UIImage) -> String? {
         if #available(iOS 11.0, *) {
             let mLModelOne = GoogLeNetPlaces()
@@ -961,6 +1229,27 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
     }
     
     
+    @IBAction func removeImageViewImagePost(_ sender: Any) {
+        
+        let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
+        let alert = SCLAlertView(appearance: appearance)
+        _ = alert.addButton("Delete Image")
+        {
+            self.imagePostImageView.image = nil
+            self.imagePostImageView.isUserInteractionEnabled = false
+            self.imagePostImageView.isHidden = true
+            self.imagePostRemoveImage.isHidden = true
+//            self.deleteImageCheck = true
+            //            self.blurOut()
+        }
+        _ = alert.addButton("Cancel")
+        {
+//            self.editBodyTextView.becomeFirstResponder()
+//            print("user canceled action.")
+        }
+        _ = alert.showWarning("Remove Image?", subTitle:"Image will be removed from this post if you proceed.")
+        
+    }
     
     
     @IBAction func cancelStatus(_ sender: Any) {
@@ -1026,6 +1315,36 @@ class newFoldingPostListTableViewController: UITableViewController, UIImagePicke
         print("user canceled status entry")
     }
     
+    @IBAction func cancelImagePost(_ sender: Any) {
+        
+        let window = UIApplication.shared.keyWindow!
+        window.endEditing(true)
+        if(self.imagePostImageView.image != nil){
+            let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
+            let alert = SCLAlertView(appearance: appearance)
+            _ = alert.addButton("Delete Post")
+            {
+                self.imagePostImageView.image = nil
+                self.imagePostImageView.isUserInteractionEnabled = false
+                self.imagePostImageView.isHidden = true
+                self.blurOutImage()
+            }
+            _ = alert.addButton("Cancel")
+            {
+//                self.bodyTextView.becomeFirstResponder()
+//                print("user canceled action.")
+            }
+            _ = alert.showWarning("Delete current post?", subTitle:"If you cancel now, you'll lose the image you just attached!")
+            
+        }
+        else
+        {
+            self.imagePostImageView.image = nil
+            self.imagePostImageView.isUserInteractionEnabled = false
+            self.imagePostImageView.isHidden = true
+            self.blurOutImage()
+        }
+    }
     
     func getUid() -> String {
         return (Auth.auth().currentUser?.uid)!

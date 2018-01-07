@@ -304,7 +304,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate {
             //                        self.blurEffect.effect = nil
             //                        self.blurEffect.isUserInteractionEnabled = false
         }) { (success:Bool) in
-            let window = UIApplication.shared.keyWindow!
+//            let window = UIApplication.shared.keyWindow!
             self.createAccountView.removeFromSuperview()
             //            self.blurEffect.removeFromSuperview()
             //            for view in window.subviews {

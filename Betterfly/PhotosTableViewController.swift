@@ -465,14 +465,38 @@ extension PhotosTableViewController: PhotoCellDelegate {
     func sharePressed(cell: PhotosTableViewCell) {
 //        guard let index = tableView.indexPath(for: cell)?.row else { return }
 //        print("\(cell.photoCellTextBodyView.text!)")
-        let imageToShare =  cell.photoCellImageView.image!
-        let textToShare = "\(String(describing: cell.photoCellDateLabel.text!)): \(cell.photoCellTextBodyView.text!)"
-        let shareItems = [imageToShare, textToShare] as [Any]
         
+        let alertView = SCLAlertView()
+        alertView.addButton("Delete Post") {
+            
+        }
+        alertView.addButton("Edit Post") {
+            
+        }
+        alertView.addButton("Share Post") {
+            let imageToShare =  cell.photoCellImageView.image!
+            let textToShare = "\(String(describing: cell.photoCellDateLabel.text!)): \(cell.photoCellTextBodyView.text!)"
+            let shareItems = [imageToShare, textToShare] as [Any]
+            
+            let activityViewController = UIActivityViewController(activityItems: shareItems , applicationActivities: nil)
+            self.present(activityViewController, animated: true, completion: nil)
+            
+        }
+        alertView.showEdit("Options", subTitle: "Select one of the options below.")
+        
+        
+        
+//
+//        let imageToShare =  cell.photoCellImageView.image!
+//        let textToShare = "\(String(describing: cell.photoCellDateLabel.text!)): \(cell.photoCellTextBodyView.text!)"
+//        let shareItems = [imageToShare, textToShare] as [Any]
+//
 //        let textImage = textToImage(drawText: cell.photoCellTextBodyView.text! as NSString, inImage: cell.photoCellImageView.image!, atPoint: CGPoint.zero)
 //        let shareImage = [textImage]
-        let activityViewController = UIActivityViewController(activityItems: shareItems , applicationActivities: nil)
-                self.present(activityViewController, animated: true, completion: nil)
+        
+        
+//        let activityViewController = UIActivityViewController(activityItems: shareItems , applicationActivities: nil)
+//                self.present(activityViewController, animated: true, completion: nil)
     
     }
 }

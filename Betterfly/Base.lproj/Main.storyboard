@@ -207,7 +207,7 @@
                                                 <constraint firstAttribute="height" constant="30" id="g5U-Do-c58"/>
                                             </constraints>
                                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <state key="normal" image="share-4-White"/>
+                                            <state key="normal" image="menu-1"/>
                                             <connections>
                                                 <action selector="shareImageCell:" destination="fjb-EI-eHr" eventType="touchUpInside" id="dRj-C9-K1f"/>
                                             </connections>
@@ -394,10 +394,6 @@
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="attachment" translatesAutoresizingMaskIntoConstraints="NO" id="8Cc-Y3-6u8">
-                                                    <rect key="frame" x="275" y="34" width="60" height="64"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
@@ -565,11 +561,79 @@
                         <outlet property="editPostView" destination="Nnl-ja-a9C" id="mi2-aa-GQD"/>
                         <outlet property="editRemoveImagePost" destination="Gil-sK-NZ7" id="seo-sz-VcK"/>
                         <outlet property="entryDate" destination="XSg-Fp-V9Y" id="aI2-Ix-yFn"/>
+                        <outlet property="imageEntryDate" destination="02T-RG-yD6" id="yWm-Tr-J2D"/>
+                        <outlet property="imagePostImageView" destination="GOt-hA-ghy" id="YQy-t0-aTH"/>
+                        <outlet property="imagePostRemoveImage" destination="8tf-m9-Ouz" id="o3E-KA-dQb"/>
+                        <outlet property="imagePostView" destination="ke0-18-V8b" id="CvF-Ds-KEl"/>
                         <outlet property="postImageView" destination="UZr-Vp-ub7" id="aVe-hj-Aek"/>
                         <outlet property="removeImagePost" destination="NXz-rN-awM" id="rjS-O8-VEr"/>
                         <outlet property="toolBarView" destination="Ihv-yY-xWk" id="fab-lh-sp6"/>
                     </connections>
                 </tableViewController>
+                <view contentMode="scaleAspectFit" id="ke0-18-V8b">
+                    <rect key="frame" x="0.0" y="0.0" width="325" height="350"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0aE-CK-g4d">
+                            <rect key="frame" x="7" y="7" width="54" height="24"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                            <state key="normal" title="Cancel">
+                                <color key="titleColor" red="0.2050135434" green="0.59736168379999999" blue="0.8569512963" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="cancelImagePost:" destination="iPH-Ic-0j5" eventType="touchUpInside" id="jYe-Sj-tvT"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pqa-yX-r5O">
+                            <rect key="frame" x="263" y="7" width="46" height="24"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                            <state key="normal" title="Post">
+                                <color key="titleColor" red="0.2050135434" green="0.59736168379999999" blue="0.8569512963" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="didTapShareImage:" destination="iPH-Ic-0j5" eventType="touchUpInside" id="xrY-qx-Gmi"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="02T-RG-yD6">
+                            <rect key="frame" x="69" y="10" width="195" height="19"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView clipsSubviews="YES" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GOt-hA-ghy">
+                            <rect key="frame" x="16" y="94" width="293" height="246"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ZM-mL-XZ6">
+                            <rect key="frame" x="263" y="39" width="42" height="42"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Camera" image="photo-camera"/>
+                            <connections>
+                                <action selector="addPictureToPost:" destination="iPH-Ic-0j5" eventType="touchUpInside" id="QYG-RR-Aj2"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="chV-gh-CqE">
+                            <rect key="frame" x="29" y="39" width="42" height="42"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Library" image="photos"/>
+                            <connections>
+                                <action selector="addPictureFromLibrary:" destination="iPH-Ic-0j5" eventType="touchUpInside" id="49n-Xs-9Jk"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8tf-m9-Ouz">
+                            <rect key="frame" x="29" y="106" width="22" height="22"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="error"/>
+                            <connections>
+                                <action selector="removeImageViewImagePost:" destination="iPH-Ic-0j5" eventType="touchUpInside" id="zQ2-AL-Wpg"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
                 <view contentMode="scaleAspectFit" id="Ihv-yY-xWk">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1051,18 +1115,17 @@
     </scenes>
     <resources>
         <image name="SignInLogo" width="539" height="539"/>
-        <image name="attachment" width="512" height="512"/>
         <image name="edit-3" width="512" height="512"/>
         <image name="error" width="512" height="512"/>
         <image name="instagram" width="512" height="512"/>
         <image name="linkedin" width="512" height="512"/>
         <image name="listTabBarIcon" width="33" height="34"/>
+        <image name="menu-1" width="512" height="512"/>
         <image name="photo-camera" width="512" height="512"/>
         <image name="photos" width="512" height="512"/>
         <image name="photosTabBarIcon" width="38" height="38"/>
         <image name="placeholderImage" width="1000" height="800"/>
         <image name="share-3" width="512" height="512"/>
-        <image name="share-4-White" width="512" height="512"/>
         <image name="trash-1" width="512" height="512"/>
         <image name="twitter" width="512" height="512"/>
     </resources>
