@@ -9,6 +9,7 @@ target 'Betterfly' do
   pod 'SwipeableTabBarController'
   pod 'Kingfisher', '~> 3.13' 
   pod "Floaty", "~> 3.0.0" 
+  pod 'ALCameraViewController', '~> 2.0.3' 
   pod 'Instructions', '~> 1.0.0' 
   pod 'Weakify', '~> 0.4.0' 
   pod 'Crashlytics', '~> 3.9.3'

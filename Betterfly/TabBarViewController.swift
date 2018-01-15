@@ -9,19 +9,19 @@
 import UIKit
 import SwipeableTabBarController
 
-class TabBarViewController: SwipeableTabBarController {
+class TabBarViewController: UITabBarController {
 
     @IBInspectable var defaultIndex: Int = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
         selectedIndex = defaultIndex
-        if #available(iOS 10.0, *) {
-            tabBar.unselectedItemTintColor = UIColor.white.withAlphaComponent(0.6)
-        } else {
-            // Fallback on earlier versions
-        }
-        setSwipeAnimation(type: SwipeAnimationType.sideBySide)
+//        if #available(iOS 10.0, *) {
+//            tabBar.unselectedItemTintColor = UIColor.white.withAlphaComponent(0.6)
+//        } else {
+//            // Fallback on earlier versions
+//        }
+//        setSwipeAnimation(type: SwipeAnimationType.sideBySide)
         // Do any additional setup after loading the view.
     }
 

@@ -29,6 +29,17 @@ class PhotosTableViewController: UITableViewController, UIImagePickerControllerD
 //    var postArray: Array<DataSnapshot> = []
 //    var postArray: Array<DataSnapshot> = newFoldingPostListTableViewController.postArr
     let timeStamp = "\(Date().timeIntervalSince1970)"
+    var tempEditKey = ""
+    var tempEditTag = 0
+    
+    
+    @IBOutlet var newImagePost: UIView!
+    
+    @IBOutlet weak var newImagePostImageView: UIImageView!
+    
+    @IBOutlet var editPostView: UIView!
+    
+//    var tempEditTextBody = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
@@ -37,11 +48,13 @@ class PhotosTableViewController: UITableViewController, UIImagePickerControllerD
         storageRef = Storage.storage().reference()
         self.tableView.separatorColor = UIColor.clear
 //        let timeStamp = "\(Date().timeIntervalSince1970)"
-//        postArray.removeAll()
+        globalVariables.postArray.removeAll()
         getQuery().queryOrdered(byChild: "timeStamp").observe(.childAdded, with: {  (snapshot) -> Void in
             globalVariables.postArray.insert(snapshot, at: 0)
             self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
         })
+        
+        
         
 //        let floaty = Floaty()
 ////        //        let fab = KCFloatingActionButton()
@@ -225,7 +238,7 @@ class PhotosTableViewController: UITableViewController, UIImagePickerControllerD
         self.tableView.reloadData()
         //        if(makingPost == false) {
         getQuery().observe(.childAdded, with: {  (snapshot) -> Void in
-            globalVariables.postArray.insert(snapshot, at: 0)
+//            globalVariables.postArray.insert(snapshot, at: 0)
             //            guard let post = Post.init(snapshot: snapshot) else { return }
             //            print("test: \(post.body)")
             //            self.tableView.beginUpdates()
@@ -339,9 +352,10 @@ class PhotosTableViewController: UITableViewController, UIImagePickerControllerD
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoCell", for: indexPath) as! PhotosTableViewCell
+        cell.tag = indexPath.row
         cell.delegate = self
         let postDict = globalVariables.postArray[(indexPath as NSIndexPath).row].value as? [String : AnyObject]
-        
+//        cell.tag = indexPath.row
         if((postDict?["downloadURL"])! as! String  != "")
         {
 //                        let photoRef = self.storageRef.child("users/" + Auth.auth().currentUser!.uid + "/\(postArray[(indexPath as NSIndexPath).row].key).jpg")
@@ -414,14 +428,14 @@ class PhotosTableViewController: UITableViewController, UIImagePickerControllerD
                     cell.photoCellImageView!.kf.indicatorType = .activity
                     cell.photoCellImageView!.kf.setImage(with: imageURL, options: [.transition(.fade(0.2))])
                     
-                    ImageDownloader.default.downloadImage(with: imageURL!, options: [], progressBlock: nil) {
-                        (imageStore, error, url, data) in
-                        if(imageStore != nil)
-                        {
-                            ImageCache.default.store(imageStore!, forKey: "\(globalVariables.postArray[(indexPath as NSIndexPath).row].key).jpg")
-                        }
-                        //                                    print("Downloaded Image: \(image)")
-                    }
+//                    ImageDownloader.default.downloadImage(with: imageURL!, options: [], progressBlock: nil) {
+//                        (imageStore, error, url, data) in
+//                        if(imageStore != nil)
+//                        {
+//                            ImageCache.default.store(imageStore!, forKey: "\(globalVariables.postArray[(indexPath as NSIndexPath).row].key).jpg")
+//                        }
+//                        //                                    print("Downloaded Image: \(image)")
+//                    }
                     //                                ImageCache.default.store(cell.openImageView!.image!, forKey: "\(self.postArray[(indexPath as NSIndexPath).row].key).jpg")
                     //                                print("Not exist in cache.")
                 }
@@ -462,16 +476,30 @@ class PhotosTableViewController: UITableViewController, UIImagePickerControllerD
 }
 
 extension PhotosTableViewController: PhotoCellDelegate {
+    func editPhotoCell(_ tag: Int) {
+        let postKey = globalVariables.postArray[tag].key
+        tempEditKey = postKey
+        tempEditTag = tag
+        print("this would edit the cell at row \(tempEditTag)")
+    }
+    
+    func deletePhotoCell(_ tag: Int) {
+        let postKey = globalVariables.postArray[tag].key
+        tempEditKey = postKey
+        tempEditTag = tag
+        print("this would delete the cell at row \(tempEditTag)")
+    }
+    
     func sharePressed(cell: PhotosTableViewCell) {
 //        guard let index = tableView.indexPath(for: cell)?.row else { return }
 //        print("\(cell.photoCellTextBodyView.text!)")
         
         let alertView = SCLAlertView()
         alertView.addButton("Delete Post") {
-            
+            self.deletePhotoCell(cell.tag)
         }
         alertView.addButton("Edit Post") {
-            
+            self.editPhotoCell(cell.tag)
         }
         alertView.addButton("Share Post") {
             let imageToShare =  cell.photoCellImageView.image!

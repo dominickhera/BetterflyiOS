@@ -10,6 +10,10 @@ import UIKit
 
 protocol PhotoCellDelegate: class {
     func sharePressed(cell: PhotosTableViewCell)
+    func editPhotoCell(_: Int)
+    func deletePhotoCell(_: Int)
+//        func editFoldingCell(_: Int)
+//    func deleteFoldingCell(_: Int)
 }
 
 
@@ -28,14 +32,38 @@ class PhotosTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    @IBAction func shareImageCell(_ sender: Any) {
-        print("booty")
-        delegate?.sharePressed(cell: self)
-    }
+//    @IBAction func shareImageCell(_ sender: Any) {
+//        print("booty")
+//        delegate?.sharePressed(cell: self)
+//    }
+    
+//    func deletePhotoCell(_ sender: Any) {
+//        delegate?.deletePhotoCell(self.tag)
+//    }
+//
+//     func editPhotoCell(_ sender: Any) {
+//        delegate?.editPhotoCell(self.tag)
+//    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
 
+}
+extension PhotosTableViewCell {
+    @IBAction func shareImageCell(_ sender: Any) {
+//        print("booty")
+        delegate?.sharePressed(cell: self)
+    }
+    
+    func deletePhotoCell(_ sender: Any) {
+        print("delete, tag is \(self.tag)")
+        delegate?.deletePhotoCell(self.tag)
+    }
+    
+    func editPhotoCell(_ sender: Any) {
+        print("edit, tag is \(self.tag)")
+        delegate?.editPhotoCell(self.tag)
+    }
 }

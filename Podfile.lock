@@ -1,4 +1,5 @@
 PODS:
+  - ALCameraViewController (2.0.3)
   - Bolts (1.9.0):
     - Bolts/AppLinks (= 1.9.0)
     - Bolts/Tasks (= 1.9.0)
@@ -67,17 +68,17 @@ PODS:
     - FirebaseCore (~> 4.0)
     - GTMSessionFetcher/Core (~> 1.1)
   - FirebaseSwizzlingUtilities (1.0.0)
-  - FirebaseUI/Auth (4.5.0):
+  - FirebaseUI/Auth (4.5.1):
     - Firebase/Auth (~> 4.2)
-  - FirebaseUI/Database (4.5.0):
+  - FirebaseUI/Database (4.5.1):
     - Firebase/Database (~> 4.0)
-  - FirebaseUI/Facebook (4.5.0):
+  - FirebaseUI/Facebook (4.5.1):
     - FBSDKLoginKit (~> 4.0)
     - FirebaseUI/Auth
-  - FirebaseUI/Google (4.5.0):
+  - FirebaseUI/Google (4.5.1):
     - FirebaseUI/Auth
     - GoogleSignIn (~> 4.0)
-  - FirebaseUI/Storage (4.5.0):
+  - FirebaseUI/Storage (4.5.1):
     - Firebase/Storage (~> 4.0)
     - SDWebImage (~> 4.0)
   - Floaty (3.0.1)
@@ -124,13 +125,14 @@ PODS:
   - SDWebImage/Core (4.2.3)
   - SimpleImageViewer (1.1.1)
   - SlackTextViewController (1.9.6)
-  - SwipeableTabBarController (1.0.10)
+  - SwipeableTabBarController (1.0.11)
   - TwitterCore (3.1.0)
   - TwitterKit (3.3.0):
     - TwitterCore (>= 3.1.0)
   - Weakify (0.4.0)
 
 DEPENDENCIES:
+  - ALCameraViewController (~> 2.0.3)
   - Bolts
   - Crashlytics (~> 3.9.3)
   - Fabric
@@ -165,6 +167,7 @@ DEPENDENCIES:
   - Weakify (~> 0.4.0)
 
 SPEC CHECKSUMS:
+  ALCameraViewController: 7b86c2888df0e63f53a801e9d96fe194f51157ec
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   Crashlytics: dbb07d01876c171c5ccbdf7826410380189e452c
   Fabric: 9cd6a848efcf1b8b07497e0b6a2e7d336353ba15
@@ -181,7 +184,7 @@ SPEC CHECKSUMS:
   FirebasePerformance: 3877d097c59956aa2d7a317dbae503c2b4e78459
   FirebaseStorage: ab08d1c93a2feffa038fdd6693088b310ab1e6c6
   FirebaseSwizzlingUtilities: f1c49a5a372ac852c853722a5891a0a5e2344a6c
-  FirebaseUI: 883482fea73b73bbb488c55176f4c6ad128957eb
+  FirebaseUI: 1dc9c8a87a776b488a28a28541f029e60c824cfd
   Floaty: bb7a353deee9ddcc14c584ca9c538efdc19669f2
   FoldingCell: 55e9fcac546acc2c8f110f210af892aa90032160
   GoogleSignIn: 3fdaa34a2ba04dbd7a25d7db39aecb0da98d5bdc
@@ -200,11 +203,11 @@ SPEC CHECKSUMS:
   SDWebImage: 791bb72962b3492327ddcac4b1880bd1b5458431
   SimpleImageViewer: 34c3a2cde2d9ac022146772cefc27fca14b0c8b1
   SlackTextViewController: b854e62c1c156336bc4fd409c6ca79b5773e8f9d
-  SwipeableTabBarController: 7db57f2b3a5cd0a36abff1709eadfb2d7037cffa
+  SwipeableTabBarController: ffdb77cfe9997c92078b5022b4e770bdf88d76bd
   TwitterCore: 644d59e75abccb26cf0a9050d2c4dea0e5412241
   TwitterKit: a2e60ddcedbf54091eac6f27685ca7a87681e1d7
   Weakify: 66756fc9a0b7384e6dd58706d82d4afa081c775c
 
-PODFILE CHECKSUM: 2f7b6231a0f2b73bf57b58231cd85b8333640434
+PODFILE CHECKSUM: b51fc9d47a3eb27276362adfe298521d4135df8f
 
 COCOAPODS: 1.3.1
