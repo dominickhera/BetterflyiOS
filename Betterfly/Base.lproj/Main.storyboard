@@ -165,6 +165,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.20260798930000001" green="0.59701740739999998" blue="0.85633224249999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PhotoCell" rowHeight="450" id="fjb-EI-eHr" customClass="PhotosTableViewCell" customModule="Betterfly" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="450"/>
@@ -247,61 +248,14 @@
                     <navigationItem key="navigationItem" title="Photos" id="vdc-2q-g0O"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="editPostDateLabel" destination="ZJA-CL-Co6" id="xHp-sW-yWG"/>
+                        <outlet property="editPostDeleteImageButton" destination="vO8-la-g5x" id="VHK-pr-cfP"/>
+                        <outlet property="editPostImageView" destination="dXU-Zz-fg2" id="9Zk-CQ-OEZ"/>
+                        <outlet property="editPostTextBody" destination="Dmh-xo-ePm" id="JOZ-4Z-qPd"/>
                         <outlet property="editPostView" destination="hPs-Un-Srl" id="sM4-QX-I2e"/>
-                        <outlet property="newImagePost" destination="B8D-pY-9Gk" id="gcG-g4-nOy"/>
-                        <outlet property="newImagePostImageView" destination="XcV-dZ-W7Z" id="uAa-4t-6pW"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iA4-Cf-gHh" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <view contentMode="scaleAspectFit" id="B8D-pY-9Gk">
-                    <rect key="frame" x="0.0" y="0.0" width="325" height="350"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xUz-JY-ElG">
-                            <rect key="frame" x="7" y="7" width="54" height="24"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                            <state key="normal" title="Cancel">
-                                <color key="titleColor" red="0.2050135434" green="0.59736168379999999" blue="0.8569512963" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dCd-mX-IgD">
-                            <rect key="frame" x="263" y="7" width="46" height="24"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                            <state key="normal" title="Post">
-                                <color key="titleColor" red="0.2050135434" green="0.59736168379999999" blue="0.8569512963" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                        </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X5U-Y1-zqw">
-                            <rect key="frame" x="69" y="10" width="195" height="19"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <imageView clipsSubviews="YES" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XcV-dZ-W7Z">
-                            <rect key="frame" x="16" y="94" width="293" height="246"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        </imageView>
-                        <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C0d-Iu-1NN">
-                            <rect key="frame" x="263" y="39" width="42" height="42"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinY="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Camera" image="photo-camera"/>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xix-FH-f2q">
-                            <rect key="frame" x="29" y="39" width="42" height="42"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinY="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Library" image="photos"/>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LDM-z3-2gt">
-                            <rect key="frame" x="29" y="106" width="22" height="22"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" image="error"/>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                </view>
                 <view contentMode="scaleAspectFit" id="hPs-Un-Srl">
                     <rect key="frame" x="0.0" y="0.0" width="325" height="393"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -319,6 +273,9 @@
                             <state key="normal" title="Cancel">
                                 <color key="titleColor" red="0.2050135434" green="0.59736168379999999" blue="0.8569512963" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
+                            <connections>
+                                <action selector="didTapCancelEdit:" destination="3kg-kQ-i8e" eventType="touchUpInside" id="85B-Kl-W0i"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2No-y4-DTh">
                             <rect key="frame" x="252" y="3" width="62" height="36"/>
@@ -327,6 +284,9 @@
                             <state key="normal" title="Update">
                                 <color key="titleColor" red="0.2050135434" green="0.59736168379999999" blue="0.8569512963" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
+                            <connections>
+                                <action selector="didTapUpdatePost:" destination="3kg-kQ-i8e" eventType="touchUpInside" id="dvq-io-4RF"/>
+                            </connections>
                         </button>
                         <imageView clipsSubviews="YES" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dXU-Zz-fg2">
                             <rect key="frame" x="10" y="213" width="306" height="170"/>
@@ -350,6 +310,9 @@
                             <rect key="frame" x="23" y="224" width="22" height="22"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="error"/>
+                            <connections>
+                                <action selector="didTapRemoveImageFromEdit:" destination="3kg-kQ-i8e" eventType="touchUpInside" id="F35-fG-cM7"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
